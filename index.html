@@ -8,8 +8,6 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
 body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-.email-mask { -webkit-text-security: disc; text-security: disc; }
-.email-visible { -webkit-text-security: none; text-security: none; }
 </style>
 </head>
 <body class="bg-slate-100 min-h-screen flex flex-col justify-between pb-20 md:pb-0">
@@ -22,19 +20,19 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 <p class="text-xs text-slate-500 mt-1">Sila Log Masuk Untuk Meneruskan.</p>
 </div>
 ​<form id="login-form" class="space-y-4" onsubmit="handleLogin(event)">
-<!-- Input E-mel dengan Ikon Mata -->
+<!-- Input E-mel Biasa (Aktif) -->
 <div class="relative">
 <input type="email" id="login-email" required placeholder="Alamat E-mel Pentadbir / Guru" 
-class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#550000] text-sm email-mask pr-12">
-<button type="button" onclick="toggleInputVisibility('login-email', this, 'email')" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-800 p-2 text-base">
+class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#550000] text-sm pr-12">
+<button type="button" onclick="toggleInputVisibility('login-email', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-800 p-2 text-base">
 👁️
 </button>
 </div>
-​<!-- Input Kata Laluan dengan Ikon Mata -->
+​<!-- Input Kata Laluan -->
 <div class="relative">
 <input type="password" id="login-password" required placeholder="Kata Laluan" 
 class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#550000] text-sm pr-12">
-<button type="button" onclick="toggleInputVisibility('login-password', this, 'password')" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-800 p-2 text-base">
+<button type="button" onclick="toggleInputVisibility('login-password', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-800 p-2 text-base">
 👁️
 </button>
 </div>
@@ -58,19 +56,17 @@ Log Masuk
 <input type="text" id="reg-name" required placeholder="Nama Penuh Guru" 
 class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#550000] text-sm">
 </div>
-<!-- Input E-mel Pendaftaran dengan Ikon Mata -->
 <div class="relative">
 <input type="email" id="reg-email" required placeholder="Alamat E-mel" 
-class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#550000] text-sm email-mask pr-12">
-<button type="button" onclick="toggleInputVisibility('reg-email', this, 'email')" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-800 p-2 text-base">
+class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#550000] text-sm pr-12">
+<button type="button" onclick="toggleInputVisibility('reg-email', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-800 p-2 text-base">
 👁️
 </button>
 </div>
-​<!-- Input Kata Laluan Pendaftaran dengan Ikon Mata -->
 <div class="relative">
 <input type="password" id="reg-password" required placeholder="Kata Laluan Baharu (Min. 6 aksara)" 
 class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#550000] text-sm pr-12">
-<button type="button" onclick="toggleInputVisibility('reg-password', this, 'password')" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-800 p-2 text-base">
+<button type="button" onclick="toggleInputVisibility('reg-password', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-800 p-2 text-base">
 👁️
 </button>
 </div>
@@ -82,9 +78,9 @@ Daftar Akaun
 <a href="#" onclick="toggleView('login')" class="text-[#550000] font-bold hover:underline">Kembali ke Log Masuk</a>
 </div>
 </div>
-​<!-- 3. PAPARAN UTAMA DASHBOARD DENGAN KAD & MENU GAYA TELEFON -->
+​<!-- 3. PAPARAN UTAMA DASHBOARD -->
 <div id="dashboard-section" class="hidden w-full space-y-4">
-​<!-- KAD HEADER GELAP DENGAN IKON LOCENG (NOTIFIKASI) -->
+​<!-- KAD HEADER GELAP DENGAN IKON LOCENG -->
 <div class="bg-[#0B132B] text-white p-6 rounded-3xl shadow-xl relative overflow-hidden">
 <div class="flex justify-between items-start">
 <div>
@@ -92,7 +88,6 @@ Daftar Akaun
 <h2 class="text-lg md:text-xl font-bold tracking-tight">MUKIM BANGGOL SETOL</h2>
 <p class="text-xs text-slate-400 mt-1">Sistem Pendaftaran Pelajar</p>
 </div>
-<!-- Ikon Loceng Pemberitahuan dengan Badge Nombor Bil -->
 <div onclick="switchTab('senarai')" class="relative bg-slate-800/80 p-3 rounded-2xl border border-slate-700 cursor-pointer hover:bg-slate-700 transition">
 <span class="text-lg">🔔</span>
 <span id="bell-badge" class="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-extrabold px-1.5 py-0.5 rounded-full shadow-md">0</span>
@@ -103,7 +98,7 @@ Daftar Akaun
 <span id="current-date">Ahad, 1 November 2026</span>
 </div>
 </div>
-​<!-- MENU TAB IKON (UTAMA, BORANG, SENARAI, TETAPAN) -->
+​<!-- MENU TAB IKON -->
 <div class="bg-white p-3 rounded-3xl shadow-md grid grid-cols-4 gap-2 text-center">
 <button onclick="switchTab('home')" id="tab-home-btn" class="p-2.5 rounded-2xl bg-[#0B132B] text-white flex flex-col items-center justify-center transition shadow">
 <span class="text-base mb-0.5">📊</span>
@@ -122,7 +117,7 @@ Daftar Akaun
 <span class="text-[10px] font-semibold">Tetapan</span>
 </button>
 </div>
-​<!-- KANDUNGAN TAB: 1. UTAMA (STATISTIK) -->
+​<!-- Kandungan Tab Utama -->
 <div id="content-home" class="space-y-4">
 <div class="bg-[#0B132B] text-white p-4 rounded-2xl shadow flex items-center justify-between cursor-pointer" onclick="switchTab('form')">
 <span class="text-xs font-semibold tracking-wider uppercase">+ Tambah Pendaftaran Pelajar</span>
@@ -137,7 +132,7 @@ Daftar Akaun
 <h2 class="text-3xl font-extrabold text-slate-800" id="stat-year">0</h2>
 </div>
 </div>
-​<!-- KANDUNGAN TAB: 2. BORANG PENDAFTARAN -->
+​<!-- Kandungan Tab Borang -->
 <div id="content-form" class="hidden bg-white p-6 rounded-3xl shadow-md space-y-4">
 <h3 class="text-base font-bold text-slate-800 border-b pb-2">Borang Pendaftaran Pelajar Baru</h3>
 <form id="student-form" class="space-y-3" onsubmit="saveStudentData(event)">
@@ -175,18 +170,18 @@ Simpan Pendaftaran
 </button>
 </form>
 </div>
-​<!-- KANDUNGAN TAB: 3. SENARAI PELAJAR -->
+​<!-- Kandungan Tab Senarai -->
 <div id="content-senarai" class="hidden bg-white p-6 rounded-3xl shadow-md space-y-4">
 <h3 class="text-base font-bold text-slate-800 border-b pb-2">Senarai Pelajar Berdaftar</h3>
 <div id="student-list-container" class="space-y-3">
 <p class="text-xs text-slate-500">Memuatkan senarai...</p>
 </div>
 </div>
-​<!-- KANDUNGAN TAB: 4. TETAPAN / KELULUSAN AKAUN GURU -->
+​<!-- Kandungan Tab Tetapan/Admin -->
 <div id="content-admin" class="hidden bg-white p-6 rounded-3xl shadow-md space-y-4">
 <h3 class="text-base font-bold text-slate-800 border-b pb-2">Kelulusan Akaun Guru</h3>
 <div class="p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl text-[11px] leading-relaxed">
-Tekan <strong>Luluskan</strong> untuk mengaktifkan akaun guru. Tekan <strong>Hapus Akaun</strong> jika guru telah berpindah atau tidak lagi berkhidmat di sekolah.
+Tekan <strong>Luluskan</strong> untuk mengaktifkan akaun guru. Tekan <strong>Hapus Akaun</strong> jika guru tidak lagi berkhidmat.
 </div>
 <button onclick="loadTeacherAccounts()" class="px-4 py-2 bg-teal-800 text-white rounded-xl text-xs font-semibold shadow">
 Muat Semula Senarai
@@ -195,16 +190,14 @@ Muat Semula Senarai
 <p class="text-xs text-slate-500">Memuatkan senarai akaun...</p>
 </div>
 </div>
-​<!-- BUTANG LOG KELUAR -->
-<div class="pt-2">
+​<div class="pt-2">
 <button onclick="handleLogout()" class="w-full py-3 bg-red-600 hover:bg-red-700 text-white rounded-2xl text-xs font-semibold shadow transition">
 Log Keluar (<span id="user-display-email"></span>)
 </button>
 </div>
 ​</div>
 ​</main>
-​<!-- FOOTER -->
-<footer class="text-center py-4 text-xs text-slate-400 border-t bg-white mt-auto">
+​<footer class="text-center py-4 text-xs text-slate-400 border-t bg-white mt-auto">
 © 2026 SMU(A) Khairiah Banggol Setol
 </footer>
 ​<!-- FIREBASE SDK & SKRIP LOGIK -->
@@ -228,8 +221,7 @@ const db = getFirestore(app);
 "asrimohdzain@gmail.com",
 "sitinurnabihah950822@gmail.com"
 ];
-​// Fungsi Tukar Paparan Tersembunyi
-window.toggleView = function(view) {
+​window.toggleView = function(view) {
 document.getElementById('login-section').classList.add('hidden');
 document.getElementById('register-section').classList.add('hidden');
 document.getElementById('dashboard-section').classList.add('hidden');
@@ -237,29 +229,16 @@ document.getElementById('dashboard-section').classList.add('hidden');
 if (view === 'register') document.getElementById('register-section').classList.remove('hidden');
 if (view === 'dashboard') document.getElementById('dashboard-section').classList.remove('hidden');
 };
-​// Fungsi Lihat / Sembunyi Teks E-mel & Kata Laluan (Ikon Mata)
-window.toggleInputVisibility = function(inputId, btn, type) {
+​// Fungsi Lihat / Sembunyi Kata Laluan
+window.toggleInputVisibility = function(inputId, btn) {
 const input = document.getElementById(inputId);
 if (!input) return;
-if (type === 'email') {
-const isMasked = input.classList.contains('email-mask');
-if (isMasked) {
-input.classList.remove('email-mask');
-input.classList.add('email-visible');
-btn.innerText = '🔒';
-} else {
-input.classList.remove('email-visible');
-input.classList.add('email-mask');
-btn.innerText = '👁️';
-}
-} else {
 if (input.type === 'password') {
 input.type = 'text';
 btn.innerText = '🔒';
 } else {
 input.type = 'password';
 btn.innerText = '👁️';
-}
 }
 };
 ​window.switchTab = function(tab) {
@@ -281,20 +260,15 @@ activeBtn.className = "p-2.5 rounded-2xl bg-[#0B132B] text-white flex flex-col i
 if(tab === 'senarai') loadStudentList();
 if(tab === 'admin') loadTeacherAccounts();
 };
-​// Log Masuk dengan Semakan Status Kelulusan
-window.handleLogin = async function(e) {
+​window.handleLogin = async function(e) {
 e.preventDefault();
 const email = document.getElementById('login-email').value.trim().toLowerCase();
 const password = document.getElementById('login-password').value;
 try {
 const userCredential = await signInWithEmailAndPassword(auth, email, password);
 const user = userCredential.user;
-​if (adminEmails.includes(email)) {
-// Admin sentiasa dibenarkan masuk
-return;
-}
-​// Semak status kelulusan guru di Firestore
-const docRef = doc(db, "guru", user.uid);
+​if (adminEmails.includes(email)) return;
+​const docRef = doc(db, "guru", user.uid);
 const docSnap = await getDoc(docRef);
 ​if (docSnap.exists()) {
 const data = docSnap.data();
@@ -304,7 +278,6 @@ alert('Akaun anda masih menunggu kelulusan pentadbir.');
 toggleView('login');
 }
 } else {
-// Jika rekod guru tiada, cipta rekod menunggu
 await setDoc(docRef, { email: email, status: 'menunggu', tarikhDaftar: new Date().toISOString() });
 await signOut(auth);
 alert('Akaun anda berjaya didaftarkan dan sedang menunggu kelulusan pentadbir.');
@@ -314,8 +287,7 @@ toggleView('login');
 alert('Gagal log masuk: ' + error.message);
 }
 };
-​// Pendaftaran Akaun Guru Baharu
-window.handleRegister = async function(e) {
+​window.handleRegister = async function(e) {
 e.preventDefault();
 const name = document.getElementById('reg-name').value;
 const email = document.getElementById('reg-email').value.trim().toLowerCase();
@@ -336,8 +308,7 @@ document.getElementById('register-form').reset();
 alert('Gagal daftar akaun: ' + error.message);
 }
 };
-​// Fungsi Lupa Kata Laluan
-window.handleForgotPassword = async function(e) {
+​window.handleForgotPassword = async function(e) {
 e.preventDefault();
 const email = document.getElementById('login-email').value.trim().toLowerCase();
 if (!email) {
