@@ -22,22 +22,22 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 ​<form id="login-form" class="space-y-4" onsubmit="handleLogin(event)">
 <div class="relative">
 <input type="email" id="login-email" required placeholder="Alamat E-mel Pentadbir / Guru" 
-class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#0B132B] text-sm">
+class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#580000] text-sm">
 </div>
 ​<div class="relative">
 <input type="password" id="login-password" required placeholder="Kata Laluan" 
-class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#0B132B] text-sm pr-12">
+class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#580000] text-sm pr-12">
 <button type="button" onclick="togglePasswordVisibility('login-password', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 p-2 text-base select-none cursor-pointer">
 👁️
 </button>
 </div>
-​<button type="submit" id="login-btn" class="w-full py-4 bg-[#0B132B] hover:bg-slate-800 text-white font-bold rounded-2xl transition duration-200 shadow-lg text-xs tracking-widest uppercase cursor-pointer">
+​<button type="submit" id="login-btn" class="w-full py-4 bg-[#580000] hover:bg-[#7a0000] text-white font-bold rounded-2xl transition duration-200 shadow-lg text-xs tracking-widest uppercase cursor-pointer">
 Log Masuk
 </button>
 </form>
 ​<div class="text-center mt-6 space-y-2 text-xs">
-<a href="#" onclick="handleForgotPassword(event)" class="block text-[#0B132B] font-bold hover:underline">Lupa Kata Laluan?</a>
-<a href="#" onclick="toggleView('register')" class="block text-[#0B132B] font-bold hover:underline">Daftar Akaun Guru Baharu</a>
+<a href="#" onclick="handleForgotPassword(event)" class="block text-[#580000] font-bold hover:underline">Lupa Kata Laluan?</a>
+<a href="#" onclick="toggleView('register')" class="block text-[#580000] font-bold hover:underline">Daftar Akaun Guru Baharu</a>
 </div>
 </div>
 ​<!-- 2. PAPARAN PENDAFTARAN AKAUN GURU -->
@@ -49,50 +49,50 @@ Log Masuk
 ​<form id="register-form" class="space-y-4" onsubmit="handleRegister(event)">
 <div>
 <input type="text" id="reg-name" required placeholder="Nama Penuh Guru" 
-class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#0B132B] text-sm">
+class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#580000] text-sm">
 </div>
 <div>
 <input type="email" id="reg-email" required placeholder="Alamat E-mel" 
-class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#0B132B] text-sm">
+class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#580000] text-sm">
 </div>
 <div class="relative">
 <input type="password" id="reg-password" required placeholder="Kata Laluan Baharu (Min. 6 aksara)" 
-class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#0B132B] text-sm pr-12">
+class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#580000] text-sm pr-12">
 <button type="button" onclick="togglePasswordVisibility('reg-password', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 p-2 text-base select-none cursor-pointer">
 👁️
 </button>
 </div>
-​<button type="submit" id="reg-btn" class="w-full py-4 bg-[#0B132B] hover:bg-slate-800 text-white font-bold rounded-2xl transition duration-200 shadow-lg text-xs tracking-widest uppercase cursor-pointer">
+​<button type="submit" id="reg-btn" class="w-full py-4 bg-[#580000] hover:bg-[#7a0000] text-white font-bold rounded-2xl transition duration-200 shadow-lg text-xs tracking-widest uppercase cursor-pointer">
 Daftar Akaun
 </button>
 </form>
 ​<div class="text-center mt-6 text-xs">
-<a href="#" onclick="toggleView('login')" class="text-[#0B132B] font-bold hover:underline">Kembali ke Log Masuk</a>
+<a href="#" onclick="toggleView('login')" class="text-[#580000] font-bold hover:underline">Kembali ke Log Masuk</a>
 </div>
 </div>
 ​<!-- 3. PAPARAN UTAMA DASHBOARD -->
 <div id="dashboard-section" class="hidden w-full space-y-4">
 ​<!-- KAD HEADER GELAP DENGAN IKON LOCENG -->
-<div class="bg-[#0B132B] text-white p-6 rounded-3xl shadow-xl relative overflow-hidden">
+<div class="bg-[#580000] text-white p-6 rounded-3xl shadow-xl relative overflow-hidden">
 <div class="flex justify-between items-start">
 <div>
 <h1 class="text-base md:text-lg font-bold tracking-tight">SMU(A) KHAIRIAH</h1>
 <h2 class="text-base md:text-lg font-bold tracking-tight">MUKIM BANGGOL SETOL</h2>
-<p class="text-xs text-slate-400 mt-0.5">Sistem Pendaftaran Pelajar</p>
+<p class="text-xs text-rose-200 mt-0.5">Sistem Pendaftaran Pelajar</p>
 </div>
-<div onclick="switchTab('senarai')" class="relative bg-slate-800/80 p-2.5 rounded-2xl border border-slate-700 cursor-pointer hover:bg-slate-700 transition">
+<div onclick="switchTab('senarai')" class="relative bg-[#7a123d] p-2.5 rounded-2xl border border-rose-900 cursor-pointer hover:bg-[#8f1648] transition">
 <span class="text-base">🔔</span>
 <span id="bell-badge" class="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-extrabold px-1.5 py-0.5 rounded-full shadow-md">0</span>
 </div>
 </div>
-​<div class="mt-3 inline-flex items-center space-x-2 bg-slate-800/80 px-3 py-1.5 rounded-xl border border-slate-700 text-xs text-slate-300">
+​<div class="mt-3 inline-flex items-center space-x-2 bg-[#7a123d] px-3 py-1.5 rounded-xl border border-rose-900 text-xs text-rose-100">
 <span>📅</span>
 <span id="current-date">Ahad, 1 November 2026</span>
 </div>
 </div>
 ​<!-- MENU TAB IKON SEPERTI RUJUKAN -->
 <div class="bg-white p-2.5 rounded-3xl shadow-md grid grid-cols-4 gap-1 text-center">
-<button onclick="switchTab('home')" id="tab-home-btn" class="p-2 rounded-2xl bg-[#0B132B] text-white flex flex-col items-center justify-center transition shadow cursor-pointer">
+<button onclick="switchTab('home')" id="tab-home-btn" class="p-2 rounded-2xl bg-[#580000] text-white flex flex-col items-center justify-center transition shadow cursor-pointer">
 <span class="text-sm mb-0.5">📊</span>
 <span class="text-[10px] font-semibold">Utama</span>
 </button>
@@ -111,7 +111,7 @@ Daftar Akaun
 </div>
 ​<!-- Kandungan Tab Utama -->
 <div id="content-home" class="space-y-4">
-<div class="bg-[#0B132B] text-white p-4 rounded-2xl shadow flex items-center justify-between cursor-pointer hover:bg-slate-800 transition" onclick="switchTab('form')">
+<div class="bg-[#580000] text-white p-4 rounded-2xl shadow flex items-center justify-between cursor-pointer hover:bg-[#7a123d] transition" onclick="switchTab('form')">
 <span class="text-xs font-semibold tracking-wider uppercase">+ Tambah Pendaftaran Pelajar</span>
 <span class="text-lg">➔</span>
 </div>
@@ -130,39 +130,39 @@ Daftar Akaun
 <form id="student-form" class="space-y-3" onsubmit="saveStudentData(event)">
 <div>
 <label class="block text-[11px] font-semibold text-slate-600 mb-1">Nama Penuh Pelajar</label>
-<input type="text" id="student-name" required class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#0B132B]">
+<input type="text" id="student-name" required class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#580000]">
 </div>
 <div>
 <label class="block text-[11px] font-semibold text-slate-600 mb-1">Nombor Kad Pengenalan / MyKad</label>
-<input type="text" id="student-ic" required class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#0B132B]">
+<input type="text" id="student-ic" required class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#580000]">
 </div>
 <div class="grid grid-cols-2 gap-2">
 <div>
 <label class="block text-[11px] font-semibold text-slate-600 mb-1">Jantina</label>
-<select id="student-gender" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#0B132B]">
+<select id="student-gender" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#580000]">
 <option value="Lelaki">Lelaki</option>
 <option value="Perempuan">Perempuan</option>
 </select>
 </div>
 <div>
 <label class="block text-[11px] font-semibold text-slate-600 mb-1">Program / Tingkatan</label>
-<input type="text" id="student-class" required placeholder="Contoh: Tingkatan 1" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#0B132B]">
+<input type="text" id="student-class" required placeholder="Contoh: Tingkatan 1" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#580000]">
 </div>
 </div>
 <div>
 <label class="block text-[11px] font-semibold text-slate-600 mb-1">Nama Waris / Penjaga</label>
-<input type="text" id="guardian-name" required class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#0B132B]">
+<input type="text" id="guardian-name" required class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#580000]">
 </div>
 <div>
 <label class="block text-[11px] font-semibold text-slate-600 mb-1">Nombor Telefon Waris</label>
-<input type="tel" id="guardian-phone" required class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#0B132B]">
+<input type="tel" id="guardian-phone" required class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#580000]">
 </div>
-​<button type="submit" class="w-full py-3 bg-[#0B132B] hover:bg-slate-800 text-white font-semibold rounded-2xl transition duration-200 shadow text-xs uppercase tracking-wider mt-2 cursor-pointer">
+​<button type="submit" class="w-full py-3 bg-[#580000] hover:bg-[#7a0000] text-white font-semibold rounded-2xl transition duration-200 shadow text-xs uppercase tracking-wider mt-2 cursor-pointer">
 Simpan Pendaftaran
 </button>
 </form>
 </div>
-​<!-- Kandungan Tab Senarai (DALAM BENTUK JADUAL SEPERTI RUJUKAN) -->
+​<!-- Kandungan Tab Senarai (DALAM BENTUK JADUAL) -->
 <div id="content-senarai" class="hidden bg-white rounded-3xl shadow-md overflow-hidden">
 <div class="p-5 border-b">
 <h3 class="text-base font-bold text-slate-800">Senarai Pelajar Berdaftar</h3>
@@ -170,7 +170,7 @@ Simpan Pendaftaran
 <div class="overflow-x-auto">
 <table class="w-full text-left border-collapse">
 <thead>
-<tr class="bg-[#0B132B] text-white text-[11px] uppercase tracking-wider">
+<tr class="bg-[#580000] text-white text-[11px] uppercase tracking-wider">
 <th class="p-3">Bil</th>
 <th class="p-3">Nama Pelajar</th>
 <th class="p-3">MyKad / Tingkatan</th>
@@ -261,7 +261,7 @@ btn.className = "p-2 rounded-2xl hover:bg-slate-100 text-slate-600 flex flex-col
 const activeBtn = document.getElementById(tab-${tab}-btn);
 if(activeEl) activeEl.classList.remove('hidden');
 if(activeBtn && tab !== 'admin') {
-activeBtn.className = "p-2 rounded-2xl bg-[#0B132B] text-white flex flex-col items-center justify-center transition shadow cursor-pointer";
+activeBtn.className = "p-2 rounded-2xl bg-[#580000] text-white flex flex-col items-center justify-center transition shadow cursor-pointer";
 }
 ​if(tab === 'home') loadDashboardStats();
 if(tab === 'senarai') loadStudentList();
