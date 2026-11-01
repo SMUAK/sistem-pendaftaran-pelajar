@@ -1,1 +1,345 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Pendaftaran Pelajar - SMU(A) Khairiah Banggol Setol</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen flex flex-col justify-between">
 
+    <!-- HEADER / TAJUK UTAMA -->
+    <header class="bg-[#580000] text-white py-6 shadow-md text-center">
+        <h2 class="text-sm font-medium tracking-wide uppercase">SMU(A) Khairiah Banggol Setol</h2>
+        <h1 class="text-3xl font-bold tracking-wider mt-1">Sistem Pendaftaran Pelajar</h1>
+    </header>
+
+    <!-- KAWASAN UTAMA (KANDUNGAN) -->
+    <main class="flex-grow flex items-center justify-center p-4">
+
+        <!-- 1. PAPARAN BORANG LOG MASUK -->
+        <div id="login-section" class="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 border border-slate-100">
+            <div class="text-center mb-6">
+                <h3 class="text-xl font-bold text-slate-800">Selamat Datang!</h3>
+                <p class="text-sm text-slate-600 mt-1">Sila Log Masuk Untuk Meneruskan.</p>
+            </div>
+
+            <form id="login-form" class="space-y-4" onsubmit="handleLogin(event)">
+                <input type="email" id="login-email" required placeholder="Masukkan E-mel" 
+                    class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-[#580000] text-sm">
+                <input type="password" id="login-password" required placeholder="Kata Laluan" 
+                    class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-[#580000] text-sm">
+
+                <button type="submit" class="w-full py-3 bg-[#580000] hover:bg-[#7a0000] text-white font-semibold rounded-xl transition duration-200 shadow-lg text-sm tracking-wider uppercase">
+                    Log Masuk
+                </button>
+            </form>
+
+            <div class="text-center mt-6 space-y-2 text-xs">
+                <a href="#" onclick="alert('Sila hubungi pentadbir sistem untuk set semula kata laluan.')" class="block text-[#580000] hover:underline">Lupa Kata Laluan?</a>
+                <a href="#" onclick="toggleView('register')" class="block text-slate-600 hover:text-[#580000] font-medium">Daftar Akaun Guru Baharu</a>
+            </div>
+        </div>
+
+        <!-- 2. PAPARAN PENDAFTARAN AKAUN GURU -->
+        <div id="register-section" class="hidden w-full max-w-md bg-white rounded-2xl shadow-xl p-8 border border-slate-100">
+            <div class="text-center mb-6">
+                <h3 class="text-xl font-bold text-slate-800">Daftar Akaun Baharu</h3>
+                <p class="text-sm text-slate-600 mt-1">Cipta akses untuk guru/pentadbir.</p>
+            </div>
+
+            <form id="register-form" class="space-y-4" onsubmit="handleRegister(event)">
+                <input type="email" id="reg-email" required placeholder="E-mel Guru" 
+                    class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-[#580000] text-sm">
+                <input type="password" id="reg-password" required placeholder="Kata Laluan (Min. 6 aksara)" 
+                    class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-[#580000] text-sm">
+                
+                <button type="submit" class="w-full py-3 bg-[#580000] hover:bg-[#7a0000] text-white font-semibold rounded-xl transition duration-200 shadow-lg text-sm tracking-wider uppercase">
+                    Daftar Akaun
+                </button>
+            </form>
+
+            <div class="text-center mt-6 text-xs">
+                <a href="#" onclick="toggleView('login')" class="text-[#580000] hover:underline font-medium">← Kembali ke Log Masuk</a>
+            </div>
+        </div>
+
+        <!-- 3. PAPARAN UTAMA DASHBOARD -->
+        <div id="dashboard-section" class="hidden w-full max-w-4xl bg-white rounded-2xl shadow-xl p-8 border border-slate-100 space-y-6">
+            <div class="flex justify-between items-center border-b pb-4">
+                <div>
+                    <h3 class="text-xl font-bold text-slate-800" id="dashboard-title">Sistem Pendaftaran Pelajar</h3>
+                    <p class="text-xs text-slate-500" id="user-display-email">Log masuk sebagai: -</p>
+                </div>
+                <button onclick="handleLogout()" class="px-4 py-2 bg-slate-700 hover:bg-slate-800 text-white rounded-lg text-xs font-semibold">
+                    Log Keluar
+                </button>
+            </div>
+
+            <!-- Tab Menu Navigasi Dalaman (Khusus Admin / Guru) -->
+            <div class="flex space-x-2 border-b pb-3">
+                <button onclick="switchTab('form')" id="tab-form-btn" class="px-4 py-2 bg-[#580000] text-white rounded-lg text-xs font-semibold shadow">Borang Pendaftaran</button>
+                <button onclick="switchTab('admin')" id="tab-admin-btn" class="hidden px-4 py-2 bg-slate-200 text-slate-700 hover:bg-slate-300 rounded-lg text-xs font-semibold">Kelulusan Akaun Guru</button>
+            </div>
+
+            <!-- A. BAHAGIAN BORANG PENDAFTARAN PELAJAR -->
+            <div id="content-form" class="space-y-4">
+                <form id="student-form" class="space-y-4" onsubmit="saveStudentData(event)">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Nama Penuh Pelajar</label>
+                            <input type="text" id="student-name" required class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-[#580000]">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Nombor Kad Pengenalan / MyKad</label>
+                            <input type="text" id="student-ic" required class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-[#580000]">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Jantina</label>
+                            <select id="student-gender" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-[#580000]">
+                                <option value="Lelaki">Lelaki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Program / Tingkatan</label>
+                            <input type="text" id="student-class" required placeholder="Contoh: Tingkatan 1" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-[#580000]">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Nama Waris / Penjaga</label>
+                        <input type="text" id="guardian-name" required class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-[#580000]">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-1">Nombor Telefon Waris</label>
+                        <input type="tel" id="guardian-phone" required class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-[#580000]">
+                    </div>
+
+                    <button type="submit" class="w-full py-3 bg-[#580000] hover:bg-[#7a0000] text-white font-semibold rounded-xl transition duration-200 shadow-md text-sm uppercase tracking-wider">
+                        Simpan Pendaftaran Pelajar
+                    </button>
+                </form>
+            </div>
+
+            <!-- B. BAHAGIAN KELULUSAN AKAUN GURU (KHAS ADMIN) -->
+            <div id="content-admin" class="hidden space-y-4">
+                <div class="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl text-xs leading-relaxed">
+                    Tekan <strong>Luluskan</strong> untuk aktifkan akaun guru. Tekan <strong>Hapus Akaun</strong> jika guru telah berpindah atau tidak lagi berkhidmat di sekolah.
+                </div>
+
+                <div class="flex space-x-3">
+                    <button onclick="loadTeacherAccounts()" class="px-4 py-2 bg-teal-800 hover:bg-teal-900 text-white rounded-xl text-xs font-semibold shadow">
+                        Muat Semula Senarai Akaun
+                    </button>
+                </div>
+
+                <!-- Senarai Kad Akaun Guru -->
+                <div id="teacher-list-container" class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                    <!-- Dimuat secara dinamik melalui skrip -->
+                    <p class="text-xs text-slate-500">Memuatkan senarai akaun...</p>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="text-center py-4 text-xs text-slate-500 border-t bg-white">
+        &copy; 2026 SMU(A) Khairiah Banggol Setol. Hak Cipta Terpelihara.
+    </footer>
+
+    <!-- FIREBASE SDK & SKRIP LOGIK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBfWyq2ADAtOdbaeHh7nRhB3dM4LjKDFdw",
+            authDomain: "sistem-pendaftaran-pelaj-6d6b4.firebaseapp.com",
+            projectId: "sistem-pendaftaran-pelaj-6d6b4",
+            storageBucket: "sistem-pendaftaran-pelaj-6d6b4.firebasestorage.app",
+            messagingSenderId: "611930781573",
+            appId: "1:611930781573:web:6b6f458c7291f9936876ec"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Senarai Emel Admin Rasmi
+        const adminEmails = [
+            "smuakhairiahbs@yik.edu.my",
+            "asrimohdzain@gmail.com"
+        ];
+
+        window.toggleView = function(view) {
+            document.getElementById('login-section').classList.add('hidden');
+            document.getElementById('register-section').classList.add('hidden');
+            document.getElementById('dashboard-section').classList.add('hidden');
+
+            if (view === 'login') document.getElementById('login-section').classList.remove('hidden');
+            if (view === 'register') document.getElementById('register-section').classList.remove('hidden');
+            if (view === 'dashboard') document.getElementById('dashboard-section').classList.remove('hidden');
+        };
+
+        window.switchTab = function(tab) {
+            const formTab = document.getElementById('content-form');
+            const adminTab = document.getElementById('content-admin');
+            const formBtn = document.getElementById('tab-form-btn');
+            const adminBtn = document.getElementById('tab-admin-btn');
+
+            if (tab === 'form') {
+                formTab.classList.remove('hidden');
+                adminTab.classList.add('hidden');
+                formBtn.className = "px-4 py-2 bg-[#580000] text-white rounded-lg text-xs font-semibold shadow";
+                adminBtn.className = "px-4 py-2 bg-slate-200 text-slate-700 hover:bg-slate-300 rounded-lg text-xs font-semibold";
+            } else if (tab === 'admin') {
+                formTab.classList.add('hidden');
+                adminTab.classList.remove('hidden');
+                adminBtn.className = "px-4 py-2 bg-[#580000] text-white rounded-lg text-xs font-semibold shadow";
+                formBtn.className = "px-4 py-2 bg-slate-200 text-slate-700 hover:bg-slate-300 rounded-lg text-xs font-semibold";
+                loadTeacherAccounts();
+            }
+        };
+
+        window.handleLogin = async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+            } catch (error) {
+                alert('Gagal log masuk: ' + error.message);
+            }
+        };
+
+        window.handleRegister = async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('reg-email').value;
+            const password = document.getElementById('reg-password').value;
+
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                
+                // Simpan rekod akaun guru ke koleksi 'guru' untuk kawalan admin
+                await setDoc(doc(db, "guru", userCredential.user.uid), {
+                    email: email,
+                    status: "aktif",
+                    tarikhDaftar: new Date().toISOString()
+                });
+
+                alert('Akaun berjaya didaftarkan! Sila log masuk.');
+                toggleView('login');
+            } catch (error) {
+                alert('Gagal daftar akaun: ' + error.message);
+            }
+        };
+
+        window.handleLogout = async function() {
+            await signOut(auth);
+            toggleView('login');
+        };
+
+        window.saveStudentData = async function(e) {
+            e.preventDefault();
+            const studentData = {
+                nama: document.getElementById('student-name').value,
+                noMyKad: document.getElementById('student-ic').value,
+                jantina: document.getElementById('student-gender').value,
+                tingkatan: document.getElementById('student-class').value,
+                namaWaris: document.getElementById('guardian-name').value,
+                telefonWaris: document.getElementById('guardian-phone').value,
+                tarikhDaftar: new Date().toISOString()
+            };
+
+            try {
+                await addDoc(collection(db, "pelajar"), studentData);
+                alert('Pendaftaran pelajar berjaya disimpan ke pangkalan data!');
+                document.getElementById('student-form').reset();
+            } catch (error) {
+                alert('Ralat menyimpan data: ' + error.message);
+            }
+        };
+
+        // Fungsi Memuatkan Senarai Akaun Guru untuk Admin
+        window.loadTeacherAccounts = async function() {
+            const container = document.getElementById('teacher-list-container');
+            container.innerHTML = '<p class="text-xs text-slate-500">Memuatkan senarai akaun...</p>';
+
+            try {
+                const querySnapshot = await getDocs(collection(db, "guru"));
+                container.innerHTML = '';
+
+                if (querySnapshot.empty) {
+                    container.innerHTML = '<p class="text-xs text-slate-500">Tiada akaun guru berdaftar ditemui.</p>';
+                    return;
+                }
+
+                querySnapshot.forEach((docSnap) => {
+                    const data = docSnap.data();
+                    const teacherId = docSnap.id;
+
+                    const card = document.createElement('div');
+                    card.className = "bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-2";
+                    card.innerHTML = `
+                        <div class="font-bold text-slate-800 text-sm">Akaun Guru</div>
+                        <div class="text-xs text-slate-600">${data.email}</div>
+                        <div class="text-xs font-semibold text-slate-700">Status: <span class="text-emerald-600">${data.status || 'aktif'}</span></div>
+                        <div class="pt-2">
+                            <button onclick="deleteTeacher('${teacherId}')" class="px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-semibold transition">
+                                Hapus Akaun
+                            </button>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            } catch (error) {
+                container.innerHTML = `<p class="text-xs text-red-500">Ralat memuatkan data: ${error.message}</p>`;
+            }
+        };
+
+        // Fungsi Hapus Akaun Guru
+        window.deleteTeacher = async function(id) {
+            if (confirm("Adakah anda pasti mahu menghapus akaun ini?")) {
+                try {
+                    await deleteDoc(doc(db, "guru", id));
+                    alert("Akaun berjaya dipadam daripada senarai.");
+                    loadTeacherAccounts();
+                } catch (error) {
+                    alert("Ralat memadam akaun: " + error.message);
+                }
+            }
+        };
+
+        // Pantau Status Pengguna
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById('user-display-email').innerText = `Log masuk sebagai: ${user.email}`;
+                toggleView('dashboard');
+
+                // Semak sama ada pengguna adalah Admin
+                const adminBtn = document.getElementById('tab-admin-btn');
+                if (adminEmails.includes(user.email)) {
+                    adminBtn.classList.remove('hidden'); // Paparkan tab Admin
+                } else {
+                    adminBtn.classList.add('hidden'); // Sembunyikan untuk guru biasa
+                }
+            } else {
+                toggleView('login');
+            }
+        });
+    </script>
+</body>
+</html>
