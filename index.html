@@ -11,23 +11,24 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 </style>
 </head>
 <body class="bg-slate-100 min-h-screen flex flex-col justify-between pb-16">
-
 <!-- KAWASAN UTAMA -->
 <main class="w-full max-w-md mx-auto p-4 space-y-4 flex-grow">
-
 <!-- 1. PAPARAN BORANG LOG MASUK -->
 <div id="login-section" class="w-full bg-white rounded-3xl shadow-xl p-8 border border-slate-100 mt-10">
 <div class="text-center mb-6">
 <h3 class="text-xl font-bold text-slate-800">Selamat Datang!</h3>
 <p class="text-xs text-slate-500 mt-1">Sila Log Masuk Untuk Meneruskan.</p>
 </div>
-
 <form id="login-form" class="space-y-4" onsubmit="handleLogin(event)">
+<!-- Ruangan E-mel dengan Ikon Mata -->
 <div class="relative">
-<input type="email" id="login-email" required placeholder="Alamat E-mel Pentadbir / Guru" 
-class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#580000] text-sm">
+<input type="password" id="login-email" required placeholder="Alamat E-mel Pentadbir / Guru" 
+class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#580000] text-sm pr-12">
+<button type="button" onclick="toggleEmailVisibility('login-email', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 p-2 text-base select-none cursor-pointer">
+👁️
+</button>
 </div>
-
+<!-- Ruangan Kata Laluan dengan Ikon Mata -->
 <div class="relative">
 <input type="password" id="login-password" required placeholder="Kata Laluan" 
 class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#580000] text-sm pr-12">
@@ -35,12 +36,10 @@ class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:
 👁️
 </button>
 </div>
-
 <button type="submit" id="login-btn" class="w-full py-4 bg-[#580000] hover:bg-[#7a0000] text-white font-bold rounded-2xl transition duration-200 shadow-lg text-xs tracking-widest uppercase cursor-pointer">
 Log Masuk
 </button>
 </form>
-
 <div class="text-center mt-6 space-y-2 text-xs">
 <a href="#" onclick="handleForgotPassword(event)" class="block text-[#580000] font-bold hover:underline">Lupa Kata Laluan?</a>
 <a href="#" onclick="toggleView('register')" class="block text-[#580000] font-bold hover:underline">Daftar Akaun Guru Baharu</a>
@@ -53,7 +52,6 @@ Log Masuk
 <h3 class="text-xl font-bold text-slate-800">Pendaftaran Akaun Guru</h3>
 <p class="text-xs text-slate-500 mt-1">Cipta akses akaun baharu.</p>
 </div>
-
 <form id="register-form" class="space-y-4" onsubmit="handleRegister(event)">
 <div>
 <input type="text" id="reg-name" required placeholder="Nama Penuh Guru" 
@@ -70,12 +68,10 @@ class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:
 👁️
 </button>
 </div>
-
 <button type="submit" id="reg-btn" class="w-full py-4 bg-[#580000] hover:bg-[#7a0000] text-white font-bold rounded-2xl transition duration-200 shadow-lg text-xs tracking-widest uppercase cursor-pointer">
 Daftar Akaun
 </button>
 </form>
-
 <div class="text-center mt-6 text-xs">
 <a href="#" onclick="toggleView('login')" class="text-[#580000] font-bold hover:underline">Kembali ke Log Masuk</a>
 </div>
@@ -83,7 +79,6 @@ Daftar Akaun
 
 <!-- 3. PAPARAN UTAMA DASHBOARD -->
 <div id="dashboard-section" class="hidden w-full space-y-4">
-
 <!-- KAD HEADER GELAP DENGAN IKON LOCENG -->
 <div class="bg-[#580000] text-white p-6 rounded-3xl shadow-xl relative overflow-hidden">
 <div class="flex justify-between items-start">
@@ -97,7 +92,6 @@ Daftar Akaun
 <span id="bell-badge" class="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-extrabold px-1.5 py-0.5 rounded-full shadow-md">0</span>
 </div>
 </div>
-
 <div class="mt-3 inline-flex items-center space-x-2 bg-[#7a123d] px-3 py-1.5 rounded-xl border border-rose-900 text-xs text-rose-100">
 <span>📅</span>
 <span id="current-date">Ahad, 1 November 2026</span>
@@ -130,12 +124,10 @@ Daftar Akaun
 <span class="text-xs font-semibold tracking-wider uppercase">+ Tambah Pendaftaran Pelajar</span>
 <span class="text-lg">➔</span>
 </div>
-
 <div class="bg-white p-5 rounded-3xl shadow-md space-y-1">
 <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Jumlah Keseluruhan Pelajar</p>
 <h2 class="text-3xl font-extrabold text-slate-800" id="stat-total">0</h2>
 </div>
-
 <div class="bg-white p-5 rounded-3xl shadow-md space-y-1">
 <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Pendaftaran Tahun Ini (2026)</p>
 <h2 class="text-3xl font-extrabold text-slate-800" id="stat-year">0</h2>
@@ -144,39 +136,85 @@ Daftar Akaun
 
 <!-- Kandungan Tab Borang -->
 <div id="content-form" class="hidden bg-white p-6 rounded-3xl shadow-md space-y-4">
-<h3 class="text-base font-bold text-slate-800 border-b pb-2">Borang Pendaftaran Pelajar Baru</h3>
-<form id="student-form" class="space-y-3" onsubmit="saveStudentData(event)">
-<div>
-<label class="block text-[11px] font-semibold text-slate-600 mb-1">Nama Penuh Pelajar</label>
-<input type="text" id="student-name" required class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#580000]">
+<div class="border-b pb-3">
+<h3 class="text-sm font-bold text-slate-800 uppercase tracking-wide">PENDAFTARAN PELAJAR BAHARU TINGKATAN SATU TAHUN 2027</h3>
 </div>
+<form id="student-form" class="space-y-4" onsubmit="saveStudentData(event)">
 <div>
-<label class="block text-[11px] font-semibold text-slate-600 mb-1">Nombor Kad Pengenalan / MyKad</label>
-<input type="text" id="student-ic" required class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#580000]">
-</div>
-<div class="grid grid-cols-2 gap-2">
-<div>
-<label class="block text-[11px] font-semibold text-slate-600 mb-1">Jantina</label>
-<select id="student-gender" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#580000]">
-<option value="Lelaki">Lelaki</option>
-<option value="Perempuan">Perempuan</option>
-</select>
-</div>
-<div>
-<label class="block text-[11px] font-semibold text-slate-600 mb-1">Program / Tingkatan</label>
-<input type="text" id="student-class" required placeholder="Contoh: Tingkatan 1" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#580000]">
-</div>
-</div>
-<div>
-<label class="block text-[11px] font-semibold text-slate-600 mb-1">Nama Waris / Penjaga</label>
-<input type="text" id="guardian-name" required class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#580000]">
-</div>
-<div>
-<label class="block text-[11px] font-semibold text-slate-600 mb-1">Nombor Telefon Waris</label>
-<input type="tel" id="guardian-phone" required class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#580000]">
+<label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">NAMA PELAJAR <span class="text-red-500">*</span></label>
+<input type="text" id="student-name" required placeholder="Short-answer text" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#580000]">
 </div>
 
-<button type="submit" class="w-full py-3 bg-[#580000] hover:bg-[#7a0000] text-white font-semibold rounded-2xl transition duration-200 shadow text-xs uppercase tracking-wider mt-2 cursor-pointer">
+<div>
+<label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">NO KAD PENGENALAN PELAJAR <span class="text-red-500">*</span></label>
+<input type="text" id="student-ic" required placeholder="Short-answer text" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#580000]">
+</div>
+
+<div>
+<label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">NAMA PENUH IBU BAPA / PENJAGA <span class="text-red-500">*</span></label>
+<input type="text" id="guardian-name" required placeholder="Short-answer text" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#580000]">
+</div>
+
+<div>
+<label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">NO. TELEFON UNTUK DIHUBUNGI <span class="text-red-500">*</span></label>
+<input type="tel" id="guardian-phone" required placeholder="Short-answer text" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#580000]">
+</div>
+
+<div>
+<label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">NAMA SEKOLAH TERDAHULU <span class="text-red-500">*</span></label>
+<textarea id="student-prev-school" required rows="2" placeholder="Long-answer text" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#580000] resize-none"></textarea>
+</div>
+
+<!-- Aliran Kelas Yang Dipohon dengan Pilihan Tingkatan T1 hingga T5 -->
+<div class="space-y-2 pt-1">
+<label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">ALIRAN KELAS YANG DIPOHON <span class="text-red-500">*</span></label>
+
+<div class="space-y-2">
+<label class="flex items-start space-x-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
+<input type="radio" name="aliran_kelas" value="Aliran Akademik (Akademik & Arab/Agama)" required onclick="toggleTingkatanOptions(false)" class="mt-0.5 text-[#580000] focus:ring-[#580000]">
+<span class="text-xs text-slate-700 font-medium">Aliran Akademik (Akademik & Arab/Agama)</span>
+</label>
+
+<label class="flex items-start space-x-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
+<input type="radio" name="aliran_kelas" value="Aliran Tahfiz (Tahfiz, Akademik & Arab/Agama) - Wajib tinggal di asrama tahfiz" onclick="toggleTingkatanOptions(true)" class="mt-0.5 text-[#580000] focus:ring-[#580000]">
+<span class="text-xs text-slate-700 font-medium">Aliran Tahfiz (Tahfiz, Akademik & Arab/Agama) - Wajib tinggal di asrama tahfiz</span>
+</label>
+</div>
+
+<!-- Pilihan Tingkatan (T1, T2, T3, T4, T5) yang muncul apabila aliran dipilih -->
+<div id="tingkatan-options-container" class="hidden mt-3 pl-6 p-3 bg-rose-50 border border-rose-200 rounded-2xl space-y-2">
+<label class="block text-[11px] font-bold text-[#580000] uppercase">Sila Pilih Pilihan Tingkatan:</label>
+<div class="grid grid-cols-5 gap-1.5 text-center">
+<label class="border border-rose-300 rounded-xl p-2 cursor-pointer hover:bg-rose-100 bg-white transition flex flex-col items-center">
+<input type="radio" name="sub_tingkatan" value="T1" class="mb-1 text-[#580000]">
+<span class="text-[11px] font-bold text-slate-800">T1</span>
+</label>
+<label class="border border-rose-300 rounded-xl p-2 cursor-pointer hover:bg-rose-100 bg-white transition flex flex-col items-center">
+<input type="radio" name="sub_tingkatan" value="T2" class="mb-1 text-[#580000]">
+<span class="text-[11px] font-bold text-slate-800">T2</span>
+</label>
+<label class="border border-rose-300 rounded-xl p-2 cursor-pointer hover:bg-rose-100 bg-white transition flex flex-col items-center">
+<input type="radio" name="sub_tingkatan" value="T3" class="mb-1 text-[#580000]">
+<span class="text-[11px] font-bold text-slate-800">T3</span>
+</label>
+<label class="border border-rose-300 rounded-xl p-2 cursor-pointer hover:bg-rose-100 bg-white transition flex flex-col items-center">
+<input type="radio" name="sub_tingkatan" value="T4" class="mb-1 text-[#580000]">
+<span class="text-[11px] font-bold text-slate-800">T4</span>
+</label>
+<label class="border border-rose-300 rounded-xl p-2 cursor-pointer hover:bg-rose-100 bg-white transition flex flex-col items-center">
+<input type="radio" name="sub_tingkatan" value="T5" class="mb-1 text-[#580000]">
+<span class="text-[11px] font-bold text-slate-800">T5</span>
+</label>
+</div>
+</div>
+</div>
+
+<div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-[11px] text-slate-500 leading-relaxed space-y-1 mt-2">
+<p>Pihak sekolah akan menghubungi anda dalam masa terdekat untuk urusan seterusnya selepas permohonan ini lengkap dihantar.</p>
+<p>Terima kasih atas sokongan dan kepercayaan yang diberikan kepada sekolah kami.</p>
+</div>
+
+<button type="submit" class="w-full py-3 bg-[#580000] hover:bg-[#7a0000] text-white font-semibold rounded-2xl transition duration-200 shadow text-xs uppercase tracking-wider mt-3 cursor-pointer">
 Simpan Pendaftaran
 </button>
 </form>
@@ -193,7 +231,7 @@ Simpan Pendaftaran
 <tr class="bg-[#580000] text-white text-[11px] uppercase tracking-wider">
 <th class="p-3">Bil</th>
 <th class="p-3">Nama Pelajar</th>
-<th class="p-3">MyKad / Tingkatan</th>
+<th class="p-3">MyKad / Aliran</th>
 <th class="p-3">Waris & Telefon</th>
 </tr>
 </thead>
@@ -225,9 +263,7 @@ Muat Semula Senarai
 Log Keluar (<span id="user-display-email"></span>)
 </button>
 </div>
-
 </div>
-
 </main>
 
 <footer class="text-center py-4 text-xs text-slate-400 border-t bg-white mt-auto">
@@ -263,12 +299,25 @@ window.toggleView = function(view) {
 document.getElementById('login-section').classList.add('hidden');
 document.getElementById('register-section').classList.add('hidden');
 document.getElementById('dashboard-section').classList.add('hidden');
-
 if (view === 'login') document.getElementById('login-section').classList.remove('hidden');
 if (view === 'register') document.getElementById('register-section').classList.remove('hidden');
 if (view === 'dashboard') document.getElementById('dashboard-section').classList.remove('hidden');
 };
 
+// Fungsi kawalan papar/sembunyi teks E-mel
+window.toggleEmailVisibility = function(inputId, btn) {
+const input = document.getElementById(inputId);
+if (!input) return;
+if (input.type === 'password') {
+input.type = 'text';
+btn.innerText = '🔒';
+} else {
+input.type = 'password';
+btn.innerText = '👁️';
+}
+};
+
+// Fungsi kawalan papar/sembunyi teks Kata Laluan
 window.togglePasswordVisibility = function(inputId, btn) {
 const input = document.getElementById(inputId);
 if (!input) return;
@@ -281,6 +330,22 @@ btn.innerText = '👁️';
 }
 };
 
+// Fungsi paparan pilihan T1 hingga T5 apabila aliran dipilih
+window.toggleTingkatanOptions = function(show) {
+const container = document.getElementById('tingkatan-options-container');
+const subRadios = container.querySelectorAll('input[name="sub_tingkatan"]');
+if (show) {
+container.classList.remove('hidden');
+subRadios.forEach(r => r.required = true);
+} else {
+container.classList.add('hidden');
+subRadios.forEach(r => {
+r.required = false;
+r.checked = false;
+});
+}
+};
+
 window.switchTab = function(tab) {
 ['home', 'form', 'senarai', 'admin'].forEach(t => {
 const el = document.getElementById(`content-${t}`);
@@ -290,14 +355,12 @@ if(btn && t !== 'admin') {
 btn.className = "p-2 rounded-2xl hover:bg-slate-100 text-slate-600 flex flex-col items-center justify-center transition cursor-pointer";
 }
 });
-
 const activeEl = document.getElementById(`content-${tab}`);
 const activeBtn = document.getElementById(`tab-${tab}-btn`);
 if(activeEl) activeEl.classList.remove('hidden');
 if(activeBtn && tab !== 'admin') {
 activeBtn.className = "p-2 rounded-2xl bg-[#580000] text-white flex flex-col items-center justify-center transition shadow cursor-pointer";
 }
-
 if(tab === 'home') loadDashboardStats();
 if(tab === 'senarai') loadStudentList();
 if(tab === 'admin') loadTeacherAccounts();
@@ -308,19 +371,14 @@ e.preventDefault();
 const email = document.getElementById('login-email').value.trim().toLowerCase();
 const password = document.getElementById('login-password').value;
 const btn = document.getElementById('login-btn');
-
 try {
 btn.innerText = "SEDANG LOG MASUK...";
 btn.disabled = true;
-
 const userCredential = await signInWithEmailAndPassword(auth, email, password);
 const user = userCredential.user;
-
 if (adminEmails.includes(email)) return;
-
 const docRef = doc(db, "guru", user.uid);
 const docSnap = await getDoc(docRef);
-
 if (docSnap.exists()) {
 const data = docSnap.data();
 if (data.status !== 'aktif') {
@@ -348,11 +406,9 @@ const name = document.getElementById('reg-name').value;
 const email = document.getElementById('reg-email').value.trim().toLowerCase();
 const password = document.getElementById('reg-password').value;
 const btn = document.getElementById('reg-btn');
-
 try {
 btn.innerText = "MENDAFTAR...";
 btn.disabled = true;
-
 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 await setDoc(doc(db, "guru", userCredential.user.uid), {
 nama: name,
@@ -394,13 +450,21 @@ toggleView('login');
 
 window.saveStudentData = async function(e) {
 e.preventDefault();
+const aliranSelected = document.querySelector('input[name="aliran_kelas"]:checked');
+let tingkatanValue = aliranSelected ? aliranSelected.value : '';
+
+const subTingkatanSelected = document.querySelector('input[name="sub_tingkatan"]:checked');
+if (subTingkatanSelected && !document.getElementById('tingkatan-options-container').classList.contains('hidden')) {
+tingkatanValue += ` (${subTingkatanSelected.value})`;
+}
+
 const studentData = {
 nama: document.getElementById('student-name').value,
 noMyKad: document.getElementById('student-ic').value,
-jantina: document.getElementById('student-gender').value,
-tingkatan: document.getElementById('student-class').value,
-namaWaris: document.getElementById('guardian-name').value,
+namaWarisibuBapa: document.getElementById('guardian-name').value,
 telefonWaris: document.getElementById('guardian-phone').value,
+sekolahTerdahulu: document.getElementById('student-prev-school').value,
+tingkatan: tingkatanValue,
 tarikhDaftar: new Date().toISOString()
 };
 
@@ -408,6 +472,7 @@ try {
 await addDoc(collection(db, "pelajar"), studentData);
 alert('Pendaftaran pelajar berjaya disimpan!');
 document.getElementById('student-form').reset();
+document.getElementById('tingkatan-options-container').classList.add('hidden');
 switchTab('home');
 loadDashboardStats();
 } catch (error) {
@@ -451,7 +516,7 @@ tr.innerHTML = `
 <td class="p-3 font-semibold text-slate-500">${i++}</td>
 <td class="p-3 font-bold text-slate-800">${escapeHtml(d.nama)}</td>
 <td class="p-3 text-slate-600">${escapeHtml(d.noMyKad)}<br><span class="text-[10px] text-slate-400">${escapeHtml(d.tingkatan)}</span></td>
-<td class="p-3 text-slate-600">${escapeHtml(d.namaWaris)}<br><span class="text-[10px] text-slate-400">${escapeHtml(d.telefonWaris)}</span></td>
+<td class="p-3 text-slate-600">${escapeHtml(d.namaWarisibuBapa)}<br><span class="text-[10px] text-slate-400">${escapeHtml(d.telefonWaris)}</span></td>
 `;
 container.appendChild(tr);
 });
@@ -478,7 +543,6 @@ querySnapshot.forEach(docSnap => {
 const data = docSnap.data();
 const teacherId = docSnap.id;
 const isAktif = data.status === 'aktif';
-
 const card = document.createElement('div');
 card.className = "bg-slate-50 p-3 rounded-2xl border border-slate-200 text-xs space-y-2";
 card.innerHTML = `
@@ -493,8 +557,6 @@ container.appendChild(card);
 });
 } catch(e) { container.innerHTML = '<p class="text-xs text-red-500">Ralat memuatkan akaun.</p>'; }
 };
-
-window.loadTeacherAccounts = window.loadTeacherAccounts;
 
 window.approveTeacher = async function(id) {
 try {
