@@ -20,9 +20,9 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 <p class="text-xs text-slate-500 mt-1">Sila Log Masuk Untuk Meneruskan.</p>
 </div>
 <form id="login-form" class="space-y-4" onsubmit="handleLogin(event)">
-<!-- Ruangan E-mel diset kepada type="email" supaya cadangan pelayar berfungsi & ikon mata disokong -->
+<!-- Ruangan E-mel dengan autocomplete sokongan pelayar & fungsi sembunyi/papar betul -->
 <div class="relative">
-<input type="email" id="login-email" required placeholder="Alamat E-mel Pentadbir / Guru" 
+<input type="password" id="login-email" autocomplete="email" required placeholder="Alamat E-mel Pentadbir / Guru" 
 class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#580000] text-sm pr-12">
 <button type="button" onclick="toggleEmailVisibility('login-email', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 p-2 text-base select-none cursor-pointer">
 👁️
@@ -30,7 +30,7 @@ class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:
 </div>
 <!-- Ruangan Kata Laluan dengan Ikon Mata -->
 <div class="relative">
-<input type="password" id="login-password" required placeholder="Kata Laluan" 
+<input type="password" id="login-password" autocomplete="current-password" required placeholder="Kata Laluan" 
 class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#580000] text-sm pr-12">
 <button type="button" onclick="togglePasswordVisibility('login-password', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 p-2 text-base select-none cursor-pointer">
 👁️
@@ -304,15 +304,15 @@ if (view === 'register') document.getElementById('register-section').classList.r
 if (view === 'dashboard') document.getElementById('dashboard-section').classList.remove('hidden');
 };
 
-// Fungsi khas kawalan papar/sembunyi teks E-mel dengan kekal menyokong jenis input e-mel
+// Fungsi kawalan papar/sembunyi teks E-mel dengan betul
 window.toggleEmailVisibility = function(inputId, btn) {
 const input = document.getElementById(inputId);
 if (!input) return;
-if (input.type === 'email') {
+if (input.type === 'password') {
 input.type = 'text';
 btn.innerText = '🔒';
 } else {
-input.type = 'email';
+input.type = 'password';
 btn.innerText = '👁️';
 }
 };
