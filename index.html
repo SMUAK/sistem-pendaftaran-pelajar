@@ -8,6 +8,7 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
 body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+.masked-text { -webkit-text-security: disc; text-security: disc; }
 </style>
 </head>
 <body class="bg-slate-100 min-h-screen flex flex-col justify-between pb-16">
@@ -20,15 +21,15 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 <p class="text-xs text-slate-500 mt-1">Sila Log Masuk Untuk Meneruskan.</p>
 </div>
 <form id="login-form" class="space-y-4" onsubmit="handleLogin(event)">
-<!-- Ruangan E-mel dengan autocomplete sokongan pelayar & fungsi sembunyi/papar betul -->
+<!-- Ruangan E-mel: type="email" disokong pelayar untuk autoglobal/cadangan, disembunyikan dengan CSS security -->
 <div class="relative">
-<input type="password" id="login-email" autocomplete="email" required placeholder="Alamat E-mel Pentadbir / Guru" 
-class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#580000] text-sm pr-12">
+<input type="email" id="login-email" autocomplete="email" required placeholder="Alamat E-mel Pentadbir / Guru" 
+class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#580000] text-sm pr-12 masked-text">
 <button type="button" onclick="toggleEmailVisibility('login-email', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 p-2 text-base select-none cursor-pointer">
 👁️
 </button>
 </div>
-<!-- Ruangan Kata Laluan dengan Ikon Mata -->
+<!-- Ruangan Kata Laluan -->
 <div class="relative">
 <input type="password" id="login-password" autocomplete="current-password" required placeholder="Kata Laluan" 
 class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#580000] text-sm pr-12">
@@ -304,15 +305,15 @@ if (view === 'register') document.getElementById('register-section').classList.r
 if (view === 'dashboard') document.getElementById('dashboard-section').classList.remove('hidden');
 };
 
-// Fungsi kawalan papar/sembunyi teks E-mel dengan betul
+// Fungsi kawalan papar/sembunyi teks E-mel menggunakan CSS security class supaya kekal type="email"
 window.toggleEmailVisibility = function(inputId, btn) {
 const input = document.getElementById(inputId);
 if (!input) return;
-if (input.type === 'password') {
-input.type = 'text';
+if (input.classList.contains('masked-text')) {
+input.classList.remove('masked-text');
 btn.innerText = '🔒';
 } else {
-input.type = 'password';
+input.classList.add('masked-text');
 btn.innerText = '👁️';
 }
 };
@@ -487,7 +488,7 @@ let total = querySnapshot.size;
 let countYear = 0;
 querySnapshot.forEach(docSnap => {
 const data = docSnap.data();
-if(data.tarikhDaftar && data.tarikhDaftar.startsWith("2026")) {
+if(data.tarikhDatur && data.tarikhDatar.startsWith("2026")) {
 countYear++;
 }
 });
