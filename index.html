@@ -7,13 +7,14 @@
 <!-- Tailwind CSS CDN -->
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f1f5f9; }
 .masked-text { -webkit-text-security: disc; text-security: disc; }
 </style>
 </head>
-<body class="bg-slate-100 min-h-screen flex flex-col justify-between pb-16">
-<!-- KAWASAN UTAMA -->
-<main class="w-full max-w-md mx-auto p-4 space-y-4 flex-grow">
+<body class="min-h-screen flex flex-col justify-between pb-16">
+<!-- KAWASAN UTAMA (Responsif Lebar untuk PC/Tab & Telefon) -->
+<main class="w-full max-w-xl mx-auto p-4 space-y-4 flex-grow">
+
 <!-- 1. PAPARAN BORANG LOG MASUK -->
 <div id="login-section" class="w-full bg-white rounded-3xl shadow-xl p-8 border border-slate-100 mt-10">
 <div class="text-center mb-6">
@@ -21,29 +22,29 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 <p class="text-xs text-slate-500 mt-1">Sila Log Masuk Untuk Meneruskan.</p>
 </div>
 <form id="login-form" class="space-y-4" onsubmit="handleLogin(event)">
-<!-- Ruangan E-mel: type="email" disokong pelayar untuk autoglobal/cadangan, disembunyikan dengan CSS security -->
 <div class="relative">
 <input type="email" id="login-email" autocomplete="email" required placeholder="Alamat E-mel Pentadbir / Guru" 
-class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#580000] text-sm pr-12 masked-text">
+class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#3b0000] text-sm pr-12 masked-text">
 <button type="button" onclick="toggleEmailVisibility('login-email', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 p-2 text-base select-none cursor-pointer">
 👁️
 </button>
 </div>
-<!-- Ruangan Kata Laluan -->
 <div class="relative">
 <input type="password" id="login-password" autocomplete="current-password" required placeholder="Kata Laluan" 
-class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#580000] text-sm pr-12">
+class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#3b0000] text-sm pr-12">
 <button type="button" onclick="togglePasswordVisibility('login-password', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 p-2 text-base select-none cursor-pointer">
 👁️
 </button>
 </div>
-<button type="submit" id="login-btn" class="w-full py-4 bg-[#580000] hover:bg-[#7a0000] text-white font-bold rounded-2xl transition duration-200 shadow-lg text-xs tracking-widest uppercase cursor-pointer">
+<div class="flex justify-center pt-2">
+<button type="submit" id="login-btn" class="px-8 py-3.5 bg-[#3b0000] hover:bg-[#4a0000] text-white font-bold rounded-2xl transition duration-200 shadow-lg text-xs tracking-widest uppercase cursor-pointer">
 Log Masuk
 </button>
+</div>
 </form>
 <div class="text-center mt-6 space-y-2 text-xs">
-<a href="#" onclick="handleForgotPassword(event)" class="block text-[#580000] font-bold hover:underline">Lupa Kata Laluan?</a>
-<a href="#" onclick="toggleView('register')" class="block text-[#580000] font-bold hover:underline">Daftar Akaun Guru Baharu</a>
+<a href="#" onclick="handleForgotPassword(event)" class="block text-[#3b0000] font-bold hover:underline">Lupa Kata Laluan?</a>
+<a href="#" onclick="toggleView('register')" class="block text-[#3b0000] font-bold hover:underline">Daftar Akaun Guru Baharu</a>
 </div>
 </div>
 
@@ -56,52 +57,54 @@ Log Masuk
 <form id="register-form" class="space-y-4" onsubmit="handleRegister(event)">
 <div>
 <input type="text" id="reg-name" required placeholder="Nama Penuh Guru" 
-class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#580000] text-sm">
+class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#3b0000] text-sm">
 </div>
 <div>
 <input type="email" id="reg-email" required placeholder="Alamat E-mel" 
-class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#580000] text-sm">
+class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#3b0000] text-sm">
 </div>
 <div class="relative">
 <input type="password" id="reg-password" required placeholder="Kata Laluan Baharu (Min. 6 aksara)" 
-class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#580000] text-sm pr-12">
+class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#3b0000] text-sm pr-12">
 <button type="button" onclick="togglePasswordVisibility('reg-password', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 p-2 text-base select-none cursor-pointer">
 👁️
 </button>
 </div>
-<button type="submit" id="reg-btn" class="w-full py-4 bg-[#580000] hover:bg-[#7a0000] text-white font-bold rounded-2xl transition duration-200 shadow-lg text-xs tracking-widest uppercase cursor-pointer">
+<div class="flex justify-center pt-2">
+<button type="submit" id="reg-btn" class="px-8 py-3.5 bg-[#3b0000] hover:bg-[#4a0000] text-white font-bold rounded-2xl transition duration-200 shadow-lg text-xs tracking-widest uppercase cursor-pointer">
 Daftar Akaun
 </button>
+</div>
 </form>
 <div class="text-center mt-6 text-xs">
-<a href="#" onclick="toggleView('login')" class="text-[#580000] font-bold hover:underline">Kembali ke Log Masuk</a>
+<a href="#" onclick="toggleView('login')" class="text-[#3b0000] font-bold hover:underline">Kembali ke Log Masuk</a>
 </div>
 </div>
 
 <!-- 3. PAPARAN UTAMA DASHBOARD -->
 <div id="dashboard-section" class="hidden w-full space-y-4">
-<!-- KAD HEADER GELAP DENGAN IKON LOCENG -->
-<div class="bg-[#580000] text-white p-6 rounded-3xl shadow-xl relative overflow-hidden">
+<!-- KAD HEADER GELAP DENGAN MERAH TUA PEKAT -->
+<div class="bg-[#3b0000] text-white p-6 rounded-3xl shadow-xl relative overflow-hidden">
 <div class="flex justify-between items-start">
 <div>
 <h1 class="text-base md:text-lg font-bold tracking-tight">SMU(A) KHAIRIAH</h1>
 <h2 class="text-base md:text-lg font-bold tracking-tight">MUKIM BANGGOL SETOL</h2>
 <p class="text-xs text-rose-200 mt-0.5">Sistem Pendaftaran Pelajar</p>
 </div>
-<div onclick="switchTab('senarai')" class="relative bg-[#7a123d] p-2.5 rounded-2xl border border-rose-900 cursor-pointer hover:bg-[#8f1648] transition">
+<div onclick="switchTab('senarai')" class="relative bg-[#540000] p-2.5 rounded-2xl border border-rose-950 cursor-pointer hover:bg-[#6b0000] transition">
 <span class="text-base">🔔</span>
 <span id="bell-badge" class="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-extrabold px-1.5 py-0.5 rounded-full shadow-md">0</span>
 </div>
 </div>
-<div class="mt-3 inline-flex items-center space-x-2 bg-[#7a123d] px-3 py-1.5 rounded-xl border border-rose-900 text-xs text-rose-100">
+<div class="mt-3 inline-flex items-center space-x-2 bg-[#540000] px-3 py-1.5 rounded-xl border border-rose-950 text-xs text-rose-100">
 <span>📅</span>
 <span id="current-date">Ahad, 1 November 2026</span>
 </div>
 </div>
 
-<!-- MENU TAB IKON -->
-<div class="bg-white p-2.5 rounded-3xl shadow-md grid grid-cols-4 gap-1 text-center">
-<button onclick="switchTab('home')" id="tab-home-btn" class="p-2 rounded-2xl bg-[#580000] text-white flex flex-col items-center justify-center transition shadow cursor-pointer">
+<!-- MENU TAB IKON (5 BUTANG SEBARIS TERMASUK LOG KELUAR) -->
+<div class="bg-white p-2.5 rounded-3xl shadow-md grid grid-cols-5 gap-1 text-center">
+<button onclick="switchTab('home')" id="tab-home-btn" class="p-2 rounded-2xl bg-[#3b0000] text-white flex flex-col items-center justify-center transition shadow cursor-pointer">
 <span class="text-sm mb-0.5">📊</span>
 <span class="text-[10px] font-semibold">Utama</span>
 </button>
@@ -117,13 +120,19 @@ Daftar Akaun
 <span class="text-sm mb-0.5">⚙️</span>
 <span class="text-[10px] font-semibold">Tetapan</span>
 </button>
+<button onclick="handleLogout()" class="p-2 rounded-2xl hover:bg-slate-100 text-slate-600 flex flex-col items-center justify-center transition cursor-pointer">
+<div class="w-6 h-6 bg-red-600 rounded-lg flex items-center justify-center text-white text-xs mb-0.5 shadow">↩</div>
+<span class="text-[10px] font-semibold">Log Keluar</span>
+</button>
 </div>
 
 <!-- Kandungan Tab Utama -->
 <div id="content-home" class="space-y-4">
-<div class="bg-[#580000] text-white p-4 rounded-2xl shadow flex items-center justify-between cursor-pointer hover:bg-[#7a123d] transition" onclick="switchTab('form')">
+<div class="flex justify-center">
+<div class="bg-[#3b0000] text-white px-6 py-3 rounded-2xl shadow flex items-center space-x-2 cursor-pointer hover:bg-[#4a0000] transition" onclick="switchTab('form')">
 <span class="text-xs font-semibold tracking-wider uppercase">+ Tambah Pendaftaran Pelajar</span>
-<span class="text-lg">➔</span>
+<span class="text-base">➔</span>
+</div>
 </div>
 <div class="bg-white p-5 rounded-3xl shadow-md space-y-1">
 <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Jumlah Keseluruhan Pelajar</p>
@@ -143,27 +152,27 @@ Daftar Akaun
 <form id="student-form" class="space-y-4" onsubmit="saveStudentData(event)">
 <div>
 <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">NAMA PELAJAR <span class="text-red-500">*</span></label>
-<input type="text" id="student-name" required placeholder="Short-answer text" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#580000]">
+<input type="text" id="student-name" required placeholder="Short-answer text" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000]">
 </div>
 
 <div>
 <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">NO KAD PENGENALAN PELAJAR <span class="text-red-500">*</span></label>
-<input type="text" id="student-ic" required placeholder="Short-answer text" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#580000]">
+<input type="text" id="student-ic" required placeholder="Short-answer text" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000]">
 </div>
 
 <div>
 <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">NAMA PENUH IBU BAPA / PENJAGA <span class="text-red-500">*</span></label>
-<input type="text" id="guardian-name" required placeholder="Short-answer text" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#580000]">
+<input type="text" id="guardian-name" required placeholder="Short-answer text" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000]">
 </div>
 
 <div>
 <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">NO. TELEFON UNTUK DIHUBUNGI <span class="text-red-500">*</span></label>
-<input type="tel" id="guardian-phone" required placeholder="Short-answer text" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#580000]">
+<input type="tel" id="guardian-phone" required placeholder="Short-answer text" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000]">
 </div>
 
 <div>
 <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">NAMA SEKOLAH TERDAHULU <span class="text-red-500">*</span></label>
-<textarea id="student-prev-school" required rows="2" placeholder="Long-answer text" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#580000] resize-none"></textarea>
+<textarea id="student-prev-school" required rows="2" placeholder="Long-answer text" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000] resize-none"></textarea>
 </div>
 
 <!-- Aliran Kelas Yang Dipohon dengan Pilihan Tingkatan T1 hingga T5 untuk KEDUA-DUA Aliran -->
@@ -172,38 +181,38 @@ Daftar Akaun
 
 <div class="space-y-2">
 <label class="flex items-start space-x-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
-<input type="radio" name="aliran_kelas" value="Aliran Akademik (Akademik & Arab/Agama)" required onclick="toggleTingkatanOptions(true)" class="mt-0.5 text-[#580000] focus:ring-[#580000]">
+<input type="radio" name="aliran_kelas" value="Aliran Akademik (Akademik & Arab/Agama)" required onclick="toggleTingkatanOptions(true)" class="mt-0.5 text-[#3b0000] focus:ring-[#3b0000]">
 <span class="text-xs text-slate-700 font-medium">Aliran Akademik (Akademik & Arab/Agama)</span>
 </label>
 
 <label class="flex items-start space-x-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
-<input type="radio" name="aliran_kelas" value="Aliran Tahfiz (Tahfiz, Akademik & Arab/Agama) - Wajib tinggal di asrama tahfiz" onclick="toggleTingkatanOptions(true)" class="mt-0.5 text-[#580000] focus:ring-[#580000]">
+<input type="radio" name="aliran_kelas" value="Aliran Tahfiz (Tahfiz, Akademik & Arab/Agama) - Wajib tinggal di asrama tahfiz" onclick="toggleTingkatanOptions(true)" class="mt-0.5 text-[#3b0000] focus:ring-[#3b0000]">
 <span class="text-xs text-slate-700 font-medium">Aliran Tahfiz (Tahfiz, Akademik & Arab/Agama) - Wajib tinggal di asrama tahfiz</span>
 </label>
 </div>
 
 <!-- Pilihan Tingkatan (T1, T2, T3, T4, T5) yang muncul apabila MANA-MANA aliran dipilih -->
 <div id="tingkatan-options-container" class="hidden mt-3 pl-6 p-3 bg-rose-50 border border-rose-200 rounded-2xl space-y-2">
-<label class="block text-[11px] font-bold text-[#580000] uppercase">Sila Pilih Pilihan Tingkatan:</label>
+<label class="block text-[11px] font-bold text-[#3b0000] uppercase">Sila Pilih Pilihan Tingkatan:</label>
 <div class="grid grid-cols-5 gap-1.5 text-center">
 <label class="border border-rose-300 rounded-xl p-2 cursor-pointer hover:bg-rose-100 bg-white transition flex flex-col items-center">
-<input type="radio" name="sub_tingkatan" value="T1" class="mb-1 text-[#580000]">
+<input type="radio" name="sub_tingkatan" value="T1" class="mb-1 text-[#3b0000]">
 <span class="text-[11px] font-bold text-slate-800">T1</span>
 </label>
 <label class="border border-rose-300 rounded-xl p-2 cursor-pointer hover:bg-rose-100 bg-white transition flex flex-col items-center">
-<input type="radio" name="sub_tingkatan" value="T2" class="mb-1 text-[#580000]">
+<input type="radio" name="sub_tingkatan" value="T2" class="mb-1 text-[#3b0000]">
 <span class="text-[11px] font-bold text-slate-800">T2</span>
 </label>
 <label class="border border-rose-300 rounded-xl p-2 cursor-pointer hover:bg-rose-100 bg-white transition flex flex-col items-center">
-<input type="radio" name="sub_tingkatan" value="T3" class="mb-1 text-[#580000]">
+<input type="radio" name="sub_tingkatan" value="T3" class="mb-1 text-[#3b0000]">
 <span class="text-[11px] font-bold text-slate-800">T3</span>
 </label>
 <label class="border border-rose-300 rounded-xl p-2 cursor-pointer hover:bg-rose-100 bg-white transition flex flex-col items-center">
-<input type="radio" name="sub_tingkatan" value="T4" class="mb-1 text-[#580000]">
+<input type="radio" name="sub_tingkatan" value="T4" class="mb-1 text-[#3b0000]">
 <span class="text-[11px] font-bold text-slate-800">T4</span>
 </label>
 <label class="border border-rose-300 rounded-xl p-2 cursor-pointer hover:bg-rose-100 bg-white transition flex flex-col items-center">
-<input type="radio" name="sub_tingkatan" value="T5" class="mb-1 text-[#580000]">
+<input type="radio" name="sub_tingkatan" value="T5" class="mb-1 text-[#3b0000]">
 <span class="text-[11px] font-bold text-slate-800">T5</span>
 </label>
 </div>
@@ -215,13 +224,15 @@ Daftar Akaun
 <p>Terima kasih atas sokongan dan kepercayaan yang diberikan kepada sekolah kami.</p>
 </div>
 
-<button type="submit" class="w-full py-3 bg-[#580000] hover:bg-[#7a0000] text-white font-semibold rounded-2xl transition duration-200 shadow text-xs uppercase tracking-wider mt-3 cursor-pointer">
+<div class="flex justify-center pt-2">
+<button type="submit" class="px-8 py-3 bg-[#3b0000] hover:bg-[#4a0000] text-white font-semibold rounded-2xl transition duration-200 shadow text-xs uppercase tracking-wider cursor-pointer">
 Simpan Pendaftaran
 </button>
+</div>
 </form>
 </div>
 
-<!-- Kandungan Tab Senarai -->
+<!-- Kandungan Tab Senarai (Bentuk Jadual Sepenuhnya Ikut Medan Borang) -->
 <div id="content-senarai" class="hidden bg-white rounded-3xl shadow-md overflow-hidden">
 <div class="p-5 border-b">
 <h3 class="text-base font-bold text-slate-800">Senarai Pelajar Berdaftar</h3>
@@ -229,16 +240,18 @@ Simpan Pendaftaran
 <div class="overflow-x-auto">
 <table class="w-full text-left border-collapse">
 <thead>
-<tr class="bg-[#580000] text-white text-[11px] uppercase tracking-wider">
+<tr class="bg-[#3b0000] text-white text-[10px] uppercase tracking-wider">
 <th class="p-3">Bil</th>
 <th class="p-3">Nama Pelajar</th>
-<th class="p-3">MyKad / Aliran</th>
+<th class="p-3">No MyKad</th>
 <th class="p-3">Waris & Telefon</th>
+<th class="p-3">Sekolah Terdahulu</th>
+<th class="p-3">Aliran / Tingkatan</th>
 </tr>
 </thead>
 <tbody id="student-list-container" class="divide-y divide-slate-100 text-xs text-slate-700">
 <tr>
-<td colspan="4" class="p-4 text-center text-slate-400">Memuatkan senarai...</td>
+<td colspan="6" class="p-4 text-center text-slate-400">Memuatkan senarai...</td>
 </tr>
 </tbody>
 </table>
@@ -251,19 +264,16 @@ Simpan Pendaftaran
 <div class="p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl text-[11px] leading-relaxed">
 Tekan <strong>Luluskan</strong> untuk mengaktifkan akaun guru. Tekan <strong>Hapus Akaun</strong> jika guru tidak lagi berkhidmat.
 </div>
-<button onclick="loadTeacherAccounts()" class="px-4 py-2 bg-teal-800 hover:bg-teal-900 text-white rounded-xl text-xs font-semibold shadow cursor-pointer">
+<div>
+<button onclick="loadTeacherAccounts()" class="px-5 py-2.5 bg-teal-800 hover:bg-teal-900 text-white rounded-xl text-xs font-semibold shadow cursor-pointer">
 Muat Semula Senarai
 </button>
+</div>
 <div id="teacher-list-container" class="space-y-3 mt-2">
 <p class="text-xs text-slate-500">Memuatkan senarai akaun...</p>
 </div>
 </div>
 
-<div class="pt-2">
-<button onclick="handleLogout()" class="w-full py-3 bg-red-600 hover:bg-red-700 text-white rounded-2xl text-xs font-semibold shadow transition cursor-pointer">
-Log Keluar (<span id="user-display-email"></span>)
-</button>
-</div>
 </div>
 </main>
 
@@ -305,7 +315,6 @@ if (view === 'register') document.getElementById('register-section').classList.r
 if (view === 'dashboard') document.getElementById('dashboard-section').classList.remove('hidden');
 };
 
-// Fungsi kawalan papar/sembunyi teks E-mel menggunakan CSS security class supaya kekal type="email"
 window.toggleEmailVisibility = function(inputId, btn) {
 const input = document.getElementById(inputId);
 if (!input) return;
@@ -318,7 +327,6 @@ btn.innerText = '👁️';
 }
 };
 
-// Fungsi kawalan papar/sembunyi teks Kata Laluan
 window.togglePasswordVisibility = function(inputId, btn) {
 const input = document.getElementById(inputId);
 if (!input) return;
@@ -331,7 +339,6 @@ btn.innerText = '👁️';
 }
 };
 
-// Fungsi paparan pilihan T1 hingga T5 apabila MANA-MANA aliran dipilih
 window.toggleTingkatanOptions = function(show) {
 const container = document.getElementById('tingkatan-options-container');
 const subRadios = container.querySelectorAll('input[name="sub_tingkatan"]');
@@ -360,7 +367,7 @@ const activeEl = document.getElementById(`content-${tab}`);
 const activeBtn = document.getElementById(`tab-${tab}-btn`);
 if(activeEl) activeEl.classList.remove('hidden');
 if(activeBtn && tab !== 'admin') {
-activeBtn.className = "p-2 rounded-2xl bg-[#580000] text-white flex flex-col items-center justify-center transition shadow cursor-pointer";
+activeBtn.className = "p-2 rounded-2xl bg-[#3b0000] text-white flex flex-col items-center justify-center transition shadow cursor-pointer";
 }
 if(tab === 'home') loadDashboardStats();
 if(tab === 'senarai') loadStudentList();
@@ -488,7 +495,7 @@ let total = querySnapshot.size;
 let countYear = 0;
 querySnapshot.forEach(docSnap => {
 const data = docSnap.data();
-if(data.tarikhDatur && data.tarikhDatar.startsWith("2026")) {
+if(data.tarikhDaftar && data.tarikhDaftar.startsWith("2026")) {
 countYear++;
 }
 });
@@ -500,12 +507,12 @@ document.getElementById('bell-badge').innerText = total;
 
 window.loadStudentList = async function() {
 const container = document.getElementById('student-list-container');
-container.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-slate-400">Memuatkan senarai...</td></tr>';
+container.innerHTML = '<tr><td colspan="6" class="p-4 text-center text-slate-400">Memuatkan senarai...</td></tr>';
 try {
 const querySnapshot = await getDocs(collection(db, "pelajar"));
 container.innerHTML = '';
 if(querySnapshot.empty) {
-container.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-slate-400">Tiada rekod pelajar.</td></tr>';
+container.innerHTML = '<tr><td colspan="6" class="p-4 text-center text-slate-400">Tiada rekod pelajar.</td></tr>';
 return;
 }
 let i = 1;
@@ -516,13 +523,15 @@ tr.className = "hover:bg-slate-50 transition";
 tr.innerHTML = `
 <td class="p-3 font-semibold text-slate-500">${i++}</td>
 <td class="p-3 font-bold text-slate-800">${escapeHtml(d.nama)}</td>
-<td class="p-3 text-slate-600">${escapeHtml(d.noMyKad)}<br><span class="text-[10px] text-slate-400">${escapeHtml(d.tingkatan)}</span></td>
+<td class="p-3 text-slate-600">${escapeHtml(d.noMyKad)}</td>
 <td class="p-3 text-slate-600">${escapeHtml(d.namaWarisibuBapa)}<br><span class="text-[10px] text-slate-400">${escapeHtml(d.telefonWaris)}</span></td>
+<td class="p-3 text-slate-600">${escapeHtml(d.sekolahTerdahulu)}</td>
+<td class="p-3 text-slate-600">${escapeHtml(d.tingkatan)}</td>
 `;
 container.appendChild(tr);
 });
 } catch(e) {
-container.innerHTML = '<tr><td colspan="4" class="p-4 text-center text-red-500">Ralat memuatkan senarai.</td></tr>';
+container.innerHTML = '<tr><td colspan="6" class="p-4 text-center text-red-500">Ralat memuatkan senarai.</td></tr>';
 }
 };
 
@@ -588,7 +597,6 @@ toggleView('login');
 return;
 }
 }
-document.getElementById('user-display-email').innerText = user.email;
 toggleView('dashboard');
 loadDashboardStats();
 const adminBtn = document.getElementById('tab-admin-btn');
