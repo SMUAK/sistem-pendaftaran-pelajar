@@ -20,9 +20,9 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 <p class="text-xs text-slate-500 mt-1">Sila Log Masuk Untuk Meneruskan.</p>
 </div>
 <form id="login-form" class="space-y-4" onsubmit="handleLogin(event)">
-<!-- Ruangan E-mel dengan Ikon Mata -->
+<!-- Ruangan E-mel diset kepada type="email" supaya cadangan pelayar berfungsi & ikon mata disokong -->
 <div class="relative">
-<input type="password" id="login-email" required placeholder="Alamat E-mel Pentadbir / Guru" 
+<input type="email" id="login-email" required placeholder="Alamat E-mel Pentadbir / Guru" 
 class="w-full px-4 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:border-[#580000] text-sm pr-12">
 <button type="button" onclick="toggleEmailVisibility('login-email', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 p-2 text-base select-none cursor-pointer">
 👁️
@@ -165,13 +165,13 @@ Daftar Akaun
 <textarea id="student-prev-school" required rows="2" placeholder="Long-answer text" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#580000] resize-none"></textarea>
 </div>
 
-<!-- Aliran Kelas Yang Dipohon dengan Pilihan Tingkatan T1 hingga T5 -->
+<!-- Aliran Kelas Yang Dipohon dengan Pilihan Tingkatan T1 hingga T5 untuk KEDUA-DUA Aliran -->
 <div class="space-y-2 pt-1">
 <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">ALIRAN KELAS YANG DIPOHON <span class="text-red-500">*</span></label>
 
 <div class="space-y-2">
 <label class="flex items-start space-x-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
-<input type="radio" name="aliran_kelas" value="Aliran Akademik (Akademik & Arab/Agama)" required onclick="toggleTingkatanOptions(false)" class="mt-0.5 text-[#580000] focus:ring-[#580000]">
+<input type="radio" name="aliran_kelas" value="Aliran Akademik (Akademik & Arab/Agama)" required onclick="toggleTingkatanOptions(true)" class="mt-0.5 text-[#580000] focus:ring-[#580000]">
 <span class="text-xs text-slate-700 font-medium">Aliran Akademik (Akademik & Arab/Agama)</span>
 </label>
 
@@ -181,7 +181,7 @@ Daftar Akaun
 </label>
 </div>
 
-<!-- Pilihan Tingkatan (T1, T2, T3, T4, T5) yang muncul apabila aliran dipilih -->
+<!-- Pilihan Tingkatan (T1, T2, T3, T4, T5) yang muncul apabila MANA-MANA aliran dipilih -->
 <div id="tingkatan-options-container" class="hidden mt-3 pl-6 p-3 bg-rose-50 border border-rose-200 rounded-2xl space-y-2">
 <label class="block text-[11px] font-bold text-[#580000] uppercase">Sila Pilih Pilihan Tingkatan:</label>
 <div class="grid grid-cols-5 gap-1.5 text-center">
@@ -304,15 +304,15 @@ if (view === 'register') document.getElementById('register-section').classList.r
 if (view === 'dashboard') document.getElementById('dashboard-section').classList.remove('hidden');
 };
 
-// Fungsi kawalan papar/sembunyi teks E-mel
+// Fungsi khas kawalan papar/sembunyi teks E-mel dengan kekal menyokong jenis input e-mel
 window.toggleEmailVisibility = function(inputId, btn) {
 const input = document.getElementById(inputId);
 if (!input) return;
-if (input.type === 'password') {
+if (input.type === 'email') {
 input.type = 'text';
 btn.innerText = '🔒';
 } else {
-input.type = 'password';
+input.type = 'email';
 btn.innerText = '👁️';
 }
 };
@@ -330,7 +330,7 @@ btn.innerText = '👁️';
 }
 };
 
-// Fungsi paparan pilihan T1 hingga T5 apabila aliran dipilih
+// Fungsi paparan pilihan T1 hingga T5 apabila MANA-MANA aliran dipilih
 window.toggleTingkatanOptions = function(show) {
 const container = document.getElementById('tingkatan-options-container');
 const subRadios = container.querySelectorAll('input[name="sub_tingkatan"]');
