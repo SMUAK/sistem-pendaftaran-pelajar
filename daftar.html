@@ -21,12 +21,13 @@ input:focus, select:focus, textarea:focus {
 <!-- KAWASAN UTAMA BORANG PENDAFTARAN AWAM -->
 <main class="w-full max-w-2xl mx-auto flex-grow">
   
-  <!-- Header Logo / Nama Sekolah (Diselaraskan Mod Telefon) -->
-  <div class="bg-[#3b0000] text-white p-5 md:p-6 rounded-3xl shadow-xl mb-6 text-center space-y-2 overflow-hidden">
-    <h1 class="text-xs sm:text-sm md:text-base font-bold tracking-tight whitespace-nowrap overflow-x-auto">SMU(A) KHAIRIAH MUKIM BANGGOL SETOL</h1>
-    <div class="text-[11px] sm:text-xs text-rose-200 space-y-0.5 leading-relaxed">
-      <p>Portal Rasmi Pendaftaran Pelajar Baharu Tingkatan Satu</p>
-      <p class="font-semibold" id="header-year-text">Tahun 2027</p>
+  <!-- Header Logo / Nama Sekolah & Alamat (Susunan 2 Baris untuk Portal & Tahun) -->
+  <div class="bg-[#3b0000] text-white p-5 md:p-6 rounded-3xl shadow-xl mb-6 text-center space-y-1.5 overflow-hidden">
+    <h1 class="text-xs sm:text-sm md:text-base font-bold tracking-tight whitespace-nowrap overflow-x-auto">SMU(A) KHAIRIAH BANGGOL SETOL</h1>
+    <p class="text-[11px] sm:text-xs text-slate-200 font-medium">17070 Pasir Mas, Kelantan</p>
+    <div class="pt-0.5 space-y-0.5">
+      <p class="text-[11px] sm:text-xs text-rose-200 font-medium">Portal Rasmi Pendaftaran Pelajar Baharu Tingkatan Satu</p>
+      <p class="text-[11px] sm:text-xs text-rose-200 font-bold" id="header-year-text">Tahun 2027</p>
     </div>
   </div>
 
@@ -131,6 +132,24 @@ input:focus, select:focus, textarea:focus {
 © 2026 SMU(A) Khairiah Banggol Setol
 </footer>
 
+<!-- KOTAK MAKLUMAN DALAMAN (CUSTOM SYSTEM ALERT MODAL) -->
+<div id="custom-alert-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+  <div class="bg-white rounded-3xl shadow-2xl w-full max-w-sm overflow-hidden animate-fadeIn text-center p-6 space-y-4 border border-slate-100">
+    <div class="w-12 h-12 bg-rose-50 text-[#3b0000] rounded-2xl mx-auto flex items-center justify-center text-xl font-bold border border-rose-100">
+      ℹ️
+    </div>
+    <div class="space-y-1">
+      <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wide">Makluman Sistem</h3>
+      <p id="custom-alert-message" class="text-xs text-slate-600 leading-relaxed"></p>
+    </div>
+    <div class="pt-2">
+      <button onclick="closeCustomAlert()" class="w-full py-3 bg-[#3b0000] hover:bg-[#4a0000] text-white text-xs font-bold uppercase rounded-xl transition cursor-pointer shadow-md">
+        OK
+      </button>
+    </div>
+  </div>
+</div>
+
 <!-- FIREBASE SDK & SKRIP PENGHANTARAN -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
@@ -147,6 +166,15 @@ appId: "1:611930781573:web:6b6f458c7291f9936876ec"
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
+window.showCustomAlert = function(msg) {
+  document.getElementById('custom-alert-message').innerText = msg;
+  document.getElementById('custom-alert-modal').classList.remove('hidden');
+};
+
+window.closeCustomAlert = function() {
+  document.getElementById('custom-alert-modal').classList.add('hidden');
+};
 
 // Muat tahun automatik daripada tetapan Firestore
 async function loadPublicYear() {
@@ -205,11 +233,11 @@ window.savePublicStudentData = async function(e) {
     
     await addDoc(collection(db, "pelajar"), studentData);
     
-    alert('Alhamdulillah! Pendaftaran pelajar berjaya dihantar kepada pihak sekolah.');
+    showCustomAlert('Alhamdulillah! Pendaftaran pelajar berjaya dihantar kepada pihak sekolah.');
     document.getElementById('public-student-form').reset();
     document.getElementById('tingkatan-options-container').classList.add('hidden');
   } catch (error) {
-    alert('Ralat menghantar data: ' + error.message);
+    showCustomAlert('Ralat menghantar data: ' + error.message);
   } finally {
     btn.innerText = "Hantar Permohonan";
     btn.disabled = false;
