@@ -193,11 +193,11 @@ Daftar Akaun
       <form id="student-form" class="space-y-4" onsubmit="saveStudentData(event)">
         <div>
           <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">NAMA PELAJAR <span class="text-red-500">*</span></label>
-          <input type="text" id="student-name" required placeholder="Short-answer text" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000]">
+          <input type="text" id="student-name" required placeholder="Sila isi nama penuh pelajar" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000]">
         </div>
         <div>
           <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">NO KAD PENGENALAN PELAJAR <span class="text-red-500">*</span></label>
-          <input type="text" id="student-ic" required placeholder="Short-answer text" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000]">
+          <input type="tel" inputmode="numeric" id="student-ic" required placeholder="Sila isi tanpa sengkang" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000]">
         </div>
         <div>
           <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">JANTINA <span class="text-red-500">*</span></label>
@@ -209,15 +209,15 @@ Daftar Akaun
         </div>
         <div>
           <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">NAMA PENUH IBU BAPA / PENJAGA <span class="text-red-500">*</span></label>
-          <input type="text" id="guardian-name" required placeholder="Short-answer text" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000]">
+          <input type="text" id="guardian-name" required placeholder="Sila isi nama penuh Ibubapa / penjaga" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000]">
         </div>
         <div>
           <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">NO. TELEFON UNTUK DIHUBUNGI <span class="text-red-500">*</span></label>
-          <input type="tel" id="guardian-phone" required placeholder="Short-answer text" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000]">
+          <input type="tel" inputmode="numeric" id="guardian-phone" required placeholder="Sila isi nombor telefon" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000]">
         </div>
         <div>
           <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">NAMA SEKOLAH TERDAHULU <span class="text-red-500">*</span></label>
-          <textarea id="student-prev-school" required rows="2" placeholder="Long-answer text" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000] resize-none"></textarea>
+          <textarea id="student-prev-school" required rows="2" placeholder="Sila isi nama penuh sekolah asal" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000] resize-none"></textarea>
         </div>
 
         <!-- Aliran Kelas Yang Dipohon -->
