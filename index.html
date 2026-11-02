@@ -179,7 +179,6 @@ Daftar Akaun
           <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wide">Taburan Pendaftaran Mengikut Kategori</h3>
         </div>
         <div class="relative h-64 w-full flex items-end justify-around pt-6 pb-2 px-2 border-b border-l border-slate-200">
-          <!-- Garis Grid Melintang -->
           <div class="absolute inset-x-0 top-0 bottom-8 flex flex-col justify-between pointer-events-none opacity-40">
             <div class="border-b border-slate-200 w-full text-[10px] text-slate-400 pl-1">5</div>
             <div class="border-b border-slate-200 w-full text-[10px] text-slate-400 pl-1">4</div>
@@ -187,31 +186,26 @@ Daftar Akaun
             <div class="border-b border-slate-200 w-full text-[10px] text-slate-400 pl-1">2</div>
             <div class="border-b border-slate-200 w-full text-[10px] text-slate-400 pl-1">1</div>
           </div>
-          <!-- Bar 1: Jumlah -->
           <div class="flex flex-col items-center z-10 w-1/5 group">
             <span id="bar-val-total" class="text-xs font-bold text-slate-700 mb-1">0</span>
             <div id="bar-total" class="w-10 bg-[#3b0000] rounded-t-xl transition-all duration-500" style="height: 0px;"></div>
             <span class="text-[10px] font-bold text-slate-600 mt-2 text-center">Jumlah</span>
           </div>
-          <!-- Bar 2: Lelaki -->
           <div class="flex flex-col items-center z-10 w-1/5 group">
             <span id="bar-val-male" class="text-xs font-bold text-blue-600 mb-1">0</span>
             <div id="bar-male" class="w-10 bg-blue-600 rounded-t-xl transition-all duration-500" style="height: 0px;"></div>
             <span class="text-[10px] font-bold text-slate-600 mt-2 text-center">Lelaki</span>
           </div>
-          <!-- Bar 3: Perempuan -->
           <div class="flex flex-col items-center z-10 w-1/5 group">
             <span id="bar-val-female" class="text-xs font-bold text-pink-600 mb-1">0</span>
             <div id="bar-female" class="w-10 bg-pink-600 rounded-t-xl transition-all duration-500" style="height: 0px;"></div>
             <span class="text-[10px] font-bold text-slate-600 mt-2 text-center">Perempuan</span>
           </div>
-          <!-- Bar 4: Akademik -->
           <div class="flex flex-col items-center z-10 w-1/5 group">
             <span id="bar-val-akademik" class="text-xs font-bold text-emerald-600 mb-1">0</span>
             <div id="bar-akademik" class="w-10 bg-emerald-600 rounded-t-xl transition-all duration-500" style="height: 0px;"></div>
             <span class="text-[10px] font-bold text-slate-600 mt-2 text-center">Akademik</span>
           </div>
-          <!-- Bar 5: Tahfiz -->
           <div class="flex flex-col items-center z-10 w-1/5 group">
             <span id="bar-val-tahfiz" class="text-xs font-bold text-amber-600 mb-1">0</span>
             <div id="bar-tahfiz" class="w-10 bg-amber-600 rounded-t-xl transition-all duration-500" style="height: 0px;"></div>
@@ -222,10 +216,12 @@ Daftar Akaun
     </div>
     <!-- Kandungan Tab Borang -->
     <div id="content-form" class="hidden bg-white p-6 md:p-8 rounded-3xl shadow-md space-y-4 w-full">
-      <div class="border-b pb-3">
+      <div class="border-b pb-3 flex justify-between items-center">
         <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wide" id="form-header-title">PENDAFTARAN PELAJAR BAHARU TINGKATAN SATU TAHUN 2027</h3>
+        <button id="cancel-edit-btn" onclick="cancelEditMode()" class="hidden px-3 py-1 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-bold rounded-xl cursor-pointer">Batal Kemaskini</button>
       </div>
       <form id="student-form" class="space-y-4" onsubmit="saveStudentData(event)">
+        <input type="hidden" id="edit-student-id" value="">
         <div>
           <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">NAMA PELAJAR <span class="text-red-500">*</span></label>
           <input type="text" id="student-name" required placeholder="Sila isi nama penuh pelajar" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000]">
@@ -299,7 +295,7 @@ Daftar Akaun
           <p>Terima kasih atas sokongan dan kepercayaan yang diberikan kepada sekolah kami.</p>
         </div>
         <div class="flex justify-center pt-2">
-          <button type="submit" class="px-8 py-3 bg-[#3b0000] hover:bg-[#4a0000] text-white font-semibold rounded-2xl transition duration-200 shadow text-xs uppercase tracking-wider cursor-pointer">
+          <button type="submit" id="form-submit-btn" class="px-8 py-3 bg-[#3b0000] hover:bg-[#4a0000] text-white font-semibold rounded-2xl transition duration-200 shadow text-xs uppercase tracking-wider cursor-pointer">
             Hantar
           </button>
         </div>
@@ -374,25 +370,40 @@ Daftar Akaun
           </button>
         </div>
       </div>
-      <!-- 2. Kemaskini Data -->
+      <!-- 2. Kemaskini Data (Masukkan No Bil) -->
       <div class="bg-white p-6 rounded-3xl shadow-md space-y-3 w-full">
         <div class="flex items-center space-x-2 border-b pb-3">
           <span class="w-6 h-6 rounded-full bg-slate-700 text-white font-bold text-xs flex items-center justify-center">2</span>
-          <h3 class="text-sm font-bold text-slate-800">Kemaskini Data (Cari Melalui Senarai)</h3>
+          <h3 class="text-sm font-bold text-slate-800">Kemaskini Data (Masukkan No Bil)</h3>
         </div>
-        <p class="text-xs text-slate-500">Sila pergi ke menu <strong>Senarai</strong> untuk melihat butiran lengkap dan melakukan suntingan atau padam rekod pelajar.</p>
-        <button onclick="switchTab('senarai')" class="px-4 py-2.5 bg-slate-700 hover:bg-slate-800 text-white text-xs font-semibold rounded-xl cursor-pointer shadow">Buka Senarai Pelajar</button>
+        <p class="text-xs text-slate-500">Masukkan No Bil (nombor urutan rekod dalam senarai) untuk mengemaskini maklumat pelajar.</p>
+        <div class="flex space-x-2">
+          <input type="number" id="update-bil-input" placeholder="Cth: 1" class="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs w-40 focus:outline-none">
+          <button onclick="openEditStudentByBil()" class="px-4 py-2 bg-slate-700 hover:bg-slate-800 text-white text-xs font-semibold rounded-xl cursor-pointer shadow">Cari & Kemaskini</button>
+        </div>
       </div>
-      <!-- 3. Hapus Rekod -->
-      <div class="bg-white p-6 rounded-3xl shadow-md space-y-3 w-full">
+      <!-- 3. Hapus Rekod (Ikut Tahun atau Bil Rekod) -->
+      <div class="bg-white p-6 rounded-3xl shadow-md space-y-4 w-full">
         <div class="flex items-center space-x-2 border-b pb-3">
           <span class="w-6 h-6 rounded-full bg-red-600 text-white font-bold text-xs flex items-center justify-center">3</span>
-          <h3 class="text-sm font-bold text-slate-800">Padam Kesemua Rekod Mengikut Tahun Pendaftaran</h3>
+          <h3 class="text-sm font-bold text-slate-800">Hapus Rekod (Pilih Tahun atau No Bil)</h3>
         </div>
-        <p class="text-xs text-slate-500">Masukkan tahun pendaftaran yang ingin dipadamkan rekod pelajarnya secara sekaligus.</p>
-        <div class="flex space-x-2">
-          <input type="text" id="del-year-input" placeholder="Cth: 2027" class="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs w-40 focus:outline-none">
-          <button onclick="deleteRecordsByYear()" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-xs font-semibold rounded-xl cursor-pointer shadow">Hapus Rekod Tahun Ini</button>
+        <p class="text-xs text-slate-500">Pilih kaedah pemadaman rekod dan masukkan nilai yang ingin dipadam.</p>
+        <div class="space-y-3">
+          <div class="flex items-center space-x-4 text-xs font-medium text-slate-700">
+            <label class="flex items-center space-x-1.5 cursor-pointer">
+              <input type="radio" name="del_method" value="tahun" checked onclick="toggleDeleteMethod('tahun')" class="text-red-600">
+              <span>Hapus Mengikut Tahun</span>
+            </label>
+            <label class="flex items-center space-x-1.5 cursor-pointer">
+              <input type="radio" name="del_method" value="bil" onclick="toggleDeleteMethod('bil')" class="text-red-600">
+              <span>Hapus Mengikut No Bil</span>
+            </label>
+          </div>
+          <div class="flex space-x-2">
+            <input type="text" id="del-input-val" placeholder="Cth: 2027" class="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs w-48 focus:outline-none">
+            <button onclick="executeDeleteRecord()" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-xs font-semibold rounded-xl cursor-pointer shadow">Hapus Rekod</button>
+          </div>
         </div>
       </div>
       <!-- 4. Kelulusan Akaun Guru -->
@@ -712,35 +723,172 @@ window.handleLogout = async function() {
 await signOut(auth);
 toggleView('login');
 };
+
+// SIMPAN ATAU KEMASKINI DATA PELAJAR
 window.saveStudentData = async function(e) {
-e.preventDefault();
-const aliranSelected = document.querySelector('input[name="aliran_kelas"]:checked');
-let tingkatanValue = aliranSelected ? aliranSelected.value : '';
-const subTingkatanSelected = document.querySelector('input[name="sub_tingkatan"]:checked');
-if (subTingkatanSelected && !document.getElementById('tingkatan-options-container').classList.contains('hidden')) {
-tingkatanValue += ` (${subTingkatanSelected.value})`;
-}
-const studentData = {
-nama: document.getElementById('student-name').value,
-noMyKad: document.getElementById('student-ic').value,
-jantina: document.getElementById('student-gender').value,
-namaWarisibuBapa: document.getElementById('guardian-name').value,
-telefonWaris: document.getElementById('guardian-phone').value,
-sekolahTerdahulu: document.getElementById('student-prev-school').value,
-tingkatan: tingkatanValue,
-tarikhDaftar: new Date().toISOString()
+  e.preventDefault();
+  const editId = document.getElementById('edit-student-id').value;
+  const aliranSelected = document.querySelector('input[name="aliran_kelas"]:checked');
+  let tingkatanValue = aliranSelected ? aliranSelected.value : '';
+  const subTingkatanSelected = document.querySelector('input[name="sub_tingkatan"]:checked');
+  if (subTingkatanSelected && !document.getElementById('tingkatan-options-container').classList.contains('hidden')) {
+    tingkatanValue += ` (${subTingkatanSelected.value})`;
+  }
+  const studentData = {
+    nama: document.getElementById('student-name').value,
+    noMyKad: document.getElementById('student-ic').value,
+    jantina: document.getElementById('student-gender').value,
+    namaWarisibuBapa: document.getElementById('guardian-name').value,
+    telefonWaris: document.getElementById('guardian-phone').value,
+    sekolahTerdahulu: document.getElementById('student-prev-school').value,
+    tingkatan: tingkatanValue,
+    tarikhDaftar: new Date().toISOString()
+  };
+  try {
+    if(editId) {
+      await updateDoc(doc(db, "pelajar", editId), studentData);
+      showCustomAlert('Maklumat pelajar berjaya dikemaskini!');
+      cancelEditMode();
+    } else {
+      await addDoc(collection(db, "pelajar"), studentData);
+      showCustomAlert('Pendaftaran pelajar berjaya dihantar!');
+      document.getElementById('student-form').reset();
+      document.getElementById('tingkatan-options-container').classList.add('hidden');
+    }
+    switchTab('home');
+    loadDashboardStats();
+  } catch (error) {
+    showCustomAlert('Ralat menyimpan data: ' + error.message);
+  }
 };
-try {
-await addDoc(collection(db, "pelajar"), studentData);
-showCustomAlert('Pendaftaran pelajar berjaya dihantar!');
-document.getElementById('student-form').reset();
-document.getElementById('tingkatan-options-container').classList.add('hidden');
-switchTab('home');
-loadDashboardStats();
-} catch (error) {
-showCustomAlert('Ralat menghantar data: ' + error.message);
-}
+
+window.cancelEditMode = function() {
+  document.getElementById('edit-student-id').value = '';
+  document.getElementById('form-submit-btn').innerText = 'Hantar';
+  document.getElementById('cancel-edit-btn').classList.add('hidden');
+  document.getElementById('student-form').reset();
+  document.getElementById('tingkatan-options-container').classList.add('hidden');
 };
+
+// CARI & KEMASKINI MENGIKUT NO BIL
+window.openEditStudentByBil = async function() {
+  const bilVal = parseInt(document.getElementById('update-bil-input').value.trim());
+  if(isNaN(bilVal) || bilVal <= 0) {
+    showCustomAlert("Sila masukkan No Bil yang sah.");
+    return;
+  }
+  try {
+    const querySnapshot = await getDocs(collection(db, "pelajar"));
+    let docsArray = [];
+    querySnapshot.forEach(docSnap => {
+      docsArray.push({ id: docSnap.id, data: docSnap.data() });
+    });
+    if(bilVal > docsArray.length) {
+      showCustomAlert(`No Bil ${bilVal} tidak wujud. Jumlah rekod semasa ialah ${docsArray.length}.`);
+      return;
+    }
+    const targetRecord = docsArray[bilVal - 1];
+    const d = targetRecord.data;
+
+    // Isi borang dengan data sedia ada
+    document.getElementById('edit-student-id').value = targetRecord.id;
+    document.getElementById('student-name').value = d.nama || '';
+    document.getElementById('student-ic').value = d.noMyKad || '';
+    document.getElementById('student-gender').value = d.jantina || '';
+    document.getElementById('guardian-name').value = d.namaWarisibuBapa || '';
+    document.getElementById('guardian-phone').value = d.telefonWaris || '';
+    document.getElementById('student-prev-school').value = d.sekolahTerdahulu || '';
+
+    // Tandakan radio aliran & tingkatan
+    if(d.tingkatan) {
+      const radioAliran = document.querySelectorAll('input[name="aliran_kelas"]');
+      radioAliran.forEach(r => {
+        if(d.tingkatan.includes(r.value.substring(0, 10))) {
+          r.checked = true;
+          toggleTingkatanOptions(true);
+        }
+      });
+      if(d.tingkatan.includes('(T1')) setSubTingkatan('T1');
+      else if(d.tingkatan.includes('(T2')) setSubTingkatan('T2');
+      else if(d.tingkatan.includes('(T3')) setSubTingkatan('T3');
+      else if(d.tingkatan.includes('(T4')) setSubTingkatan('T4');
+      else if(d.tingkatan.includes('(T5')) setSubTingkatan('T5');
+    }
+
+    document.getElementById('form-submit-btn').innerText = 'Simpan Kemaskini';
+    document.getElementById('cancel-edit-btn').classList.remove('hidden');
+    document.getElementById('update-bil-input').value = '';
+    switchTab('form');
+  } catch(e) {
+    showCustomAlert("Ralat mencari rekod: " + e.message);
+  }
+};
+
+function setSubTingkatan(val) {
+  const radios = document.querySelectorAll('input[name="sub_tingkatan"]');
+  radios.forEach(r => {
+    if(r.value === val) r.checked = true;
+  });
+}
+
+// PILIHAN KAEDAH PEMADAMAN (TAHUN / BIL)
+window.toggleDeleteMethod = function(method) {
+  const inputEl = document.getElementById('del-input-val');
+  if(method === 'tahun') {
+    inputEl.placeholder = "Cth: 2027";
+  } else {
+    inputEl.placeholder = "Cth: 1 (No Bil)";
+  }
+  inputEl.value = '';
+};
+
+// EKSEKUTIF HAPUS REKOD
+window.executeDeleteRecord = async function() {
+  const method = document.querySelector('input[name="del_method"]:checked').value;
+  const val = document.getElementById('del-input-val').value.trim();
+  if(!val) {
+    showCustomAlert("Sila masukkan nilai untuk dipadam.");
+    return;
+  }
+  try {
+    const querySnapshot = await getDocs(collection(db, "pelajar"));
+    let docsArray = [];
+    querySnapshot.forEach(docSnap => {
+      docsArray.push({ id: docSnap.id, data: docSnap.data() });
+    });
+
+    if(method === 'tahun') {
+      if(confirm(`Adakah anda pasti ingin memadam semua rekod pelajar bagi tahun ${val}?`)) {
+        let count = 0;
+        for(const item of docsArray) {
+          if(item.data.tarikhDaftar && item.data.tarikhDaftar.startsWith(val)) {
+            await deleteDoc(doc(db, "pelajar", item.id));
+            count++;
+          }
+        }
+        showCustomAlert(`Berjaya memadam ${count} rekod pelajar untuk tahun ${val}.`);
+        document.getElementById('del-input-val').value = '';
+        loadDashboardStats();
+      }
+    } else {
+      const bilVal = parseInt(val);
+      if(isNaN(bilVal) || bilVal <= 0 || bilVal > docsArray.length) {
+        showCustomAlert(`No Bil ${val} tidak sah atau tidak wujud.`);
+        return;
+      }
+      const target = docsArray[bilVal - 1];
+      if(confirm(`Adakah anda pasti ingin memadam rekod pelajar No Bil ${bilVal} (${target.data.nama})?`)) {
+        await deleteDoc(doc(db, "pelajar", target.id));
+        showCustomAlert(`Rekod pelajar No Bil ${bilVal} berjaya dipadam.`);
+        document.getElementById('del-input-val').value = '';
+        loadDashboardStats();
+      }
+    }
+  } catch(e) {
+    showCustomAlert("Ralat memadam rekod: " + e.message);
+  }
+};
+
 window.loadDashboardStats = async function() {
 try {
 const querySnapshot = await getDocs(collection(db, "pelajar"));
@@ -847,6 +995,7 @@ container.innerHTML = '<p class="text-xs text-red-500 text-center">Ralat memuatk
 window.closeNotificationModal = function() {
 document.getElementById('notification-modal').classList.add('hidden');
 };
+
 window.loadStudentList = async function() {
 const container = document.getElementById('student-list-container');
 container.innerHTML = '<tr><td colspan="7" class="p-4 text-center text-slate-400">Memuatkan senarai...</td></tr>';
@@ -860,7 +1009,6 @@ return;
 let i = 1;
 querySnapshot.forEach(docSnap => {
 const d = docSnap.data();
-const docId = docSnap.id;
 const tr = document.createElement('tr');
 tr.className = "hover:bg-slate-50 transition";
 tr.innerHTML = `
@@ -870,10 +1018,7 @@ tr.innerHTML = `
 <td class="p-3 text-slate-600">${escapeHtml(d.noMyKad)}</td>
 <td class="p-3 text-slate-600">${escapeHtml(d.namaWarisibuBapa)}<br><span class="text-[10px] text-slate-400">${escapeHtml(d.telefonWaris)}</span></td>
 <td class="p-3 text-slate-600">${escapeHtml(d.sekolahTerdahulu)}</td>
-<td class="p-3 text-slate-600 flex items-center justify-between">
-  <span>${escapeHtml(d.tingkatan)}</span>
-  <button onclick="deleteSingleStudent('${docId}')" class="text-red-500 hover:text-red-700 font-bold ml-2 p-1 cursor-pointer" title="Padam Rekod">🗑️</button>
-</td>
+<td class="p-3 text-slate-600">${escapeHtml(d.tingkatan)}</td>
 `;
 container.appendChild(tr);
 });
@@ -882,48 +1027,10 @@ container.innerHTML = '<tr><td colspan="7" class="p-4 text-center text-red-500">
 }
 };
 
-window.deleteSingleStudent = async function(id) {
-  if(confirm("Adakah anda pasti ingin memadam rekod pelajar ini?")) {
-    try {
-      await deleteDoc(doc(db, "pelajar", id));
-      showCustomAlert("Rekod pelajar berjaya dipadam.");
-      loadStudentList();
-      loadDashboardStats();
-    } catch(e) {
-      showCustomAlert("Ralat memadam rekod: " + e.message);
-    }
-  }
-};
-
-window.deleteRecordsByYear = async function() {
-  const targetYear = document.getElementById('del-year-input').value.trim();
-  if(!targetYear) {
-    showCustomAlert("Sila masukkan tahun pendaftaran yang ingin dipadam.");
-    return;
-  }
-  if(confirm(`Adakah anda pasti ingin memadam semua rekod pelajar bagi tahun ${targetYear}?`)) {
-    try {
-      const querySnapshot = await getDocs(collection(db, "pelajar"));
-      let count = 0;
-      for(const docSnap of querySnapshot.docs) {
-        const d = docSnap.data();
-        if(d.tarikhDaftar && d.tarikhDaftar.startsWith(targetYear)) {
-          await deleteDoc(doc(db, "pelajar", docSnap.id));
-          count++;
-        }
-      }
-      showCustomAlert(`Berjaya memadam ${count} rekod pelajar untuk tahun ${targetYear}.`);
-      document.getElementById('del-year-input').value = '';
-      loadDashboardStats();
-    } catch(e) {
-      showCustomAlert("Ralat: " + e.message);
-    }
-  }
-};
-
 function escapeHtml(str) {
 return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
+
 window.loadTeacherAccounts = async function() {
 const container = document.getElementById('teacher-list-container');
 container.innerHTML = '<p class="text-xs text-slate-500">Memuatkan senarai akaun...</p>';
@@ -952,6 +1059,7 @@ container.appendChild(card);
 });
 } catch(e) { container.innerHTML = '<p class="text-xs text-red-500">Ralat memuatkan akaun.</p>'; }
 };
+
 window.approveTeacher = async function(id) {
 try {
 await updateDoc(doc(db, "guru", id), { status: "aktif" });
@@ -959,6 +1067,7 @@ showCustomAlert("Akaun guru berjaya diluluskan!");
 loadTeacherAccounts();
 } catch(e) { showCustomAlert("Ralat meluluskan akaun: " + e.message); }
 };
+
 window.deleteTeacher = async function(id) {
 if(confirm("Hapus akaun ini?")) {
 try {
@@ -998,7 +1107,7 @@ window.importJSONBackup = async function(event) {
       const content = e.target.result;
       const parsedData = JSON.parse(content);
       if(!Array.isArray(parsedData)) {
-        throw5("Format fail JSON tidak sah.");
+        throw new Error("Format fail JSON tidak sah.");
       }
       let importedCount = 0;
       for(const item of parsedData) {
