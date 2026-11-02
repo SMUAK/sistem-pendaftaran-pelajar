@@ -10,7 +10,7 @@
 body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f1f5f9; }
 /* Kesan warna cerah lembut apabila kotak borang ditekan / fokus */
 input:focus, select:focus, textarea:focus {
-  background-color: #fffbeb !important; /* Kuning cair / krim lembut */
+  background-color: #fffbeb !important; 
   border-color: #3b0000 !important;
   box-shadow: 0 0 0 3px rgba(59, 0, 0, 0.1);
 }
@@ -26,7 +26,7 @@ input:focus, select:focus, textarea:focus {
     <h1 class="text-xs sm:text-sm md:text-base font-bold tracking-tight whitespace-nowrap overflow-x-auto">SMU(A) KHAIRIAH MUKIM BANGGOL SETOL</h1>
     <div class="text-[11px] sm:text-xs text-rose-200 space-y-0.5 leading-relaxed">
       <p>Portal Rasmi Pendaftaran Pelajar Baharu Tingkatan Satu</p>
-      <p class="font-semibold">Tahun 2027</p>
+      <p class="font-semibold" id="header-year-text">Tahun 2027</p>
     </div>
   </div>
 
@@ -134,7 +134,7 @@ input:focus, select:focus, textarea:focus {
 <!-- FIREBASE SDK & SKRIP PENGHANTARAN -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 const firebaseConfig = {
 apiKey: "AIzaSyBfWyq2ADAtOdbaeHh7nRhB3dM4LjKDFdw",
@@ -147,6 +147,19 @@ appId: "1:611930781573:web:6b6f458c7291f9936876ec"
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
+// Muat tahun automatik daripada tetapan Firestore
+async function loadPublicYear() {
+  try {
+    const docRef = doc(db, "tetapan", "sekolah");
+    const docSnap = await getDoc(docRef);
+    if(docSnap.exists() && docSnap.data().tahun) {
+      const thn = docSnap.data().tahun;
+      document.getElementById('header-year-text').innerText = `Tahun ${thn}`;
+    }
+  } catch(e) { console.log(e); }
+}
+loadPublicYear();
 
 window.toggleTingkatanOptions = function(show) {
   const container = document.getElementById('tingkatan-options-container');
