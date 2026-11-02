@@ -26,10 +26,8 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between pb-16">
-
 <!-- KAWASAN UTAMA (Skrin Penuh) -->
 <main class="w-full px-4 md:px-8 py-6 flex-grow">
-
 <!-- 1. PAPARAN BORANG LOG MASUK -->
 <div id="login-section" class="w-full max-w-md mx-auto bg-white rounded-3xl shadow-xl p-8 border border-slate-100 mt-10">
 <div class="text-center mb-6">
@@ -62,7 +60,6 @@ Log Masuk
 <a href="#" onclick="toggleView('register')" class="block text-[#3b0000] font-bold hover:underline">Daftar Akaun Guru Baharu</a>
 </div>
 </div>
-
 <!-- 2. PAPARAN PENDAFTARAN AKAUN GURU -->
 <div id="register-section" class="hidden w-full max-w-md mx-auto bg-white rounded-3xl shadow-xl p-8 border border-slate-100 mt-10">
 <div class="text-center mb-6">
@@ -95,7 +92,6 @@ Daftar Akaun
 <a href="#" onclick="toggleView('login')" class="text-[#3b0000] font-bold hover:underline">Kembali ke Log Masuk</a>
 </div>
 </div>
-
 <!-- 3. PAPARAN UTAMA DASHBOARD -->
 <div id="dashboard-section" class="hidden w-full grid grid-cols-1 md:grid-cols-6 lg:grid-cols-5 gap-6 items-start">
   
@@ -115,13 +111,11 @@ Daftar Akaun
           <span id="bell-badge" class="absolute -top-1 -right-1 bg-red-600 text-white text-[9px] font-extrabold px-1.5 py-0.2 rounded-full shadow-md">0</span>
         </div>
       </div>
-
       <div class="flex justify-between items-center pt-1">
         <div class="inline-flex items-center space-x-1.5 bg-[#540000] px-2.5 py-1 rounded-xl border border-rose-950 text-[10px] text-rose-100">
           <span>📅</span>
           <span id="current-date">Ahad, 1 November 2026</span>
         </div>
-
         <!-- Ikon Log Keluar Dalam Kotak Header -->
         <button onclick="handleLogout()" title="Log Keluar" class="bg-red-600 hover:bg-red-700 p-2 rounded-xl border border-red-800 cursor-pointer transition flex items-center justify-center shadow-md">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
@@ -130,7 +124,6 @@ Daftar Akaun
         </button>
       </div>
     </div>
-
     <!-- Menu Sidebar -->
     <div class="bg-white p-3 rounded-3xl shadow-md flex md:flex-col gap-1.5 text-center justify-between md:justify-start items-center md:items-stretch">
       <button onclick="switchTab('home')" id="tab-home-btn" class="p-3 rounded-2xl bg-[#3b0000] text-white flex md:flex-row flex-col items-center justify-center md:justify-start md:space-x-3 transition shadow cursor-pointer w-full">
@@ -151,7 +144,6 @@ Daftar Akaun
       </button>
     </div>
   </div>
-
   <!-- KANDUNGAN UTAMA KANAN -->
   <div class="md:col-span-4 lg:col-span-4 space-y-4 w-full">
     
@@ -179,16 +171,15 @@ Daftar Akaun
           <h2 class="text-3xl font-extrabold text-amber-600" id="stat-tahfiz">0</h2>
         </div>
         <div class="bg-white p-5 rounded-3xl shadow-md space-y-1 border-l-4 border-purple-600">
-          <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Pendaftaran Tahun Ini (2026)</p>
+          <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Pendaftaran Tahun Ini (<span id="display-year-stat">2027</span>)</p>
           <h2 class="text-3xl font-extrabold text-purple-600" id="stat-year">0</h2>
         </div>
       </div>
     </div>
-
     <!-- Kandungan Tab Borang -->
     <div id="content-form" class="hidden bg-white p-6 md:p-8 rounded-3xl shadow-md space-y-4 w-full">
       <div class="border-b pb-3">
-        <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wide">PENDAFTARAN PELAJAR BAHARU TINGKATAN SATU TAHUN 2027</h3>
+        <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wide" id="form-header-title">PENDAFTARAN PELAJAR BAHARU TINGKATAN SATU TAHUN 2027</h3>
       </div>
       <form id="student-form" class="space-y-4" onsubmit="saveStudentData(event)">
         <div>
@@ -219,7 +210,6 @@ Daftar Akaun
           <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">NAMA SEKOLAH TERDAHULU <span class="text-red-500">*</span></label>
           <textarea id="student-prev-school" required rows="2" placeholder="Sila isi nama penuh sekolah asal" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000] resize-none"></textarea>
         </div>
-
         <!-- Aliran Kelas Yang Dipohon -->
         <div class="space-y-2 pt-1">
           <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">ALIRAN KELAS YANG DIPOHON <span class="text-red-500">*</span></label>
@@ -233,7 +223,6 @@ Daftar Akaun
               <span class="text-xs text-slate-700 font-medium">Aliran Tahfiz (Tahfiz, Akademik & Arab/Agama) - Wajib tinggal di asrama tahfiz</span>
             </label>
           </div>
-
           <!-- Pilihan Tingkatan T1 hingga T5 -->
           <div id="tingkatan-options-container" class="hidden mt-3 pl-6 p-3 bg-rose-50 border border-rose-200 rounded-2xl space-y-2">
             <label class="block text-[11px] font-bold text-[#3b0000] uppercase">Sila Pilih Pilihan Tingkatan:</label>
@@ -261,12 +250,10 @@ Daftar Akaun
             </div>
           </div>
         </div>
-
         <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-[11px] text-slate-500 leading-relaxed space-y-1 mt-2">
           <p>Pihak sekolah akan menghubungi anda dalam masa terdekat untuk urusan seterusnya selepas permohonan ini lengkap dihantar.</p>
           <p>Terima kasih atas sokongan dan kepercayaan yang diberikan kepada sekolah kami.</p>
         </div>
-
         <div class="flex justify-center pt-2">
           <button type="submit" class="px-8 py-3 bg-[#3b0000] hover:bg-[#4a0000] text-white font-semibold rounded-2xl transition duration-200 shadow text-xs uppercase tracking-wider cursor-pointer">
             Hantar
@@ -274,7 +261,6 @@ Daftar Akaun
         </div>
       </form>
     </div>
-
     <!-- Kandungan Tab Senarai -->
     <div id="content-senarai" class="hidden bg-white rounded-3xl shadow-md overflow-hidden p-5 space-y-4 w-full">
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-3 gap-3">
@@ -305,7 +291,6 @@ Daftar Akaun
         </table>
       </div>
     </div>
-
     <!-- Kandungan Tab Tetapan/Admin -->
     <div id="content-admin" class="hidden space-y-6 w-full">
       
@@ -313,12 +298,16 @@ Daftar Akaun
       <div class="bg-white p-6 md:p-8 rounded-3xl shadow-md space-y-4 border border-emerald-100 w-full">
         <div class="flex items-center space-x-2 border-b pb-3">
           <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center">1</span>
-          <h3 class="text-sm font-bold text-slate-800">Maklumat Rasmi Institusi</h3>
+          <h3 class="text-sm font-bold text-slate-800">Maklumat Rasmi Institusi & Tahun Pendaftaran</h3>
         </div>
         <div class="space-y-3">
           <div>
             <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Nama Institusi / Sekolah</label>
             <input type="text" id="inst-name" value="SMU(A) Khairiah Banggol Setol" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono text-slate-700 focus:outline-none focus:border-[#3b0000]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Tahun Pendaftaran (Cth: 2027, 2028)</label>
+            <input type="text" id="inst-year" value="2027" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono font-bold text-[#3b0000] focus:outline-none focus:border-[#3b0000]">
           </div>
           <div>
             <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Alamat Tetap Sekolah</label>
@@ -336,12 +325,11 @@ Daftar Akaun
           </div>
         </div>
         <div>
-          <button onclick="alert('Maklumat rasmi institusi berjaya disimpan!')" class="px-5 py-2.5 bg-teal-700 hover:bg-teal-800 text-white text-xs font-semibold rounded-xl shadow cursor-pointer transition">
-            Simpan Maklumat Institusi
+          <button onclick="saveInstitutionSettings()" class="px-5 py-2.5 bg-teal-700 hover:bg-teal-800 text-white text-xs font-semibold rounded-xl shadow cursor-pointer transition">
+            Simpan Maklumat Institusi & Tahun
           </button>
         </div>
       </div>
-
       <!-- 2. Kemaskini Data -->
       <div class="bg-white p-6 rounded-3xl shadow-md space-y-3 w-full">
         <div class="flex items-center space-x-2 border-b pb-3">
@@ -354,7 +342,6 @@ Daftar Akaun
           <button onclick="alert('Sila pilih rekod melalui senarai pelajar.')" class="px-4 py-2 bg-slate-700 hover:bg-slate-800 text-white text-xs font-semibold rounded-xl cursor-pointer">Cari / Kemaskini</button>
         </div>
       </div>
-
       <!-- 3. Hapus Rekod -->
       <div class="bg-white p-6 rounded-3xl shadow-md space-y-3 w-full">
         <div class="flex items-center space-x-2 border-b pb-3">
@@ -367,7 +354,6 @@ Daftar Akaun
           <button onclick="alert('Fungsi hapus rekod aktif.')" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-xs font-semibold rounded-xl cursor-pointer">Hapus Rekod</button>
         </div>
       </div>
-
       <!-- 4. Kelulusan Akaun Guru -->
       <div class="bg-white p-6 rounded-3xl shadow-md space-y-4 w-full">
         <div class="flex items-center space-x-2 border-b pb-3">
@@ -386,7 +372,6 @@ Daftar Akaun
           <p class="text-xs text-slate-500">Memuatkan senarai akaun...</p>
         </div>
       </div>
-
       <!-- 5. Sandaran JSON -->
       <div class="bg-white p-6 rounded-3xl shadow-md space-y-3 w-full">
         <div class="flex items-center space-x-2 border-b pb-3">
@@ -401,18 +386,13 @@ Daftar Akaun
           </label>
         </div>
       </div>
-
     </div>
-
   </div>
 </div>
-
 </main>
-
 <footer class="text-center py-4 text-xs text-slate-400 border-t bg-white mt-auto w-full">
 © 2026 SMU(A) Khairiah Banggol Setol
 </footer>
-
 <!-- MODAL NOTIFIKASI / RINGKASAN DATA BARU (POPUP LOCENG) -->
 <div id="notification-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
   <div class="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden animate-fadeIn">
@@ -430,18 +410,15 @@ Daftar Akaun
     </div>
   </div>
 </div>
-
 <!-- TOAST AMARAN DOUBLE BACK -->
 <div id="exit-toast" class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-900/90 text-white px-4 py-2 rounded-full text-xs shadow-xl z-50 transition-opacity duration-300">
 Tekan sekali lagi untuk keluar
 </div>
-
 <!-- FIREBASE SDK & SKRIP LOGIK -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, setDoc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
 const firebaseConfig = {
 apiKey: "AIzaSyBfWyq2ADAtOdbaeHh7nRhB3dM4LjKDFdw",
 authDomain: "sistem-pendaftaran-pelaj-6d6b4.firebaseapp.com",
@@ -450,19 +427,54 @@ storageBucket: "sistem-pendaftaran-pelaj-6d6b4.firebasestorage.app",
 messagingSenderId: "611930781573",
 appId: "1:611930781573:web:6b6f458c7291f9936876ec"
 };
-
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-
 const adminEmails = [
 "smuakhairiahbs@yik.edu.my",
 "asrimohdzain@gmail.com",
 "sitinurnabihah950822@gmail.com"
 ];
-
 let currentActiveTab = 'home';
 let lastBackPress = 0;
+
+// Fungsi muat turun Tetapan Sekolah / Tahun dari Firestore
+window.loadSettings = async function() {
+  try {
+    const docRef = doc(db, "tetapan", "sekolah");
+    const docSnap = await getDoc(docRef);
+    if(docSnap.exists()) {
+      const data = docSnap.data();
+      if(data.nama) document.getElementById('inst-name').value = data.nama;
+      if(data.tahun) {
+        document.getElementById('inst-year').value = data.tahun;
+        document.getElementById('display-year-stat').innerText = data.tahun;
+        document.getElementById('form-header-title').innerText = `PENDAFTARAN PELAJAR BAHARU TINGKATAN SATU TAHUN ${data.tahun}`;
+      }
+      if(data.alamat) document.getElementById('inst-address').value = data.alamat;
+      if(data.telefon) document.getElementById('inst-phone').value = data.telefon;
+      if(data.email) document.getElementById('inst-email').value = data.email;
+    }
+  } catch(e) { console.log(e); }
+};
+
+window.saveInstitutionSettings = async function() {
+  const settingsData = {
+    nama: document.getElementById('inst-name').value,
+    tahun: document.getElementById('inst-year').value,
+    alamat: document.getElementById('inst-address').value,
+    telefon: document.getElementById('inst-phone').value,
+    email: document.getElementById('inst-email').value
+  };
+  try {
+    await setDoc(doc(db, "tetapan", "sekolah"), settingsData);
+    document.getElementById('display-year-stat').innerText = settingsData.tahun;
+    document.getElementById('form-header-title').innerText = `PENDAFTARAN PELAJAR BAHARU TINGKATAN SATU TAHUN ${settingsData.tahun}`;
+    alert('Maklumat rasmi institusi & tahun pendaftaran berjaya disimpan!');
+  } catch(e) {
+    alert('Ralat menyimpan tetapan: ' + e.message);
+  }
+};
 
 window.toggleView = function(view) {
 document.getElementById('login-section').classList.add('hidden');
@@ -475,7 +487,6 @@ if (view === 'dashboard') {
   history.pushState({tab: 'home'}, '', '');
 }
 };
-
 window.toggleEmailVisibility = function(inputId, btn) {
 const input = document.getElementById(inputId);
 if (!input) return;
@@ -487,7 +498,6 @@ input.classList.add('masked-text');
 btn.innerText = '👁️';
 }
 };
-
 window.togglePasswordVisibility = function(inputId, btn) {
 const input = document.getElementById(inputId);
 if (!input) return;
@@ -499,7 +509,6 @@ input.type = 'password';
 btn.innerText = '👁️';
 }
 };
-
 window.toggleTingkatanOptions = function(show) {
 const container = document.getElementById('tingkatan-options-container');
 const subRadios = container.querySelectorAll('input[name="sub_tingkatan"]');
@@ -514,7 +523,6 @@ r.checked = false;
 });
 }
 };
-
 window.switchTab = function(tab, pushState = true) {
 currentActiveTab = tab;
 if(pushState) {
@@ -538,7 +546,6 @@ if(tab === 'home') loadDashboardStats();
 if(tab === 'senarai') loadStudentList();
 if(tab === 'admin') loadTeacherAccounts();
 };
-
 // Pengurusan Butang Back Telefon (Double Back to Exit / Menu Utama)
 window.addEventListener('popstate', (e) => {
 const dashboardSection = document.getElementById('dashboard-section');
@@ -562,7 +569,6 @@ if (!dashboardSection.classList.contains('hidden')) {
   }
 }
 });
-
 function showExitToast() {
 const toast = document.getElementById('exit-toast');
 toast.classList.remove('hidden');
@@ -570,7 +576,6 @@ setTimeout(() => {
   toast.classList.add('hidden');
 }, 2000);
 }
-
 window.handleLogin = async function(e) {
 e.preventDefault();
 const email = document.getElementById('login-email').value.trim().toLowerCase();
@@ -604,7 +609,6 @@ btn.innerText = "Log Masuk";
 btn.disabled = false;
 }
 };
-
 window.handleRegister = async function(e) {
 e.preventDefault();
 const name = document.getElementById('reg-name').value;
@@ -632,7 +636,6 @@ btn.innerText = "Daftar Akaun";
 btn.disabled = false;
 }
 };
-
 window.handleForgotPassword = async function(e) {
 e.preventDefault();
 const email = document.getElementById('login-email').value.trim().toLowerCase();
@@ -647,22 +650,18 @@ alert('Pautan tetapan semula kata laluan telah dihantar ke e-mel: ' + email);
 alert('Ralat: ' + error.message);
 }
 };
-
 window.handleLogout = async function() {
 await signOut(auth);
 toggleView('login');
 };
-
 window.saveStudentData = async function(e) {
 e.preventDefault();
 const aliranSelected = document.querySelector('input[name="aliran_kelas"]:checked');
 let tingkatanValue = aliranSelected ? aliranSelected.value : '';
-
 const subTingkatanSelected = document.querySelector('input[name="sub_tingkatan"]:checked');
 if (subTingkatanSelected && !document.getElementById('tingkatan-options-container').classList.contains('hidden')) {
 tingkatanValue += ` (${subTingkatanSelected.value})`;
 }
-
 const studentData = {
 nama: document.getElementById('student-name').value,
 noMyKad: document.getElementById('student-ic').value,
@@ -673,7 +672,6 @@ sekolahTerdahulu: document.getElementById('student-prev-school').value,
 tingkatan: tingkatanValue,
 tarikhDaftar: new Date().toISOString()
 };
-
 try {
 await addDoc(collection(db, "pelajar"), studentData);
 alert('Pendaftaran pelajar berjaya dihantar!');
@@ -685,7 +683,6 @@ loadDashboardStats();
 alert('Ralat menghantar data: ' + error.message);
 }
 };
-
 window.loadDashboardStats = async function() {
 try {
 const querySnapshot = await getDocs(collection(db, "pelajar"));
@@ -696,14 +693,14 @@ let femaleCount = 0;
 let akademikCount = 0;
 let tahfizCount = 0;
 let recentCount = 0;
-
 const now = new Date();
+
+const currentYearStr = document.getElementById('display-year-stat').innerText;
 
 querySnapshot.forEach(docSnap => {
 const data = docSnap.data();
-
 if(data.tarikhDaftar) {
-  if(data.tarikhDaftar.startsWith("2026")) {
+  if(data.tarikhDaftar.startsWith(currentYearStr)) {
     countYear++;
   }
   const regDate = new Date(data.tarikhDaftar);
@@ -713,24 +710,20 @@ if(data.tarikhDaftar) {
     recentCount++;
   }
 }
-
 if(data.jantina === 'Lelaki') maleCount++;
 if(data.jantina === 'Perempuan') femaleCount++;
-
 if(data.tingkatan && data.tingkatan.toLowerCase().includes('akademik')) {
   akademikCount++;
 } else if(data.tingkatan && data.tingkatan.toLowerCase().includes('tahfiz')) {
   tahfizCount++;
 }
 });
-
 document.getElementById('stat-total').innerText = total;
 document.getElementById('stat-male').innerText = maleCount;
 document.getElementById('stat-female').innerText = femaleCount;
 document.getElementById('stat-akademik').innerText = akademikCount;
 document.getElementById('stat-tahfiz').innerText = tahfizCount;
 document.getElementById('stat-year').innerText = countYear;
-
 const bellBadge = document.getElementById('bell-badge');
 if(recentCount > 0) {
   bellBadge.innerText = recentCount;
@@ -739,22 +732,18 @@ if(recentCount > 0) {
   bellBadge.innerText = '0';
   bellBadge.style.display = 'none';
 }
-
 } catch(e) { console.log(e); }
 };
-
 window.openNotificationModal = async function() {
 const modal = document.getElementById('notification-modal');
 const container = document.getElementById('notification-list-content');
 modal.classList.remove('hidden');
 container.innerHTML = '<p class="text-xs text-slate-500 text-center">Memuatkan data terkini...</p>';
-
 try {
 const querySnapshot = await getDocs(collection(db, "pelajar"));
 container.innerHTML = '';
 let records = [];
 const now = new Date();
-
 querySnapshot.forEach(docSnap => {
 const d = docSnap.data();
 if(d.tarikhDaftar) {
@@ -765,14 +754,11 @@ if(d.tarikhDaftar) {
   }
 }
 });
-
 if(records.length === 0) {
 container.innerHTML = '<p class="text-xs text-slate-400 text-center">Tiada pendaftaran baharu dalam masa 3 hari terkini.</p>';
 return;
 }
-
 records.reverse();
-
 records.forEach((d, index) => {
 const item = document.createElement('div');
 item.className = "p-3 bg-slate-50 border border-slate-200 rounded-2xl text-xs space-y-1";
@@ -784,16 +770,13 @@ item.innerHTML = `
 `;
 container.appendChild(item);
 });
-
 } catch(e) {
 container.innerHTML = '<p class="text-xs text-red-500 text-center">Ralat memuatkan data.</p>';
 }
 };
-
 window.closeNotificationModal = function() {
 document.getElementById('notification-modal').classList.add('hidden');
 };
-
 window.loadStudentList = async function() {
 const container = document.getElementById('student-list-container');
 container.innerHTML = '<tr><td colspan="7" class="p-4 text-center text-slate-400">Memuatkan senarai...</td></tr>';
@@ -824,11 +807,9 @@ container.appendChild(tr);
 container.innerHTML = '<tr><td colspan="7" class="p-4 text-center text-red-500">Ralat memuatkan senarai.</td></tr>';
 }
 };
-
 function escapeHtml(str) {
 return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
-
 window.loadTeacherAccounts = async function() {
 const container = document.getElementById('teacher-list-container');
 container.innerHTML = '<p class="text-xs text-slate-500">Memuatkan senarai akaun...</p>';
@@ -857,7 +838,6 @@ container.appendChild(card);
 });
 } catch(e) { container.innerHTML = '<p class="text-xs text-red-500">Ralat memuatkan akaun.</p>'; }
 };
-
 window.approveTeacher = async function(id) {
 try {
 await updateDoc(doc(db, "guru", id), { status: "aktif" });
@@ -865,7 +845,6 @@ alert("Akaun guru berjaya diluluskan!");
 loadTeacherAccounts();
 } catch(e) { alert("Ralat meluluskan akaun: " + e.message); }
 };
-
 window.deleteTeacher = async function(id) {
 if(confirm("Hapus akaun ini?")) {
 try {
@@ -875,7 +854,6 @@ loadTeacherAccounts();
 } catch(e) { alert("Ralat."); }
 }
 };
-
 onAuthStateChanged(auth, async (user) => {
 if (user) {
 const email = user.email.toLowerCase();
@@ -887,6 +865,7 @@ toggleView('login');
 return;
 }
 }
+await loadSettings();
 toggleView('dashboard');
 loadDashboardStats();
 const adminBtn = document.getElementById('tab-admin-btn');
