@@ -172,6 +172,27 @@ Daftar Akaun
         </div>
       </div>
 
+      <!-- JADUAL ANALISA MENGIKUT TINGKATAN (DILETAK SELEPAS KAD ANALISA UTAMA) -->
+      <div class="bg-white p-6 rounded-3xl shadow-md space-y-4 w-full">
+        <div class="flex items-center space-x-2 border-b pb-3">
+          <span class="text-lg">📋</span>
+          <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wide">Analisa Pendaftaran Mengikut Tingkatan</h3>
+        </div>
+        <div class="overflow-x-auto w-full">
+          <table class="w-full text-left border-collapse min-w-[300px]">
+            <thead>
+              <tr class="bg-[#3b0000] text-white text-[10px] uppercase tracking-wider">
+                <th class="p-3">Tingkatan</th>
+                <th class="p-3 text-center">Jumlah Pelajar</th>
+              </tr>
+            </thead>
+            <tbody id="tingkatan-table-body" class="divide-y divide-slate-100 text-xs text-slate-700">
+              <tr><td colspan="2" class="p-3 text-center text-slate-400">Memuatkan data...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       <!-- CARTA BAR ANALISA PENDAFTARAN -->
       <div class="bg-white p-6 rounded-3xl shadow-md space-y-4 w-full">
         <div class="flex items-center space-x-2 border-b pb-3">
@@ -932,6 +953,9 @@ let femaleCount = 0;
 let akademikCount = 0;
 let tahfizCount = 0;
 let recentCount = 0;
+
+let tingkatanCounts = { "T1": 0, "T2": 0, "T3": 0, "T4": 0, "T5": 0 };
+
 const now = new Date();
 querySnapshot.forEach(docSnap => {
 const data = docSnap.data();
@@ -946,18 +970,44 @@ if(data.tarikhDaftar) {
 if(data.jantina === 'Lelaki') maleCount++;
 if(data.jantina === 'Perempuan') femaleCount++;
 
-// Semak Tahfiz terlebih dahulu kerana string Tahfiz turut mengandungi perkataan 'Akademik'
+// Semak Aliran
 if(data.tingkatan && data.tingkatan.toLowerCase().includes('tahfiz')) {
   tahfizCount++;
 } else if(data.tingkatan && data.tingkatan.toLowerCase().includes('akademik')) {
   akademikCount++;
 }
+
+// Semak Tingkatan (T1 - T5)
+if(data.tingkatan) {
+  if(data.tingkatan.includes('(T1')) tingkatanCounts["T1"]++;
+  else if(data.tingkatan.includes('(T2')) tingkatanCounts["T2"]++;
+  else if(data.tingkatan.includes('(T3')) tingkatanCounts["T3"]++;
+  else if(data.tingkatan.includes('(T4')) tingkatanCounts["T4"]++;
+  else if(data.tingkatan.includes('(T5')) tingkatanCounts["T5"]++;
+}
 });
+
 document.getElementById('stat-total').innerText = total;
 document.getElementById('stat-male').innerText = maleCount;
 document.getElementById('stat-female').innerText = femaleCount;
 document.getElementById('stat-akademik').innerText = akademikCount;
 document.getElementById('stat-tahfiz').innerText = tahfizCount;
+
+// Paparkan Jadual Analisa Mengikut Tingkatan
+const tbodyTingkatan = document.getElementById('tingkatan-table-body');
+tbodyTingkatan.innerHTML = '';
+let totalTingkatanCheck = 0;
+['T1', 'T2', 'T3', 'T4', 'T5'].forEach(t => {
+  const count = tingkatanCounts[t];
+  totalTingkatanCheck += count;
+  const tr = document.createElement('tr');
+  tr.className = "hover:bg-slate-50 transition";
+  tr.innerHTML = `
+    <td class="p-3 font-bold text-slate-800">Tingkatan ${t.replace('T', '')}</td>
+    <td class="p-3 text-center font-semibold text-[#3b0000]">${count}</td>
+  `;
+  tbodyTingkatan.appendChild(tr);
+});
 
 const maxVal = Math.max(total, maleCount, femaleCount, akademikCount, tahfizCount, 5);
 const scaleFactor = 180 / (maxVal || 1);
