@@ -339,7 +339,7 @@ Daftar Akaun
         <p class="text-xs text-slate-500">Masukkan No Bil pelajar untuk melakukan suntingan data pendaftaran.</p>
         <div class="flex space-x-2">
           <input type="number" placeholder="Masukkan No Bil" class="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs w-40 focus:outline-none">
-          <button onclick="alert('Sila pilih rekod melalui senarai pelajar.')" class="px-4 py-2 bg-slate-700 hover:bg-slate-800 text-white text-xs font-semibold rounded-xl cursor-pointer">Cari / Kemaskini</button>
+          <button onclick="showCustomAlert('Sila pilih rekod melalui senarai pelajar.')" class="px-4 py-2 bg-slate-700 hover:bg-slate-800 text-white text-xs font-semibold rounded-xl cursor-pointer">Cari / Kemaskini</button>
         </div>
       </div>
       <!-- 3. Hapus Rekod -->
@@ -351,7 +351,7 @@ Daftar Akaun
         <p class="text-xs text-slate-500">Padam rekod pendaftaran secara spesifik mengikut tahun atau nombor bil.</p>
         <div class="flex space-x-2">
           <input type="text" placeholder="Tahun / No Bil" class="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs w-40 focus:outline-none">
-          <button onclick="alert('Fungsi hapus rekod aktif.')" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-xs font-semibold rounded-xl cursor-pointer">Hapus Rekod</button>
+          <button onclick="showCustomAlert('Fungsi hapus rekod aktif.')" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-xs font-semibold rounded-xl cursor-pointer">Hapus Rekod</button>
         </div>
       </div>
       <!-- 4. Kelulusan Akaun Guru -->
@@ -380,9 +380,9 @@ Daftar Akaun
         </div>
         <p class="text-xs text-slate-500">Buat salinan data sandaran pendaftaran pelajar atau muat naik semula fail sandaran.</p>
         <div class="flex space-x-3">
-          <button onclick="alert('Fail sandaran JSON berjaya dieksport.')" class="px-4 py-2.5 bg-indigo-700 hover:bg-indigo-800 text-white text-xs font-semibold rounded-xl cursor-pointer shadow">Eksport JSON</button>
+          <button onclick="showCustomAlert('Fail sandaran JSON berjaya dieksport.')" class="px-4 py-2.5 bg-indigo-700 hover:bg-indigo-800 text-white text-xs font-semibold rounded-xl cursor-pointer shadow">Eksport JSON</button>
           <label class="px-4 py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-semibold rounded-xl cursor-pointer shadow inline-block">
-            Import JSON <input type="file" class="hidden" onchange="alert('Fail JSON dipilih.')">
+            Import JSON <input type="file" class="hidden" onchange="showCustomAlert('Fail JSON dipilih.')">
           </label>
         </div>
       </div>
@@ -393,6 +393,25 @@ Daftar Akaun
 <footer class="text-center py-4 text-xs text-slate-400 border-t bg-white mt-auto w-full">
 © 2026 SMU(A) Khairiah Banggol Setol
 </footer>
+
+<!-- KOTAK MAKLUMAN DALAMAN (CUSTOM SYSTEM ALERT MODAL) -->
+<div id="custom-alert-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+  <div class="bg-white rounded-3xl shadow-2xl w-full max-w-sm overflow-hidden animate-fadeIn text-center p-6 space-y-4 border border-slate-100">
+    <div class="w-12 h-12 bg-rose-50 text-[#3b0000] rounded-2xl mx-auto flex items-center justify-center text-xl font-bold border border-rose-100">
+      ℹ️
+    </div>
+    <div class="space-y-1">
+      <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wide">Makluman Sistem</h3>
+      <p id="custom-alert-message" class="text-xs text-slate-600 leading-relaxed"></p>
+    </div>
+    <div class="pt-2">
+      <button onclick="closeCustomAlert()" class="w-full py-3 bg-[#3b0000] hover:bg-[#4a0000] text-white text-xs font-bold uppercase rounded-xl transition cursor-pointer shadow-md">
+        OK
+      </button>
+    </div>
+  </div>
+</div>
+
 <!-- MODAL NOTIFIKASI / RINGKASAN DATA BARU (POPUP LOCENG) -->
 <div id="notification-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
   <div class="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden animate-fadeIn">
@@ -438,6 +457,16 @@ const adminEmails = [
 let currentActiveTab = 'home';
 let lastBackPress = 0;
 
+// Fungsi Kotak Makluman Dalaman (Custom Alert)
+window.showCustomAlert = function(msg) {
+  document.getElementById('custom-alert-message').innerText = msg;
+  document.getElementById('custom-alert-modal').classList.remove('hidden');
+};
+
+window.closeCustomAlert = function() {
+  document.getElementById('custom-alert-modal').classList.add('hidden');
+};
+
 // Fungsi muat turun Tetapan Sekolah / Tahun dari Firestore
 window.loadSettings = async function() {
   try {
@@ -470,9 +499,9 @@ window.saveInstitutionSettings = async function() {
     await setDoc(doc(db, "tetapan", "sekolah"), settingsData);
     document.getElementById('display-year-stat').innerText = settingsData.tahun;
     document.getElementById('form-header-title').innerText = `PENDAFTARAN PELAJAR BAHARU TINGKATAN SATU TAHUN ${settingsData.tahun}`;
-    alert('Maklumat rasmi institusi & tahun pendaftaran berjaya disimpan!');
+    showCustomAlert('Maklumat rasmi institusi & tahun pendaftaran berjaya disimpan!');
   } catch(e) {
-    alert('Ralat menyimpan tetapan: ' + e.message);
+    showCustomAlert('Ralat menyimpan tetapan: ' + e.message);
   }
 };
 
@@ -551,15 +580,12 @@ window.addEventListener('popstate', (e) => {
 const dashboardSection = document.getElementById('dashboard-section');
 if (!dashboardSection.classList.contains('hidden')) {
   if (currentActiveTab !== 'home') {
-    // Back kali pertama dari sub-menu: Pulang ke menu Utama dahulu
     switchTab('home', false);
     history.pushState({tab: 'home'}, '', '');
     lastBackPress = 0;
   } else {
-    // Berada di menu Utama: Semak masa tekan back kali kedua
     const now = new Date().getTime();
     if (now - lastBackPress < 2000) {
-      // Keluar dari skrin / sejarah web
       window.history.go(-1);
     } else {
       lastBackPress = now;
@@ -593,17 +619,17 @@ if (docSnap.exists()) {
 const data = docSnap.data();
 if (data.status !== 'aktif') {
 await signOut(auth);
-alert('Akaun anda masih menunggu kelulusan pentadbir.');
+showCustomAlert('Akaun anda masih menunggu kelulusan pentadbir.');
 toggleView('login');
 }
 } else {
 await setDoc(docRef, { email: email, status: 'menunggu', tarikhDaftar: new Date().toISOString() });
 await signOut(auth);
-alert('Akaun anda berjaya didaftarkan dan sedang menunggu kelulusan pentadbir.');
+showCustomAlert('Akaun anda berjaya didaftarkan dan sedang menunggu kelulusan pentadbir.');
 toggleView('login');
 }
 } catch (error) {
-alert('Gagal log masuk: ' + error.message);
+showCustomAlert('Gagal log masuk: ' + error.message);
 } finally {
 btn.innerText = "Log Masuk";
 btn.disabled = false;
@@ -626,11 +652,11 @@ status: "menunggu",
 tarikhDaftar: new Date().toISOString()
 });
 await signOut(auth);
-alert('Pendaftaran berjaya dihantar! Akaun anda sedang menunggu kelulusan pentadbir.');
+showCustomAlert('Pendaftaran berjaya dihantar! Akaun anda sedang menunggu kelulusan pentadbir.');
 toggleView('login');
 document.getElementById('register-form').reset();
 } catch (error) {
-alert('Gagal daftar akaun: ' + error.message);
+showCustomAlert('Gagal daftar akaun: ' + error.message);
 } finally {
 btn.innerText = "Daftar Akaun";
 btn.disabled = false;
@@ -640,14 +666,14 @@ window.handleForgotPassword = async function(e) {
 e.preventDefault();
 const email = document.getElementById('login-email').value.trim().toLowerCase();
 if (!email) {
-alert('Sila masukkan alamat e-mel anda pada ruangan e-mel di atas terlebih dahulu.');
+showCustomAlert('Sila masukkan alamat e-mel anda pada ruangan e-mel di atas terlebih dahulu.');
 return;
 }
 try {
 await sendPasswordResetEmail(auth, email);
-alert('Pautan tetapan semula kata laluan telah dihantar ke e-mel: ' + email);
+showCustomAlert('Pautan tetapan semula kata laluan telah dihantar ke e-mel: ' + email);
 } catch (error) {
-alert('Ralat: ' + error.message);
+showCustomAlert('Ralat: ' + error.message);
 }
 };
 window.handleLogout = async function() {
@@ -674,13 +700,13 @@ tarikhDaftar: new Date().toISOString()
 };
 try {
 await addDoc(collection(db, "pelajar"), studentData);
-alert('Pendaftaran pelajar berjaya dihantar!');
+showCustomAlert('Pendaftaran pelajar berjaya dihantar!');
 document.getElementById('student-form').reset();
 document.getElementById('tingkatan-options-container').classList.add('hidden');
 switchTab('home');
 loadDashboardStats();
 } catch (error) {
-alert('Ralat menghantar data: ' + error.message);
+showCustomAlert('Ralat menghantar data: ' + error.message);
 }
 };
 window.loadDashboardStats = async function() {
@@ -841,17 +867,17 @@ container.appendChild(card);
 window.approveTeacher = async function(id) {
 try {
 await updateDoc(doc(db, "guru", id), { status: "aktif" });
-alert("Akaun guru berjaya diluluskan!");
+showCustomAlert("Akaun guru berjaya diluluskan!");
 loadTeacherAccounts();
-} catch(e) { alert("Ralat meluluskan akaun: " + e.message); }
+} catch(e) { showCustomAlert("Ralat meluluskan akaun: " + e.message); }
 };
 window.deleteTeacher = async function(id) {
 if(confirm("Hapus akaun ini?")) {
 try {
 await deleteDoc(doc(db, "guru", id));
-alert("Akaun dipadam.");
+showCustomAlert("Akaun dipadam.");
 loadTeacherAccounts();
-} catch(e) { alert("Ralat."); }
+} catch(e) { showCustomAlert("Ralat."); }
 }
 };
 onAuthStateChanged(auth, async (user) => {
