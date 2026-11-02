@@ -95,310 +95,306 @@ Daftar Akaun
 </div>
 
 <!-- 3. PAPARAN UTAMA DASHBOARD -->
-<div id="dashboard-section" class="hidden w-full space-y-6">
+<div id="dashboard-section" class="hidden w-full grid grid-cols-1 md:grid-cols-6 lg:grid-cols-5 gap-6 items-start">
   
-  <!-- HEADER MELINTANG PENUH DI ATAS (GAYA RUJUKAN GAMBAR) -->
-  <div class="bg-[#0f172a] text-white p-6 md:p-8 rounded-3xl shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-    <div class="space-y-1">
-      <h1 class="text-lg md:text-2xl font-extrabold tracking-tight">SMU(A) KHAIRIAH KHAIRIAH BANGGOL SETOL</h1>
-      <p class="text-xs md:text-sm text-slate-300 font-medium">Sistem Pendaftaran Pelajar</p>
+  <!-- SIDEBAR KIRI (KEMBALI TERSUSUN SEPERTI ASAL) -->
+  <div class="md:col-span-2 lg:col-span-1 space-y-4">
+    <!-- Header Kad -->
+    <div class="bg-[#3b0000] text-white p-5 rounded-3xl shadow-xl relative overflow-hidden space-y-3">
+      <div class="flex justify-between items-start">
+        <div>
+          <h1 class="text-xs md:text-sm font-bold tracking-tight">SMU(A) KHAIRIAH</h1>
+          <h2 class="text-xs md:text-sm font-bold tracking-tight">BANGGOL SETOL</h2>
+          <p class="text-[10px] text-rose-200 mt-0.5">Sistem Pendaftaran Pelajar</p>
+        </div>
+        <!-- Ikon Loceng -->
+        <div onclick="openNotificationModal()" class="relative bg-[#540000] p-2 rounded-xl border border-rose-950 cursor-pointer hover:bg-[#6b0000] transition">
+          <span class="text-sm">🔔</span>
+          <span id="bell-badge" class="absolute -top-1 -right-1 bg-red-600 text-white text-[9px] font-extrabold px-1.5 py-0.2 rounded-full shadow-md">0</span>
+        </div>
+      </div>
+      <div class="flex justify-between items-center pt-1">
+        <div class="inline-flex items-center space-x-1.5 bg-[#540000] px-2.5 py-1 rounded-xl border border-rose-950 text-[10px] text-rose-100">
+          <span>📅</span>
+          <span id="current-date">Ahad, 1 November 2026</span>
+        </div>
+        <!-- Ikon Log Keluar Dalam Kotak Header -->
+        <button onclick="handleLogout()" title="Log Keluar" class="bg-red-600 hover:bg-red-700 p-2 rounded-xl border border-red-800 cursor-pointer transition flex items-center justify-center shadow-md">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+          </svg>
+        </button>
+      </div>
     </div>
-    <div class="flex items-center gap-3">
-      <!-- Tarikh Semasa -->
-      <div class="inline-flex items-center space-x-2 bg-[#1e293b] px-4 py-2.5 rounded-2xl border border-slate-700 text-xs text-slate-200 shadow-inner">
-        <span>📅</span>
-        <span id="current-date">Ahad, 1 November 2026</span>
-      </div>
-      <!-- Butang Loceng Notifikasi -->
-      <div onclick="openNotificationModal()" class="relative bg-[#1e293b] p-2.5 rounded-2xl border border-slate-700 cursor-pointer hover:bg-[#334155] transition shadow-inner">
-        <span class="text-base">🔔</span>
-        <span id="bell-badge" class="absolute -top-1 -right-1 bg-red-600 text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded-full shadow-md">0</span>
-      </div>
-      <!-- Butang Log Keluar -->
-      <button onclick="handleLogout()" title="Log Keluar" class="bg-red-600 hover:bg-red-700 px-4 py-2.5 rounded-2xl border border-red-800 cursor-pointer transition flex items-center space-x-2 shadow-md text-xs font-bold text-white">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
-        </svg>
-        <span>Keluar</span>
+    <!-- Menu Sidebar -->
+    <div class="bg-white p-3 rounded-3xl shadow-md flex md:flex-col gap-1.5 text-center justify-between md:justify-start items-center md:items-stretch">
+      <button onclick="switchTab('home')" id="tab-home-btn" class="p-3 rounded-2xl bg-[#3b0000] text-white flex md:flex-row flex-col items-center justify-center md:justify-start md:space-x-3 transition shadow cursor-pointer w-full">
+        <span class="text-base mb-0.5 md:mb-0">📊</span>
+        <span class="text-xs font-semibold">Utama</span>
+      </button>
+      <button onclick="switchTab('form')" id="tab-form-btn" class="p-3 rounded-2xl hover:bg-slate-100 text-slate-600 flex md:flex-row flex-col items-center justify-center md:justify-start md:space-x-3 transition cursor-pointer w-full">
+        <span class="text-base mb-0.5 md:mb-0">📝</span>
+        <span class="text-xs font-semibold">Borang</span>
+      </button>
+      <button onclick="switchTab('senarai')" id="tab-senarai-btn" class="p-3 rounded-2xl hover:bg-slate-100 text-slate-600 flex md:flex-row flex-col items-center justify-center md:justify-start md:space-x-3 transition cursor-pointer w-full">
+        <span class="text-base mb-0.5 md:mb-0">📋</span>
+        <span class="text-xs font-semibold">Senarai</span>
+      </button>
+      <button onclick="switchTab('admin')" id="tab-admin-btn" class="hidden p-3 rounded-2xl hover:bg-slate-100 text-slate-600 flex md:flex-row flex-col items-center justify-center md:justify-start md:space-x-3 transition cursor-pointer w-full">
+        <span class="text-base mb-0.5 md:mb-0">⚙️</span>
+        <span class="text-xs font-semibold">Tetapan</span>
       </button>
     </div>
   </div>
 
-  <!-- BAHAGIAN KANDUNGAN UTAMA (SIDEBAR KIRI + KANDUNGAN KANAN) -->
-  <div class="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-5 gap-6 items-start">
+  <!-- KANDUNGAN UTAMA KANAN -->
+  <div class="md:col-span-4 lg:col-span-4 space-y-4 w-full">
     
-    <!-- SIDEBAR MENU KIRI -->
-    <div class="md:col-span-2 lg:col-span-1 space-y-3">
-      <div class="bg-white p-3 rounded-3xl shadow-md flex md:flex-col gap-1.5 text-center justify-between md:justify-start items-center md:items-stretch">
-        <button onclick="switchTab('home')" id="tab-home-btn" class="p-3 rounded-2xl bg-[#3b0000] text-white flex md:flex-row flex-col items-center justify-center md:justify-start md:space-x-3 transition shadow cursor-pointer w-full">
-          <span class="text-base mb-0.5 md:mb-0">📊</span>
-          <span class="text-xs font-semibold">Utama</span>
-        </button>
-        <button onclick="switchTab('form')" id="tab-form-btn" class="p-3 rounded-2xl hover:bg-slate-100 text-slate-600 flex md:flex-row flex-col items-center justify-center md:justify-start md:space-x-3 transition cursor-pointer w-full">
-          <span class="text-base mb-0.5 md:mb-0">📝</span>
-          <span class="text-xs font-semibold">Borang</span>
-        </button>
-        <button onclick="switchTab('senarai')" id="tab-senarai-btn" class="p-3 rounded-2xl hover:bg-slate-100 text-slate-600 flex md:flex-row flex-col items-center justify-center md:justify-start md:space-x-3 transition cursor-pointer w-full">
-          <span class="text-base mb-0.5 md:mb-0">📋</span>
-          <span class="text-xs font-semibold">Senarai</span>
-        </button>
-        <button onclick="switchTab('admin')" id="tab-admin-btn" class="hidden p-3 rounded-2xl hover:bg-slate-100 text-slate-600 flex md:flex-row flex-col items-center justify-center md:justify-start md:space-x-3 transition cursor-pointer w-full">
-          <span class="text-base mb-0.5 md:mb-0">⚙️</span>
-          <span class="text-xs font-semibold">Tetapan</span>
-        </button>
+    <!-- Kandungan Tab Utama & Analisa -->
+    <div id="content-home" class="space-y-4 w-full">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
+        <div class="bg-white p-5 rounded-3xl shadow-md space-y-1 border-l-4 border-[#3b0000]">
+          <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Jumlah Keseluruhan Pendaftaran</p>
+          <h2 class="text-3xl font-extrabold text-slate-800" id="stat-total">0</h2>
+        </div>
+        <div class="bg-white p-5 rounded-3xl shadow-md space-y-1 border-l-4 border-blue-600">
+          <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Jumlah Lelaki</p>
+          <h2 class="text-3xl font-extrabold text-blue-600" id="stat-male">0</h2>
+        </div>
+        <div class="bg-white p-5 rounded-3xl shadow-md space-y-1 border-l-4 border-pink-600">
+          <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Jumlah Perempuan</p>
+          <h2 class="text-3xl font-extrabold text-pink-600" id="stat-female">0</h2>
+        </div>
+        <div class="bg-white p-5 rounded-3xl shadow-md space-y-1 border-l-4 border-emerald-600">
+          <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Jumlah Aliran Akademik</p>
+          <h2 class="text-3xl font-extrabold text-emerald-600" id="stat-akademik">0</h2>
+        </div>
+        <div class="bg-white p-5 rounded-3xl shadow-md space-y-1 border-l-4 border-amber-600">
+          <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Jumlah Aliran Tahfiz</p>
+          <h2 class="text-3xl font-extrabold text-amber-600" id="stat-tahfiz">0</h2>
+        </div>
+        <div class="bg-white p-5 rounded-3xl shadow-md space-y-1 border-l-4 border-purple-600">
+          <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Pendaftaran Tahun Ini (<span id="display-year-stat">2027</span>)</p>
+          <h2 class="text-3xl font-extrabold text-purple-600" id="stat-year">0</h2>
+        </div>
       </div>
     </div>
 
-    <!-- KANDUNGAN UTAMA KANAN -->
-    <div class="md:col-span-4 lg:col-span-4 space-y-4 w-full">
-      
-      <!-- Kandungan Tab Utama & Analisa -->
-      <div id="content-home" class="space-y-4 w-full">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
-          <div class="bg-white p-5 rounded-3xl shadow-md space-y-1 border-l-4 border-[#3b0000]">
-            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Jumlah Keseluruhan Pendaftaran</p>
-            <h2 class="text-3xl font-extrabold text-slate-800" id="stat-total">0</h2>
-          </div>
-          <div class="bg-white p-5 rounded-3xl shadow-md space-y-1 border-l-4 border-blue-600">
-            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Jumlah Lelaki</p>
-            <h2 class="text-3xl font-extrabold text-blue-600" id="stat-male">0</h2>
-          </div>
-          <div class="bg-white p-5 rounded-3xl shadow-md space-y-1 border-l-4 border-pink-600">
-            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Jumlah Perempuan</p>
-            <h2 class="text-3xl font-extrabold text-pink-600" id="stat-female">0</h2>
-          </div>
-          <div class="bg-white p-5 rounded-3xl shadow-md space-y-1 border-l-4 border-emerald-600">
-            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Jumlah Aliran Akademik</p>
-            <h2 class="text-3xl font-extrabold text-emerald-600" id="stat-akademik">0</h2>
-          </div>
-          <div class="bg-white p-5 rounded-3xl shadow-md space-y-1 border-l-4 border-amber-600">
-            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Jumlah Aliran Tahfiz</p>
-            <h2 class="text-3xl font-extrabold text-amber-600" id="stat-tahfiz">0</h2>
-          </div>
-          <div class="bg-white p-5 rounded-3xl shadow-md space-y-1 border-l-4 border-purple-600">
-            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Pendaftaran Tahun Ini (<span id="display-year-stat">2027</span>)</p>
-            <h2 class="text-3xl font-extrabold text-purple-600" id="stat-year">0</h2>
-          </div>
-        </div>
+    <!-- Kandungan Tab Borang -->
+    <div id="content-form" class="hidden bg-white p-6 md:p-8 rounded-3xl shadow-md space-y-4 w-full">
+      <div class="border-b pb-3">
+        <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wide" id="form-header-title">PENDAFTARAN PELAJAR BAHARU TINGKATAN SATU TAHUN 2027</h3>
       </div>
-
-      <!-- Kandungan Tab Borang -->
-      <div id="content-form" class="hidden bg-white p-6 md:p-8 rounded-3xl shadow-md space-y-4 w-full">
-        <div class="border-b pb-3">
-          <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wide" id="form-header-title">PENDAFTARAN PELAJAR BAHARU TINGKATAN SATU TAHUN 2027</h3>
+      <form id="student-form" class="space-y-4" onsubmit="saveStudentData(event)">
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">NAMA PELAJAR <span class="text-red-500">*</span></label>
+          <input type="text" id="student-name" required placeholder="Sila isi nama penuh pelajar" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000]">
         </div>
-        <form id="student-form" class="space-y-4" onsubmit="saveStudentData(event)">
-          <div>
-            <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">NAMA PELAJAR <span class="text-red-500">*</span></label>
-            <input type="text" id="student-name" required placeholder="Sila isi nama penuh pelajar" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000]">
-          </div>
-          <div>
-            <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">NO KAD PENGENALAN PELAJAR <span class="text-red-500">*</span></label>
-            <input type="tel" inputmode="numeric" id="student-ic" required placeholder="Sila isi tanpa sengkang" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000]">
-          </div>
-          <div>
-            <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">JANTINA <span class="text-red-500">*</span></label>
-            <select id="student-gender" required class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000]">
-              <option value="" disabled selected>Sila Pilih Jantina</option>
-              <option value="Lelaki">Lelaki</option>
-              <option value="Perempuan">Perempuan</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">NAMA PENUH IBU BAPA / PENJAGA <span class="text-red-500">*</span></label>
-            <input type="text" id="guardian-name" required placeholder="Sila isi nama penuh Ibubapa / penjaga" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000]">
-          </div>
-          <div>
-            <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">NO. TELEFON UNTUK DIHUBUNGI <span class="text-red-500">*</span></label>
-            <input type="tel" inputmode="numeric" id="guardian-phone" required placeholder="Sila isi nombor telefon" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000]">
-          </div>
-          <div>
-            <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">NAMA SEKOLAH TERDAHULU <span class="text-red-500">*</span></label>
-            <textarea id="student-prev-school" required rows="2" placeholder="Sila isi nama penuh sekolah asal" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000] resize-none"></textarea>
-          </div>
-          <!-- Aliran Kelas Yang Dipohon -->
-          <div class="space-y-2 pt-1">
-            <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">ALIRAN KELAS YANG DIPOHON <span class="text-red-500">*</span></label>
-            <div class="space-y-2">
-              <label class="flex items-start space-x-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
-                <input type="radio" name="aliran_kelas" value="Aliran Akademik (Akademik & Arab/Agama)" required onclick="toggleTingkatanOptions(true)" class="mt-0.5 text-[#3b0000] focus:ring-[#3b0000]">
-                <span class="text-xs text-slate-700 font-medium">Aliran Akademik (Akademik & Arab/Agama)</span>
-              </label>
-              <label class="flex items-start space-x-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
-                <input type="radio" name="aliran_kelas" value="Aliran Tahfiz (Tahfiz, Akademik & Arab/Agama) - Wajib tinggal di asrama tahfiz" onclick="toggleTingkatanOptions(true)" class="mt-0.5 text-[#3b0000] focus:ring-[#3b0000]">
-                <span class="text-xs text-slate-700 font-medium">Aliran Tahfiz (Tahfiz, Akademik & Arab/Agama) - Wajib tinggal di asrama tahfiz</span>
-              </label>
-            </div>
-            <!-- Pilihan Tingkatan T1 hingga T5 -->
-            <div id="tingkatan-options-container" class="hidden mt-3 pl-6 p-3 bg-rose-50 border border-rose-200 rounded-2xl space-y-2">
-              <label class="block text-[11px] font-bold text-[#3b0000] uppercase">Sila Pilih Pilihan Tingkatan:</label>
-              <div class="grid grid-cols-5 gap-1.5 text-center">
-                <label class="border border-rose-300 rounded-xl p-2 cursor-pointer hover:bg-rose-100 bg-white transition flex flex-col items-center">
-                  <input type="radio" name="sub_tingkatan" value="T1" class="mb-1 text-[#3b0000]">
-                  <span class="text-[11px] font-bold text-slate-800">T1</span>
-                </label>
-                <label class="border border-rose-300 rounded-xl p-2 cursor-pointer hover:bg-rose-100 bg-white transition flex flex-col items-center">
-                  <input type="radio" name="sub_tingkatan" value="T2" class="mb-1 text-[#3b0000]">
-                  <span class="text-[11px] font-bold text-slate-800">T2</span>
-                </label>
-                <label class="border border-rose-300 rounded-xl p-2 cursor-pointer hover:bg-rose-100 bg-white transition flex flex-col items-center">
-                  <input type="radio" name="sub_tingkatan" value="T3" class="mb-1 text-[#3b0000]">
-                  <span class="text-[11px] font-bold text-slate-800">T3</span>
-                </label>
-                <label class="border border-rose-300 rounded-xl p-2 cursor-pointer hover:bg-rose-100 bg-white transition flex flex-col items-center">
-                  <input type="radio" name="sub_tingkatan" value="T4" class="mb-1 text-[#3b0000]">
-                  <span class="text-[11px] font-bold text-slate-800">T4</span>
-                </label>
-                <label class="border border-rose-300 rounded-xl p-2 cursor-pointer hover:bg-rose-100 bg-white transition flex flex-col items-center">
-                  <input type="radio" name="sub_tingkatan" value="T5" class="mb-1 text-[#3b0000]">
-                  <span class="text-[11px] font-bold text-slate-800">T5</span>
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-[11px] text-slate-500 leading-relaxed space-y-1 mt-2">
-            <p>Pihak sekolah akan menghubungi anda dalam masa terdekat untuk urusan seterusnya selepas permohonan ini lengkap dihantar.</p>
-            <p>Terima kasih atas sokongan dan kepercayaan yang diberikan kepada sekolah kami.</p>
-          </div>
-          <div class="flex justify-center pt-2">
-            <button type="submit" class="px-8 py-3 bg-[#3b0000] hover:bg-[#4a0000] text-white font-semibold rounded-2xl transition duration-200 shadow text-xs uppercase tracking-wider cursor-pointer">
-              Hantar
-            </button>
-          </div>
-        </form>
-      </div>
-
-      <!-- Kandungan Tab Senarai -->
-      <div id="content-senarai" class="hidden bg-white rounded-3xl shadow-md overflow-hidden p-5 space-y-4 w-full">
-        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-3 gap-3">
-          <h3 class="text-base font-bold text-slate-800">Senarai Pelajar Berdaftar</h3>
-          <button onclick="window.print()" class="no-print px-4 py-2 bg-[#3b0000] hover:bg-[#4a0000] text-white text-xs font-semibold rounded-xl shadow transition cursor-pointer flex items-center space-x-1.5">
-            <span>🖨️</span> <span>Cetak Senarai</span>
-          </button>
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">NO KAD PENGENALAN PELAJAR <span class="text-red-500">*</span></label>
+          <input type="tel" inputmode="numeric" id="student-ic" required placeholder="Sila isi tanpa sengkang" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000]">
         </div>
-        
-        <div id="printable-area" class="overflow-x-auto w-full">
-          <table class="w-full text-left border-collapse min-w-[750px]">
-            <thead>
-              <tr class="bg-[#3b0000] text-white text-[10px] uppercase tracking-wider">
-                <th class="p-3">Bil</th>
-                <th class="p-3">Nama Pelajar</th>
-                <th class="p-3">Jantina</th>
-                <th class="p-3">No MyKad</th>
-                <th class="p-3">Waris & Telefon</th>
-                <th class="p-3">Sekolah Terdahulu</th>
-                <th class="p-3">Aliran / Tingkatan</th>
-              </tr>
-            </thead>
-            <tbody id="student-list-container" class="divide-y divide-slate-100 text-xs text-slate-700">
-              <tr>
-                <td colspan="7" class="p-4 text-center text-slate-400">Memuatkan senarai...</td>
-              </tr>
-            </tbody>
-          </table>
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">JANTINA <span class="text-red-500">*</span></label>
+          <select id="student-gender" required class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000]">
+            <option value="" disabled selected>Sila Pilih Jantina</option>
+            <option value="Lelaki">Lelaki</option>
+            <option value="Perempuan">Perempuan</option>
+          </select>
         </div>
-      </div>
-
-      <!-- Kandungan Tab Tetapan/Admin -->
-      <div id="content-admin" class="hidden space-y-6 w-full">
-        
-        <!-- 1. Maklumat Rasmi Institusi -->
-        <div class="bg-white p-6 md:p-8 rounded-3xl shadow-md space-y-4 border border-emerald-100 w-full">
-          <div class="flex items-center space-x-2 border-b pb-3">
-            <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center">1</span>
-            <h3 class="text-sm font-bold text-slate-800">Maklumat Rasmi Institusi & Tahun Pendaftaran</h3>
-          </div>
-          <div class="space-y-3">
-            <div>
-              <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Nama Institusi / Sekolah</label>
-              <input type="text" id="inst-name" value="SMU(A) Khairiah Banggol Setol" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono text-slate-700 focus:outline-none focus:border-[#3b0000]">
-            </div>
-            <div>
-              <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Tahun Pendaftaran (Cth: 2027, 2028)</label>
-              <input type="text" id="inst-year" value="2027" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono font-bold text-[#3b0000] focus:outline-none focus:border-[#3b0000]">
-            </div>
-            <div>
-              <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Alamat Tetap Sekolah</label>
-              <textarea id="inst-address" rows="2" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono text-slate-700 focus:outline-none focus:border-[#3b0000] resize-none">17070 Pasir Mas, Kelantan.</textarea>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">No. Telefon Rasmi</label>
-                <input type="text" id="inst-phone" value="09 -7909195" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono text-slate-700 focus:outline-none focus:border-[#3b0000]">
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Email Rasmi Sekolah</label>
-                <input type="email" id="inst-email" value="smuakhairiahbs@yik.edu.my" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono text-slate-700 focus:outline-none focus:border-[#3b0000]">
-              </div>
-            </div>
-          </div>
-          <div>
-            <button onclick="saveInstitutionSettings()" class="px-5 py-2.5 bg-teal-700 hover:bg-teal-800 text-white text-xs font-semibold rounded-xl shadow cursor-pointer transition">
-              Simpan Maklumat Institusi & Tahun
-            </button>
-          </div>
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">NAMA PENUH IBU BAPA / PENJAGA <span class="text-red-500">*</span></label>
+          <input type="text" id="guardian-name" required placeholder="Sila isi nama penuh Ibubapa / penjaga" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000]">
         </div>
-
-        <!-- 2. Kemaskini Data -->
-        <div class="bg-white p-6 rounded-3xl shadow-md space-y-3 w-full">
-          <div class="flex items-center space-x-2 border-b pb-3">
-            <span class="w-6 h-6 rounded-full bg-slate-700 text-white font-bold text-xs flex items-center justify-center">2</span>
-            <h3 class="text-sm font-bold text-slate-800">Kemaskini Data (Ikut No Bil)</h3>
-          </div>
-          <p class="text-xs text-slate-500">Masukkan No Bil pelajar untuk melakukan suntingan data pendaftaran.</p>
-          <div class="flex space-x-2">
-            <input type="number" placeholder="Masukkan No Bil" class="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs w-40 focus:outline-none">
-            <button onclick="showCustomAlert('Sila pilih rekod melalui senarai pelajar.')" class="px-4 py-2 bg-slate-700 hover:bg-slate-800 text-white text-xs font-semibold rounded-xl cursor-pointer">Cari / Kemaskini</button>
-          </div>
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">NO. TELEFON UNTUK DIHUBUNGI <span class="text-red-500">*</span></label>
+          <input type="tel" inputmode="numeric" id="guardian-phone" required placeholder="Sila isi nombor telefon" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000]">
         </div>
-
-        <!-- 3. Hapus Rekod -->
-        <div class="bg-white p-6 rounded-3xl shadow-md space-y-3 w-full">
-          <div class="flex items-center space-x-2 border-b pb-3">
-            <span class="w-6 h-6 rounded-full bg-red-600 text-white font-bold text-xs flex items-center justify-center">3</span>
-            <h3 class="text-sm font-bold text-slate-800">Hapus Rekod (Ikut Tahun & Ikut No Bil)</h3>
-          </div>
-          <p class="text-xs text-slate-500">Padam rekod pendaftaran secara spesifik mengikut tahun atau nombor bil.</p>
-          <div class="flex space-x-2">
-            <input type="text" placeholder="Tahun / No Bil" class="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs w-40 focus:outline-none">
-            <button onclick="showCustomAlert('Fungsi hapus rekod aktif.')" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-xs font-semibold rounded-xl cursor-pointer">Hapus Rekod</button>
-          </div>
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">NAMA SEKOLAH TERDAHULU <span class="text-red-500">*</span></label>
+          <textarea id="student-prev-school" required rows="2" placeholder="Sila isi nama penuh sekolah asal" class="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000] resize-none"></textarea>
         </div>
-
-        <!-- 4. Kelulusan Akaun Guru -->
-        <div class="bg-white p-6 rounded-3xl shadow-md space-y-4 w-full">
-          <div class="flex items-center space-x-2 border-b pb-3">
-            <span class="w-6 h-6 rounded-full bg-teal-800 text-white font-bold text-xs flex items-center justify-center">4</span>
-            <h3 class="text-sm font-bold text-slate-800">Kelulusan Akaun Guru</h3>
-          </div>
-          <div class="p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl text-xs leading-relaxed">
-            Tekan <strong>Luluskan</strong> untuk mengaktifkan akaun guru baharu. Tekan <strong>Hapus Akaun</strong> jika guru tidak lagi berkhidmat.
-          </div>
-          <div>
-            <button onclick="loadTeacherAccounts()" class="px-5 py-2.5 bg-teal-800 hover:bg-teal-900 text-white rounded-xl text-xs font-semibold shadow cursor-pointer">
-              Muat Semula Senarai Akaun
-            </button>
-          </div>
-          <div id="teacher-list-container" class="space-y-3 mt-2">
-            <p class="text-xs text-slate-500">Memuatkan senarai akaun...</p>
-          </div>
-        </div>
-
-        <!-- 5. Sandaran JSON -->
-        <div class="bg-white p-6 rounded-3xl shadow-md space-y-3 w-full">
-          <div class="flex items-center space-x-2 border-b pb-3">
-            <span class="w-6 h-6 rounded-full bg-indigo-700 text-white font-bold text-xs flex items-center justify-center">5</span>
-            <h3 class="text-sm font-bold text-slate-800">Sandaran JSON : (Eksport JSON dan Import JSON)</h3>
-          </div>
-          <p class="text-xs text-slate-500">Buat salinan data sandaran pendaftaran pelajar atau muat naik semula fail sandaran.</p>
-          <div class="flex space-x-3">
-            <button onclick="showCustomAlert('Fail sandaran JSON berjaya dieksport.')" class="px-4 py-2.5 bg-indigo-700 hover:bg-indigo-800 text-white text-xs font-semibold rounded-xl cursor-pointer shadow">Eksport JSON</button>
-            <label class="px-4 py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-semibold rounded-xl cursor-pointer shadow inline-block">
-              Import JSON <input type="file" class="hidden" onchange="showCustomAlert('Fail JSON dipilih.')">
+        <!-- Aliran Kelas Yang Dipohon -->
+        <div class="space-y-2 pt-1">
+          <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">ALIRAN KELAS YANG DIPOHON <span class="text-red-500">*</span></label>
+          <div class="space-y-2">
+            <label class="flex items-start space-x-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
+              <input type="radio" name="aliran_kelas" value="Aliran Akademik (Akademik & Arab/Agama)" required onclick="toggleTingkatanOptions(true)" class="mt-0.5 text-[#3b0000] focus:ring-[#3b0000]">
+              <span class="text-xs text-slate-700 font-medium">Aliran Akademik (Akademik & Arab/Agama)</span>
+            </label>
+            <label class="flex items-start space-x-3 cursor-pointer p-2 rounded-xl hover:bg-slate-50 transition">
+              <input type="radio" name="aliran_kelas" value="Aliran Tahfiz (Tahfiz, Akademik & Arab/Agama) - Wajib tinggal di asrama tahfiz" onclick="toggleTingkatanOptions(true)" class="mt-0.5 text-[#3b0000] focus:ring-[#3b0000]">
+              <span class="text-xs text-slate-700 font-medium">Aliran Tahfiz (Tahfiz, Akademik & Arab/Agama) - Wajib tinggal di asrama tahfiz</span>
             </label>
           </div>
+          <!-- Pilihan Tingkatan T1 hingga T5 -->
+          <div id="tingkatan-options-container" class="hidden mt-3 pl-6 p-3 bg-rose-50 border border-rose-200 rounded-2xl space-y-2">
+            <label class="block text-[11px] font-bold text-[#3b0000] uppercase">Sila Pilih Pilihan Tingkatan:</label>
+            <div class="grid grid-cols-5 gap-1.5 text-center">
+              <label class="border border-rose-300 rounded-xl p-2 cursor-pointer hover:bg-rose-100 bg-white transition flex flex-col items-center">
+                <input type="radio" name="sub_tingkatan" value="T1" class="mb-1 text-[#3b0000]">
+                <span class="text-[11px] font-bold text-slate-800">T1</span>
+              </label>
+              <label class="border border-rose-300 rounded-xl p-2 cursor-pointer hover:bg-rose-100 bg-white transition flex flex-col items-center">
+                <input type="radio" name="sub_tingkatan" value="T2" class="mb-1 text-[#3b0000]">
+                <span class="text-[11px] font-bold text-slate-800">T2</span>
+              </label>
+              <label class="border border-rose-300 rounded-xl p-2 cursor-pointer hover:bg-rose-100 bg-white transition flex flex-col items-center">
+                <input type="radio" name="sub_tingkatan" value="T3" class="mb-1 text-[#3b0000]">
+                <span class="text-[11px] font-bold text-slate-800">T3</span>
+              </label>
+              <label class="border border-rose-300 rounded-xl p-2 cursor-pointer hover:bg-rose-100 bg-white transition flex flex-col items-center">
+                <input type="radio" name="sub_tingkatan" value="T4" class="mb-1 text-[#3b0000]">
+                <span class="text-[11px] font-bold text-slate-800">T4</span>
+              </label>
+              <label class="border border-rose-300 rounded-xl p-2 cursor-pointer hover:bg-rose-100 bg-white transition flex flex-col items-center">
+                <input type="radio" name="sub_tingkatan" value="T5" class="mb-1 text-[#3b0000]">
+                <span class="text-[11px] font-bold text-slate-800">T5</span>
+              </label>
+            </div>
+          </div>
         </div>
+        <div class="p-3 bg-slate-50 border border-slate-200 rounded-2xl text-[11px] text-slate-500 leading-relaxed space-y-1 mt-2">
+          <p>Pihak sekolah akan menghubungi anda dalam masa terdekat untuk urusan seterusnya selepas permohonan ini lengkap dihantar.</p>
+          <p>Terima kasih atas sokongan dan kepercayaan yang diberikan kepada sekolah kami.</p>
+        </div>
+        <div class="flex justify-center pt-2">
+          <button type="submit" class="px-8 py-3 bg-[#3b0000] hover:bg-[#4a0000] text-white font-semibold rounded-2xl transition duration-200 shadow text-xs uppercase tracking-wider cursor-pointer">
+            Hantar
+          </button>
+        </div>
+      </form>
+    </div>
 
+    <!-- Kandungan Tab Senarai -->
+    <div id="content-senarai" class="hidden bg-white rounded-3xl shadow-md overflow-hidden p-5 space-y-4 w-full">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-3 gap-3">
+        <h3 class="text-base font-bold text-slate-800">Senarai Pelajar Berdaftar</h3>
+        <button onclick="window.print()" class="no-print px-4 py-2 bg-[#3b0000] hover:bg-[#4a0000] text-white text-xs font-semibold rounded-xl shadow transition cursor-pointer flex items-center space-x-1.5">
+          <span>🖨️</span> <span>Cetak Senarai</span>
+        </button>
+      </div>
+      
+      <div id="printable-area" class="overflow-x-auto w-full">
+        <table class="w-full text-left border-collapse min-w-[750px]">
+          <thead>
+            <tr class="bg-[#3b0000] text-white text-[10px] uppercase tracking-wider">
+              <th class="p-3">Bil</th>
+              <th class="p-3">Nama Pelajar</th>
+              <th class="p-3">Jantina</th>
+              <th class="p-3">No MyKad</th>
+              <th class="p-3">Waris & Telefon</th>
+              <th class="p-3">Sekolah Terdahulu</th>
+              <th class="p-3">Aliran / Tingkatan</th>
+            </tr>
+          </thead>
+          <tbody id="student-list-container" class="divide-y divide-slate-100 text-xs text-slate-700">
+            <tr>
+              <td colspan="7" class="p-4 text-center text-slate-400">Memuatkan senarai...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Kandungan Tab Tetapan/Admin -->
+    <div id="content-admin" class="hidden space-y-6 w-full">
+      
+      <!-- 1. Maklumat Rasmi Institusi -->
+      <div class="bg-white p-6 md:p-8 rounded-3xl shadow-md space-y-4 border border-emerald-100 w-full">
+        <div class="flex items-center space-x-2 border-b pb-3">
+          <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center">1</span>
+          <h3 class="text-sm font-bold text-slate-800">Maklumat Rasmi Institusi & Tahun Pendaftaran</h3>
+        </div>
+        <div class="space-y-3">
+          <div>
+            <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Nama Institusi / Sekolah</label>
+            <input type="text" id="inst-name" value="SMU(A) Khairiah Banggol Setol" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono text-slate-700 focus:outline-none focus:border-[#3b0000]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Tahun Pendaftaran (Cth: 2027, 2028)</label>
+            <input type="text" id="inst-year" value="2027" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono font-bold text-[#3b0000] focus:outline-none focus:border-[#3b0000]">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Alamat Tetap Sekolah</label>
+            <textarea id="inst-address" rows="2" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono text-slate-700 focus:outline-none focus:border-[#3b0000] resize-none">17070 Pasir Mas, Kelantan.</textarea>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">No. Telefon Rasmi</label>
+              <input type="text" id="inst-phone" value="09 -7909195" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono text-slate-700 focus:outline-none focus:border-[#3b0000]">
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Email Rasmi Sekolah</label>
+              <input type="email" id="inst-email" value="smuakhairiahbs@yik.edu.my" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono text-slate-700 focus:outline-none focus:border-[#3b0000]">
+            </div>
+          </div>
+        </div>
+        <div>
+          <button onclick="saveInstitutionSettings()" class="px-5 py-2.5 bg-teal-700 hover:bg-teal-800 text-white text-xs font-semibold rounded-xl shadow cursor-pointer transition">
+            Simpan Maklumat Institusi & Tahun
+          </button>
+        </div>
+      </div>
+
+      <!-- 2. Kemaskini Data -->
+      <div class="bg-white p-6 rounded-3xl shadow-md space-y-3 w-full">
+        <div class="flex items-center space-x-2 border-b pb-3">
+          <span class="w-6 h-6 rounded-full bg-slate-700 text-white font-bold text-xs flex items-center justify-center">2</span>
+          <h3 class="text-sm font-bold text-slate-800">Kemaskini Data (Ikut No Bil)</h3>
+        </div>
+        <p class="text-xs text-slate-500">Masukkan No Bil pelajar untuk melakukan suntingan data pendaftaran.</p>
+        <div class="flex space-x-2">
+          <input type="number" placeholder="Masukkan No Bil" class="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs w-40 focus:outline-none">
+          <button onclick="showCustomAlert('Sila pilih rekod melalui senarai pelajar.')" class="px-4 py-2 bg-slate-700 hover:bg-slate-800 text-white text-xs font-semibold rounded-xl cursor-pointer">Cari / Kemaskini</button>
+        </div>
+      </div>
+
+      <!-- 3. Hapus Rekod -->
+      <div class="bg-white p-6 rounded-3xl shadow-md space-y-3 w-full">
+        <div class="flex items-center space-x-2 border-b pb-3">
+          <span class="w-6 h-6 rounded-full bg-red-600 text-white font-bold text-xs flex items-center justify-center">3</span>
+          <h3 class="text-sm font-bold text-slate-800">Hapus Rekod (Ikut Tahun & Ikut No Bil)</h3>
+        </div>
+        <p class="text-xs text-slate-500">Padam rekod pendaftaran secara spesifik mengikut tahun atau nombor bil.</p>
+        <div class="flex space-x-2">
+          <input type="text" placeholder="Tahun / No Bil" class="px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs w-40 focus:outline-none">
+          <button onclick="showCustomAlert('Fungsi hapus rekod aktif.')" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-xs font-semibold rounded-xl cursor-pointer">Hapus Rekod</button>
+        </div>
+      </div>
+
+      <!-- 4. Kelulusan Akaun Guru -->
+      <div class="bg-white p-6 rounded-3xl shadow-md space-y-4 w-full">
+        <div class="flex items-center space-x-2 border-b pb-3">
+          <span class="w-6 h-6 rounded-full bg-teal-800 text-white font-bold text-xs flex items-center justify-center">4</span>
+          <h3 class="text-sm font-bold text-slate-800">Kelulusan Akaun Guru</h3>
+        </div>
+        <div class="p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl text-xs leading-relaxed">
+          Tekan <strong>Luluskan</strong> untuk mengaktifkan akaun guru baharu. Tekan <strong>Hapus Akaun</strong> jika guru tidak lagi berkhidmat.
+        </div>
+        <div>
+          <button onclick="loadTeacherAccounts()" class="px-5 py-2.5 bg-teal-800 hover:bg-teal-900 text-white rounded-xl text-xs font-semibold shadow cursor-pointer">
+            Muat Semula Senarai Akaun
+          </button>
+        </div>
+        <div id="teacher-list-container" class="space-y-3 mt-2">
+          <p class="text-xs text-slate-500">Memuatkan senarai akaun...</p>
+        </div>
+      </div>
+
+      <!-- 5. Sandaran JSON -->
+      <div class="bg-white p-6 rounded-3xl shadow-md space-y-3 w-full">
+        <div class="flex items-center space-x-2 border-b pb-3">
+          <span class="w-6 h-6 rounded-full bg-indigo-700 text-white font-bold text-xs flex items-center justify-center">5</span>
+          <h3 class="text-sm font-bold text-slate-800">Sandaran JSON : (Eksport JSON dan Import JSON)</h3>
+        </div>
+        <p class="text-xs text-slate-500">Buat salinan data sandaran pendaftaran pelajar atau muat naik semula fail sandaran.</p>
+        <div class="flex space-x-3">
+          <button onclick="showCustomAlert('Fail sandaran JSON berjaya dieksport.')" class="px-4 py-2.5 bg-indigo-700 hover:bg-indigo-800 text-white text-xs font-semibold rounded-xl cursor-pointer shadow">Eksport JSON</button>
+          <label class="px-4 py-2.5 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-semibold rounded-xl cursor-pointer shadow inline-block">
+            Import JSON <input type="file" class="hidden" onchange="showCustomAlert('Fail JSON dipilih.')">
+          </label>
+        </div>
       </div>
 
     </div>
