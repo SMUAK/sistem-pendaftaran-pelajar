@@ -19,8 +19,8 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 </head>
 <body class="min-h-screen flex flex-col justify-between pb-16">
 
-<!-- KAWASAN UTAMA -->
-<main class="w-full max-w-7xl mx-auto p-4 flex-grow">
+<!-- KAWASAN UTAMA (Skrin Penuh Penuh / Full Width) -->
+<main class="w-full px-4 md:px-8 py-6 flex-grow">
 
 <!-- 1. PAPARAN BORANG LOG MASUK (DIKEKALKAN SEPERTI ASAL) -->
 <div id="login-section" class="w-full max-w-md mx-auto bg-white rounded-3xl shadow-xl p-8 border border-slate-100 mt-10">
@@ -88,11 +88,11 @@ Daftar Akaun
 </div>
 </div>
 
-<!-- 3. PAPARAN UTAMA DASHBOARD -->
-<div id="dashboard-section" class="hidden w-full grid grid-cols-1 md:grid-cols-5 gap-6 items-start">
+<!-- 3. PAPARAN UTAMA DASHBOARD (Skrin Penuh dengan Sidebar Kiri Tersusun) -->
+<div id="dashboard-section" class="hidden w-full grid grid-cols-1 md:grid-cols-6 lg:grid-cols-5 gap-6 items-start">
   
   <!-- SIDEBAR KIRI -->
-  <div class="md:col-span-1 space-y-4">
+  <div class="md:col-span-2 lg:col-span-1 space-y-4">
     <div class="bg-[#3b0000] text-white p-5 rounded-3xl shadow-xl relative overflow-hidden">
       <div class="flex justify-between items-start">
         <div>
@@ -111,6 +111,7 @@ Daftar Akaun
       </div>
     </div>
 
+    <!-- Kotak Menu Sebaris / Menegak yang Kemas (Log Keluar Selari) -->
     <div class="bg-white p-3 rounded-3xl shadow-md flex md:flex-col gap-1.5 text-center justify-between md:justify-start">
       <button onclick="switchTab('home')" id="tab-home-btn" class="p-3 rounded-2xl bg-[#3b0000] text-white flex md:flex-row flex-col items-center justify-center md:justify-start md:space-x-3 transition shadow cursor-pointer w-full">
         <span class="text-base mb-0.5 md:mb-0">📊</span>
@@ -129,19 +130,18 @@ Daftar Akaun
         <span class="text-xs font-semibold">Tetapan</span>
       </button>
       <button onclick="handleLogout()" class="p-3 rounded-2xl hover:bg-slate-100 text-slate-600 flex md:flex-row flex-col items-center justify-center md:justify-start md:space-x-3 transition cursor-pointer w-full">
-        <div class="w-6 h-6 bg-red-600 rounded-lg flex items-center justify-center text-white text-xs mb-0.5 md:mb-0 shadow">↩</div>
+        <span class="text-base mb-0.5 md:mb-0">↩️</span>
         <span class="text-xs font-semibold">Log Keluar</span>
       </button>
     </div>
   </div>
 
-  <!-- KANDUNGAN UTAMA KANAN -->
-  <div class="md:col-span-4 space-y-4">
+  <!-- KANDUNGAN UTAMA KANAN (Skrin Penuh Penuh) -->
+  <div class="md:col-span-4 lg:col-span-4 space-y-4 w-full">
     
     <!-- Kandungan Tab Utama & Analisa -->
-    <div id="content-home" class="space-y-4">
-      <!-- Kad Statistik & Analisa Terperinci -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div id="content-home" class="space-y-4 w-full">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
         <div class="bg-white p-5 rounded-3xl shadow-md space-y-1 border-l-4 border-[#3b0000]">
           <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Jumlah Keseluruhan Pendaftaran</p>
           <h2 class="text-3xl font-extrabold text-slate-800" id="stat-total">0</h2>
@@ -170,7 +170,7 @@ Daftar Akaun
     </div>
 
     <!-- Kandungan Tab Borang -->
-    <div id="content-form" class="hidden bg-white p-6 md:p-8 rounded-3xl shadow-md space-y-4">
+    <div id="content-form" class="hidden bg-white p-6 md:p-8 rounded-3xl shadow-md space-y-4 w-full">
       <div class="border-b pb-3">
         <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wide">PENDAFTARAN PELAJAR BAHARU TINGKATAN SATU TAHUN 2027</h3>
       </div>
@@ -260,7 +260,7 @@ Daftar Akaun
     </div>
 
     <!-- Kandungan Tab Senarai -->
-    <div id="content-senarai" class="hidden bg-white rounded-3xl shadow-md overflow-hidden p-5 space-y-4">
+    <div id="content-senarai" class="hidden bg-white rounded-3xl shadow-md overflow-hidden p-5 space-y-4 w-full">
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-3 gap-3">
         <h3 class="text-base font-bold text-slate-800">Senarai Pelajar Berdaftar</h3>
         <button onclick="window.print()" class="no-print px-4 py-2 bg-[#3b0000] hover:bg-[#4a0000] text-white text-xs font-semibold rounded-xl shadow transition cursor-pointer flex items-center space-x-1.5">
@@ -268,7 +268,7 @@ Daftar Akaun
         </button>
       </div>
       
-      <div id="printable-area" class="overflow-x-auto">
+      <div id="printable-area" class="overflow-x-auto w-full">
         <table class="w-full text-left border-collapse min-w-[750px]">
           <thead>
             <tr class="bg-[#3b0000] text-white text-[10px] uppercase tracking-wider">
@@ -290,11 +290,11 @@ Daftar Akaun
       </div>
     </div>
 
-    <!-- Kandungan Tab Tetapan/Admin (Dikemaskini Mengikut Rujukan Gambar) -->
-    <div id="content-admin" class="hidden space-y-6">
+    <!-- Kandungan Tab Tetapan/Admin -->
+    <div id="content-admin" class="hidden space-y-6 w-full">
       
       <!-- 1. Maklumat Rasmi Institusi -->
-      <div class="bg-white p-6 md:p-8 rounded-3xl shadow-md space-y-4 border border-emerald-100">
+      <div class="bg-white p-6 md:p-8 rounded-3xl shadow-md space-y-4 border border-emerald-100 w-full">
         <div class="flex items-center space-x-2 border-b pb-3">
           <span class="w-6 h-6 rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center">1</span>
           <h3 class="text-sm font-bold text-slate-800">Maklumat Rasmi Institusi</h3>
@@ -327,7 +327,7 @@ Daftar Akaun
       </div>
 
       <!-- 2. Kemaskini Data -->
-      <div class="bg-white p-6 rounded-3xl shadow-md space-y-3">
+      <div class="bg-white p-6 rounded-3xl shadow-md space-y-3 w-full">
         <div class="flex items-center space-x-2 border-b pb-3">
           <span class="w-6 h-6 rounded-full bg-slate-700 text-white font-bold text-xs flex items-center justify-center">2</span>
           <h3 class="text-sm font-bold text-slate-800">Kemaskini Data (Ikut No Bil)</h3>
@@ -340,7 +340,7 @@ Daftar Akaun
       </div>
 
       <!-- 3. Hapus Rekod -->
-      <div class="bg-white p-6 rounded-3xl shadow-md space-y-3">
+      <div class="bg-white p-6 rounded-3xl shadow-md space-y-3 w-full">
         <div class="flex items-center space-x-2 border-b pb-3">
           <span class="w-6 h-6 rounded-full bg-red-600 text-white font-bold text-xs flex items-center justify-center">3</span>
           <h3 class="text-sm font-bold text-slate-800">Hapus Rekod (Ikut Tahun & Ikut No Bil)</h3>
@@ -353,10 +353,10 @@ Daftar Akaun
       </div>
 
       <!-- 4. Kelulusan Akaun Guru -->
-      <div class="bg-white p-6 rounded-3xl shadow-md space-y-4">
+      <div class="bg-white p-6 rounded-3xl shadow-md space-y-4 w-full">
         <div class="flex items-center space-x-2 border-b pb-3">
           <span class="w-6 h-6 rounded-full bg-teal-800 text-white font-bold text-xs flex items-center justify-center">4</span>
-          <h3 class="text-sm font-bold text-slate-800">Kelulusan Akaun Guru – Sudah ada</h3>
+          <h3 class="text-sm font-bold text-slate-800">Kelulusan Akaun Guru</h3>
         </div>
         <div class="p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl text-xs leading-relaxed">
           Tekan <strong>Luluskan</strong> untuk mengaktifkan akaun guru baharu. Tekan <strong>Hapus Akaun</strong> jika guru tidak lagi berkhidmat.
@@ -372,7 +372,7 @@ Daftar Akaun
       </div>
 
       <!-- 5. Sandaran JSON -->
-      <div class="bg-white p-6 rounded-3xl shadow-md space-y-3">
+      <div class="bg-white p-6 rounded-3xl shadow-md space-y-3 w-full">
         <div class="flex items-center space-x-2 border-b pb-3">
           <span class="w-6 h-6 rounded-full bg-indigo-700 text-white font-bold text-xs flex items-center justify-center">5</span>
           <h3 class="text-sm font-bold text-slate-800">Sandaran JSON : (Eksport JSON dan Import JSON)</h3>
@@ -393,7 +393,7 @@ Daftar Akaun
 
 </main>
 
-<footer class="text-center py-4 text-xs text-slate-400 border-t bg-white mt-auto">
+<footer class="text-center py-4 text-xs text-slate-400 border-t bg-white mt-auto w-full">
 © 2026 SMU(A) Khairiah Banggol Setol
 </footer>
 
