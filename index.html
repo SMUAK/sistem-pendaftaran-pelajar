@@ -101,7 +101,7 @@ Daftar Akaun
   
   <!-- SIDEBAR KIRI -->
   <div class="md:col-span-2 lg:col-span-1 space-y-4">
-    <!-- Header Kad (Ikon Log Keluar Kini Diletakkan di Bawah Loceng dalam Kotak Header) -->
+    <!-- Header Kad -->
     <div class="bg-[#3b0000] text-white p-5 rounded-3xl shadow-xl relative overflow-hidden space-y-3">
       <div class="flex justify-between items-start">
         <div>
@@ -122,7 +122,7 @@ Daftar Akaun
           <span id="current-date">Ahad, 1 November 2026</span>
         </div>
 
-        <!-- Ikon Log Keluar Dalam Kotak Header (Sebelah Kanan Bawah Loceng) -->
+        <!-- Ikon Log Keluar Dalam Kotak Header -->
         <button onclick="handleLogout()" title="Log Keluar" class="bg-red-600 hover:bg-red-700 p-2 rounded-xl border border-red-800 cursor-pointer transition flex items-center justify-center shadow-md">
           <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
@@ -131,7 +131,7 @@ Daftar Akaun
       </div>
     </div>
 
-    <!-- Menu Sidebar (Tanpa Butang Log Keluar Luar) -->
+    <!-- Menu Sidebar -->
     <div class="bg-white p-3 rounded-3xl shadow-md flex md:flex-col gap-1.5 text-center justify-between md:justify-start items-center md:items-stretch">
       <button onclick="switchTab('home')" id="tab-home-btn" class="p-3 rounded-2xl bg-[#3b0000] text-white flex md:flex-row flex-col items-center justify-center md:justify-start md:space-x-3 transition shadow cursor-pointer w-full">
         <span class="text-base mb-0.5 md:mb-0">📊</span>
@@ -505,18 +505,18 @@ r.checked = false;
 };
 
 window.switchTab = function(tab) {
-['home', 'form', 'senarai', 'admin'].forEach(t => {
-const el = document.getElementById(`content-${t}`);
-const btn = document.getElementById(`tab-${t}-btn`);
+['home', 'form', 'senarai', 'admin'].forEach(item => {
+const el = document.getElementById(`content-${item}`);
+const btn = document.getElementById(`tab-${item}-btn`);
 if(el) el.classList.add('hidden');
-if(btn && t !== 'admin') {
+if(btn && item !== 'admin') {
 btn.className = "p-3 rounded-2xl hover:bg-slate-100 text-slate-600 flex md:flex-row flex-col items-center justify-center md:justify-start md:space-x-3 transition cursor-pointer w-full";
 }
 });
 const activeEl = document.getElementById(`content-${tab}`);
 const activeBtn = document.getElementById(`tab-${tab}-btn`);
 if(activeEl) activeEl.classList.remove('hidden');
-if(activeBtn && t !== 'admin') {
+if(activeBtn && tab !== 'admin') {
 activeBtn.className = "p-3 rounded-2xl bg-[#3b0000] text-white flex md:flex-row flex-col items-center justify-center md:justify-start md:space-x-3 transition shadow cursor-pointer w-full";
 }
 if(tab === 'home') loadDashboardStats();
