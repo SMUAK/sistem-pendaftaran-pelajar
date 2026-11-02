@@ -945,10 +945,12 @@ if(data.tarikhDaftar) {
 }
 if(data.jantina === 'Lelaki') maleCount++;
 if(data.jantina === 'Perempuan') femaleCount++;
-if(data.tingkatan && data.tingkatan.toLowerCase().includes('akademik')) {
-  akademikCount++;
-} else if(data.tingkatan && data.tingkatan.toLowerCase().includes('tahfiz')) {
+
+// Semak Tahfiz terlebih dahulu kerana string Tahfiz turut mengandungi perkataan 'Akademik'
+if(data.tingkatan && data.tingkatan.toLowerCase().includes('tahfiz')) {
   tahfizCount++;
+} else if(data.tingkatan && data.tingkatan.toLowerCase().includes('akademik')) {
+  akademikCount++;
 }
 });
 document.getElementById('stat-total').innerText = total;
