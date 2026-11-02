@@ -12,8 +12,16 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 @media print {
   body * { visibility: hidden; }
   #printable-area, #printable-area * { visibility: visible; }
-  #printable-area { position: absolute; left: 0; top: 0; width: 100%; }
+  #printable-area { 
+    position: absolute; 
+    left: 0; 
+    top: 0; 
+    width: 100% !important; 
+    overflow: visible !important;
+  }
   .no-print { display: none !important; }
+  table { width: 100% !important; min-width: 100% !important; font-size: 11pt !important; }
+  th, td { padding: 8px !important; }
 }
 </style>
 </head>
@@ -93,25 +101,37 @@ Daftar Akaun
   
   <!-- SIDEBAR KIRI -->
   <div class="md:col-span-2 lg:col-span-1 space-y-4">
-    <div class="bg-[#3b0000] text-white p-5 rounded-3xl shadow-xl relative overflow-hidden">
+    <!-- Header Kad (Ikon Log Keluar Kini Diletakkan di Bawah Loceng dalam Kotak Header) -->
+    <div class="bg-[#3b0000] text-white p-5 rounded-3xl shadow-xl relative overflow-hidden space-y-3">
       <div class="flex justify-between items-start">
         <div>
           <h1 class="text-xs md:text-sm font-bold tracking-tight">SMU(A) KHAIRIAH</h1>
           <h2 class="text-xs md:text-sm font-bold tracking-tight">MUKIM BANGGOL SETOL</h2>
           <p class="text-[10px] text-rose-200 mt-0.5">Sistem Pendaftaran Pelajar</p>
         </div>
+        <!-- Ikon Loceng -->
         <div onclick="openNotificationModal()" class="relative bg-[#540000] p-2 rounded-xl border border-rose-950 cursor-pointer hover:bg-[#6b0000] transition">
           <span class="text-sm">🔔</span>
           <span id="bell-badge" class="absolute -top-1 -right-1 bg-red-600 text-white text-[9px] font-extrabold px-1.5 py-0.2 rounded-full shadow-md">0</span>
         </div>
       </div>
-      <div class="mt-2 inline-flex items-center space-x-1.5 bg-[#540000] px-2.5 py-1 rounded-xl border border-rose-950 text-[10px] text-rose-100">
-        <span>📅</span>
-        <span id="current-date">Ahad, 1 November 2026</span>
+
+      <div class="flex justify-between items-center pt-1">
+        <div class="inline-flex items-center space-x-1.5 bg-[#540000] px-2.5 py-1 rounded-xl border border-rose-950 text-[10px] text-rose-100">
+          <span>📅</span>
+          <span id="current-date">Ahad, 1 November 2026</span>
+        </div>
+
+        <!-- Ikon Log Keluar Dalam Kotak Header (Sebelah Kanan Bawah Loceng) -->
+        <button onclick="handleLogout()" title="Log Keluar" class="bg-red-600 hover:bg-red-700 p-2 rounded-xl border border-red-800 cursor-pointer transition flex items-center justify-center shadow-md">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+          </svg>
+        </button>
       </div>
     </div>
 
-    <!-- Menu Sidebar (Ikon Log Keluar Diselaraskan 100% Ikut Rujukan Gambar) -->
+    <!-- Menu Sidebar (Tanpa Butang Log Keluar Luar) -->
     <div class="bg-white p-3 rounded-3xl shadow-md flex md:flex-col gap-1.5 text-center justify-between md:justify-start items-center md:items-stretch">
       <button onclick="switchTab('home')" id="tab-home-btn" class="p-3 rounded-2xl bg-[#3b0000] text-white flex md:flex-row flex-col items-center justify-center md:justify-start md:space-x-3 transition shadow cursor-pointer w-full">
         <span class="text-base mb-0.5 md:mb-0">📊</span>
@@ -128,14 +148,6 @@ Daftar Akaun
       <button onclick="switchTab('admin')" id="tab-admin-btn" class="hidden p-3 rounded-2xl hover:bg-slate-100 text-slate-600 flex md:flex-row flex-col items-center justify-center md:justify-start md:space-x-3 transition cursor-pointer w-full">
         <span class="text-base mb-0.5 md:mb-0">⚙️</span>
         <span class="text-xs font-semibold">Tetapan</span>
-      </button>
-      <button onclick="handleLogout()" class="p-3 rounded-2xl hover:bg-slate-100 text-slate-600 flex md:flex-row flex-col items-center justify-center md:justify-start md:space-x-3 transition cursor-pointer w-full">
-        <div class="w-7 h-7 bg-red-600 rounded-full flex items-center justify-center text-white text-xs mb-0.5 md:mb-0 shadow-md">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
-          </svg>
-        </div>
-        <span class="text-xs font-semibold">Log Keluar</span>
       </button>
     </div>
   </div>
@@ -504,7 +516,7 @@ btn.className = "p-3 rounded-2xl hover:bg-slate-100 text-slate-600 flex md:flex-
 const activeEl = document.getElementById(`content-${tab}`);
 const activeBtn = document.getElementById(`tab-${tab}-btn`);
 if(activeEl) activeEl.classList.remove('hidden');
-if(activeBtn && tab !== 'admin') {
+if(activeBtn && t !== 'admin') {
 activeBtn.className = "p-3 rounded-2xl bg-[#3b0000] text-white flex md:flex-row flex-col items-center justify-center md:justify-start md:space-x-3 transition shadow cursor-pointer w-full";
 }
 if(tab === 'home') loadDashboardStats();
@@ -749,7 +761,7 @@ let i = 1;
 querySnapshot.forEach(docSnap => {
 const d = docSnap.data();
 const tr = document.createElement('tr');
-tr.className = "hover:bg-slate-50 transition whitespace-nowrap";
+tr.className = "hover:bg-slate-50 transition";
 tr.innerHTML = `
 <td class="p-3 font-semibold text-slate-500">${i++}</td>
 <td class="p-3 font-bold text-slate-800">${escapeHtml(d.nama)}</td>
