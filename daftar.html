@@ -181,7 +181,6 @@ window.savePublicStudentData = async function(e) {
     btn.innerText = "SEDANG MENGHANTAR...";
     btn.disabled = true;
     
-    // Simpan terus ke koleksi "pelajar" yang sama dalam Firestore
     await addDoc(collection(db, "pelajar"), studentData);
     
     alert('Alhamdulillah! Pendaftaran pelajar berjaya dihantar kepada pihak sekolah.');
