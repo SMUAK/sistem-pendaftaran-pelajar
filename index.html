@@ -19,10 +19,10 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 </head>
 <body class="min-h-screen flex flex-col justify-between pb-16">
 
-<!-- KAWASAN UTAMA (Skrin Penuh Penuh / Full Width) -->
+<!-- KAWASAN UTAMA (Skrin Penuh) -->
 <main class="w-full px-4 md:px-8 py-6 flex-grow">
 
-<!-- 1. PAPARAN BORANG LOG MASUK (DIKEKALKAN SEPERTI ASAL) -->
+<!-- 1. PAPARAN BORANG LOG MASUK -->
 <div id="login-section" class="w-full max-w-md mx-auto bg-white rounded-3xl shadow-xl p-8 border border-slate-100 mt-10">
 <div class="text-center mb-6">
 <h3 class="text-xl font-bold text-slate-800">Selamat Datang!</h3>
@@ -55,7 +55,7 @@ Log Masuk
 </div>
 </div>
 
-<!-- 2. PAPARAN PENDAFTARAN AKAUN GURU (DIKEKALKAN SEPERTI ASAL) -->
+<!-- 2. PAPARAN PENDAFTARAN AKAUN GURU -->
 <div id="register-section" class="hidden w-full max-w-md mx-auto bg-white rounded-3xl shadow-xl p-8 border border-slate-100 mt-10">
 <div class="text-center mb-6">
 <h3 class="text-xl font-bold text-slate-800">Pendaftaran Akaun Guru</h3>
@@ -88,7 +88,7 @@ Daftar Akaun
 </div>
 </div>
 
-<!-- 3. PAPARAN UTAMA DASHBOARD (Skrin Penuh dengan Sidebar Kiri Tersusun) -->
+<!-- 3. PAPARAN UTAMA DASHBOARD -->
 <div id="dashboard-section" class="hidden w-full grid grid-cols-1 md:grid-cols-6 lg:grid-cols-5 gap-6 items-start">
   
   <!-- SIDEBAR KIRI -->
@@ -111,8 +111,8 @@ Daftar Akaun
       </div>
     </div>
 
-    <!-- Kotak Menu Sebaris / Menegak yang Kemas (Log Keluar Selari) -->
-    <div class="bg-white p-3 rounded-3xl shadow-md flex md:flex-col gap-1.5 text-center justify-between md:justify-start">
+    <!-- Menu Sidebar (Ikon Log Keluar Diselaraskan 100% Ikut Rujukan Gambar) -->
+    <div class="bg-white p-3 rounded-3xl shadow-md flex md:flex-col gap-1.5 text-center justify-between md:justify-start items-center md:items-stretch">
       <button onclick="switchTab('home')" id="tab-home-btn" class="p-3 rounded-2xl bg-[#3b0000] text-white flex md:flex-row flex-col items-center justify-center md:justify-start md:space-x-3 transition shadow cursor-pointer w-full">
         <span class="text-base mb-0.5 md:mb-0">📊</span>
         <span class="text-xs font-semibold">Utama</span>
@@ -130,13 +130,17 @@ Daftar Akaun
         <span class="text-xs font-semibold">Tetapan</span>
       </button>
       <button onclick="handleLogout()" class="p-3 rounded-2xl hover:bg-slate-100 text-slate-600 flex md:flex-row flex-col items-center justify-center md:justify-start md:space-x-3 transition cursor-pointer w-full">
-        <span class="text-base mb-0.5 md:mb-0">↩️</span>
+        <div class="w-7 h-7 bg-red-600 rounded-full flex items-center justify-center text-white text-xs mb-0.5 md:mb-0 shadow-md">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+          </svg>
+        </div>
         <span class="text-xs font-semibold">Log Keluar</span>
       </button>
     </div>
   </div>
 
-  <!-- KANDUNGAN UTAMA KANAN (Skrin Penuh Penuh) -->
+  <!-- KANDUNGAN UTAMA KANAN -->
   <div class="md:col-span-4 lg:col-span-4 space-y-4 w-full">
     
     <!-- Kandungan Tab Utama & Analisa -->
