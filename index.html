@@ -431,6 +431,11 @@ Daftar Akaun
   </div>
 </div>
 
+<!-- TOAST AMARAN DOUBLE BACK -->
+<div id="exit-toast" class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-900/90 text-white px-4 py-2 rounded-full text-xs shadow-xl z-50 transition-opacity duration-300">
+Tekan sekali lagi untuk keluar
+</div>
+
 <!-- FIREBASE SDK & SKRIP LOGIK -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
@@ -456,13 +461,19 @@ const adminEmails = [
 "sitinurnabihah950822@gmail.com"
 ];
 
+let currentActiveTab = 'home';
+let lastBackPress = 0;
+
 window.toggleView = function(view) {
 document.getElementById('login-section').classList.add('hidden');
 document.getElementById('register-section').classList.add('hidden');
 document.getElementById('dashboard-section').classList.add('hidden');
 if (view === 'login') document.getElementById('login-section').classList.remove('hidden');
 if (view === 'register') document.getElementById('register-section').classList.remove('hidden');
-if (view === 'dashboard') document.getElementById('dashboard-section').classList.remove('hidden');
+if (view === 'dashboard') {
+  document.getElementById('dashboard-section').classList.remove('hidden');
+  history.pushState({tab: 'home'}, '', '');
+}
 };
 
 window.toggleEmailVisibility = function(inputId, btn) {
@@ -504,7 +515,11 @@ r.checked = false;
 }
 };
 
-window.switchTab = function(tab) {
+window.switchTab = function(tab, pushState = true) {
+currentActiveTab = tab;
+if(pushState) {
+  history.pushState({tab: tab}, '', '');
+}
 ['home', 'form', 'senarai', 'admin'].forEach(item => {
 const el = document.getElementById(`content-${item}`);
 const btn = document.getElementById(`tab-${item}-btn`);
@@ -523,6 +538,38 @@ if(tab === 'home') loadDashboardStats();
 if(tab === 'senarai') loadStudentList();
 if(tab === 'admin') loadTeacherAccounts();
 };
+
+// Pengurusan Butang Back Telefon (Double Back to Exit / Menu Utama)
+window.addEventListener('popstate', (e) => {
+const dashboardSection = document.getElementById('dashboard-section');
+if (!dashboardSection.classList.contains('hidden')) {
+  if (currentActiveTab !== 'home') {
+    // Back kali pertama dari sub-menu: Pulang ke menu Utama dahulu
+    switchTab('home', false);
+    history.pushState({tab: 'home'}, '', '');
+    lastBackPress = 0;
+  } else {
+    // Berada di menu Utama: Semak masa tekan back kali kedua
+    const now = new Date().getTime();
+    if (now - lastBackPress < 2000) {
+      // Keluar dari skrin / sejarah web
+      window.history.go(-1);
+    } else {
+      lastBackPress = now;
+      showExitToast();
+      history.pushState({tab: 'home'}, '', '');
+    }
+  }
+}
+});
+
+function showExitToast() {
+const toast = document.getElementById('exit-toast');
+toast.classList.remove('hidden');
+setTimeout(() => {
+  toast.classList.add('hidden');
+}, 2000);
+}
 
 window.handleLogin = async function(e) {
 e.preventDefault();
