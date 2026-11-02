@@ -26,9 +26,9 @@ body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-
 </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between pb-16">
-
-<!-- 1. PAPARAN BORANG LOG MASUK -->
+<!-- KAWASAN UTAMA (Skrin Penuh) -->
 <main class="w-full px-4 md:px-8 py-6 flex-grow">
+<!-- 1. PAPARAN BORANG LOG MASUK -->
 <div id="login-section" class="w-full max-w-md mx-auto bg-white rounded-3xl shadow-xl p-8 border border-slate-100 mt-10">
 <div class="text-center mb-6">
 <h3 class="text-xl font-bold text-slate-800">Selamat Datang!</h3>
@@ -60,7 +60,6 @@ Log Masuk
 <a href="#" onclick="toggleView('register')" class="block text-[#3b0000] font-bold hover:underline">Daftar Akaun Guru Baharu</a>
 </div>
 </div>
-
 <!-- 2. PAPARAN PENDAFTARAN AKAUN GURU -->
 <div id="register-section" class="hidden w-full max-w-md mx-auto bg-white rounded-3xl shadow-xl p-8 border border-slate-100 mt-10">
 <div class="text-center mb-6">
@@ -93,18 +92,17 @@ Daftar Akaun
 <a href="#" onclick="toggleView('login')" class="text-[#3b0000] font-bold hover:underline">Kembali ke Log Masuk</a>
 </div>
 </div>
-
 <!-- 3. PAPARAN UTAMA DASHBOARD -->
 <div id="dashboard-section" class="hidden w-full grid grid-cols-1 md:grid-cols-6 lg:grid-cols-5 gap-6 items-start">
   
-  <!-- SIDEBAR KIRI (KEMBALI TERSUSUN SEPERTI ASAL) -->
+  <!-- SIDEBAR KIRI -->
   <div class="md:col-span-2 lg:col-span-1 space-y-4">
     <!-- Header Kad -->
     <div class="bg-[#3b0000] text-white p-5 rounded-3xl shadow-xl relative overflow-hidden space-y-3">
       <div class="flex justify-between items-start">
         <div>
           <h1 class="text-xs md:text-sm font-bold tracking-tight">SMU(A) KHAIRIAH</h1>
-          <h2 class="text-xs md:text-sm font-bold tracking-tight">BANGGOL SETOL</h2>
+          <h2 class="text-xs md:text-sm font-bold tracking-tight">MUKIM BANGGOL SETOL</h2>
           <p class="text-[10px] text-rose-200 mt-0.5">Sistem Pendaftaran Pelajar</p>
         </div>
         <!-- Ikon Loceng -->
@@ -146,7 +144,6 @@ Daftar Akaun
       </button>
     </div>
   </div>
-
   <!-- KANDUNGAN UTAMA KANAN -->
   <div class="md:col-span-4 lg:col-span-4 space-y-4 w-full">
     
@@ -179,7 +176,6 @@ Daftar Akaun
         </div>
       </div>
     </div>
-
     <!-- Kandungan Tab Borang -->
     <div id="content-form" class="hidden bg-white p-6 md:p-8 rounded-3xl shadow-md space-y-4 w-full">
       <div class="border-b pb-3">
@@ -265,7 +261,6 @@ Daftar Akaun
         </div>
       </form>
     </div>
-
     <!-- Kandungan Tab Senarai -->
     <div id="content-senarai" class="hidden bg-white rounded-3xl shadow-md overflow-hidden p-5 space-y-4 w-full">
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b pb-3 gap-3">
@@ -296,7 +291,6 @@ Daftar Akaun
         </table>
       </div>
     </div>
-
     <!-- Kandungan Tab Tetapan/Admin -->
     <div id="content-admin" class="hidden space-y-6 w-full">
       
@@ -336,7 +330,6 @@ Daftar Akaun
           </button>
         </div>
       </div>
-
       <!-- 2. Kemaskini Data -->
       <div class="bg-white p-6 rounded-3xl shadow-md space-y-3 w-full">
         <div class="flex items-center space-x-2 border-b pb-3">
@@ -349,7 +342,6 @@ Daftar Akaun
           <button onclick="showCustomAlert('Sila pilih rekod melalui senarai pelajar.')" class="px-4 py-2 bg-slate-700 hover:bg-slate-800 text-white text-xs font-semibold rounded-xl cursor-pointer">Cari / Kemaskini</button>
         </div>
       </div>
-
       <!-- 3. Hapus Rekod -->
       <div class="bg-white p-6 rounded-3xl shadow-md space-y-3 w-full">
         <div class="flex items-center space-x-2 border-b pb-3">
@@ -362,7 +354,6 @@ Daftar Akaun
           <button onclick="showCustomAlert('Fungsi hapus rekod aktif.')" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-xs font-semibold rounded-xl cursor-pointer">Hapus Rekod</button>
         </div>
       </div>
-
       <!-- 4. Kelulusan Akaun Guru -->
       <div class="bg-white p-6 rounded-3xl shadow-md space-y-4 w-full">
         <div class="flex items-center space-x-2 border-b pb-3">
@@ -381,7 +372,6 @@ Daftar Akaun
           <p class="text-xs text-slate-500">Memuatkan senarai akaun...</p>
         </div>
       </div>
-
       <!-- 5. Sandaran JSON -->
       <div class="bg-white p-6 rounded-3xl shadow-md space-y-3 w-full">
         <div class="flex items-center space-x-2 border-b pb-3">
@@ -396,14 +386,10 @@ Daftar Akaun
           </label>
         </div>
       </div>
-
     </div>
-
   </div>
-
 </div>
 </main>
-
 <footer class="text-center py-4 text-xs text-slate-400 border-t bg-white mt-auto w-full">
 © 2026 SMU(A) Khairiah Banggol Setol
 </footer>
@@ -443,18 +429,15 @@ Daftar Akaun
     </div>
   </div>
 </div>
-
 <!-- TOAST AMARAN DOUBLE BACK -->
 <div id="exit-toast" class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-900/90 text-white px-4 py-2 rounded-full text-xs shadow-xl z-50 transition-opacity duration-300">
 Tekan sekali lagi untuk keluar
 </div>
-
 <!-- FIREBASE SDK & SKRIP LOGIK -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, setDoc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
 const firebaseConfig = {
 apiKey: "AIzaSyBfWyq2ADAtOdbaeHh7nRhB3dM4LjKDFdw",
 authDomain: "sistem-pendaftaran-pelaj-6d6b4.firebaseapp.com",
@@ -463,20 +446,18 @@ storageBucket: "sistem-pendaftaran-pelaj-6d6b4.firebasestorage.app",
 messagingSenderId: "611930781573",
 appId: "1:611930781573:web:6b6f458c7291f9936876ec"
 };
-
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-
 const adminEmails = [
 "smuakhairiahbs@yik.edu.my",
 "asrimohdzain@gmail.com",
 "sitinurnabihah950822@gmail.com"
 ];
-
 let currentActiveTab = 'home';
 let lastBackPress = 0;
 
+// Fungsi Kotak Makluman Dalaman (Custom Alert)
 window.showCustomAlert = function(msg) {
   document.getElementById('custom-alert-message').innerText = msg;
   document.getElementById('custom-alert-modal').classList.remove('hidden');
@@ -486,6 +467,7 @@ window.closeCustomAlert = function() {
   document.getElementById('custom-alert-modal').classList.add('hidden');
 };
 
+// Fungsi muat turun Tetapan Sekolah / Tahun dari Firestore
 window.loadSettings = async function() {
   try {
     const docRef = doc(db, "tetapan", "sekolah");
@@ -524,422 +506,403 @@ window.saveInstitutionSettings = async function() {
 };
 
 window.toggleView = function(view) {
-  document.getElementById('login-section').classList.add('hidden');
-  document.getElementById('register-section').classList.add('hidden');
-  document.getElementById('dashboard-section').classList.add('hidden');
-  if (view === 'login') document.getElementById('login-section').classList.remove('hidden');
-  if (view === 'register') document.getElementById('register-section').classList.remove('hidden');
-  if (view === 'dashboard') {
-    document.getElementById('dashboard-section').classList.remove('hidden');
-    history.pushState({tab: 'home'}, '', '');
-  }
+document.getElementById('login-section').classList.add('hidden');
+document.getElementById('register-section').classList.add('hidden');
+document.getElementById('dashboard-section').classList.add('hidden');
+if (view === 'login') document.getElementById('login-section').classList.remove('hidden');
+if (view === 'register') document.getElementById('register-section').classList.remove('hidden');
+if (view === 'dashboard') {
+  document.getElementById('dashboard-section').classList.remove('hidden');
+  history.pushState({tab: 'home'}, '', '');
+}
 };
-
 window.toggleEmailVisibility = function(inputId, btn) {
-  const input = document.getElementById(inputId);
-  if (!input) return;
-  if (input.classList.contains('masked-text')) {
-    input.classList.remove('masked-text');
-    btn.innerText = '🔒';
-  } else {
-    input.classList.add('masked-text');
-    btn.innerText = '👁️';
-  }
+const input = document.getElementById(inputId);
+if (!input) return;
+if (input.classList.contains('masked-text')) {
+input.classList.remove('masked-text');
+btn.innerText = '🔒';
+} else {
+input.classList.add('masked-text');
+btn.innerText = '👁️';
+}
 };
-
 window.togglePasswordVisibility = function(inputId, btn) {
-  const input = document.getElementById(inputId);
-  if (!input) return;
-  if (input.type === 'password') {
-    input.type = 'text';
-    btn.innerText = '🔒';
-  } else {
-    input.type = 'password';
-    btn.innerText = '👁️';
-  }
+const input = document.getElementById(inputId);
+if (!input) return;
+if (input.type === 'password') {
+input.type = 'text';
+btn.innerText = '🔒';
+} else {
+input.type = 'password';
+btn.innerText = '👁️';
+}
 };
-
 window.toggleTingkatanOptions = function(show) {
-  const container = document.getElementById('tingkatan-options-container');
-  const subRadios = container.querySelectorAll('input[name="sub_tingkatan"]');
-  if (show) {
-    container.classList.remove('hidden');
-    subRadios.forEach(r => r.required = true);
-  } else {
-    container.classList.add('hidden');
-    subRadios.forEach(r => {
-      r.required = false;
-      r.checked = false;
-    });
-  }
-};
-
-window.switchTab = function(tab, pushState = true) {
-  currentActiveTab = tab;
-  if(pushState) {
-    history.pushState({tab: tab}, '', '');
-  }
-  ['home', 'form', 'senarai', 'admin'].forEach(item => {
-    const el = document.getElementById(`content-${item}`);
-    const btn = document.getElementById(`tab-${item}-btn`);
-    if(el) el.classList.add('hidden');
-    if(btn && item !== 'admin') {
-      btn.className = "p-3 rounded-2xl hover:bg-slate-100 text-slate-600 flex md:flex-row flex-col items-center justify-center md:justify-start md:space-x-3 transition cursor-pointer w-full";
-    }
-  });
-  const activeEl = document.getElementById(`content-${tab}`);
-  const activeBtn = document.getElementById(`tab-${tab}-btn`);
-  if(activeEl) activeEl.classList.remove('hidden');
-  if(activeBtn && tab !== 'admin') {
-    activeBtn.className = "p-3 rounded-2xl bg-[#3b0000] text-white flex md:flex-row flex-col items-center justify-center md:justify-start md:space-x-3 transition shadow cursor-pointer w-full";
-  }
-  if(tab === 'home') loadDashboardStats();
-  if(tab === 'senarai') loadStudentList();
-  if(tab === 'admin') loadTeacherAccounts();
-};
-
-window.addEventListener('popstate', (e) => {
-  const dashboardSection = document.getElementById('dashboard-section');
-  if (!dashboardSection.classList.contains('hidden')) {
-    if (currentActiveTab !== 'home') {
-      switchTab('home', false);
-      history.pushState({tab: 'home'}, '', '');
-      lastBackPress = 0;
-    } else {
-      const now = new Date().getTime();
-      if (now - lastBackPress < 2000) {
-        window.history.go(-1);
-      } else {
-        lastBackPress = now;
-        showExitToast();
-        history.pushState({tab: 'home'}, '', '');
-      }
-    }
-  }
+const container = document.getElementById('tingkatan-options-container');
+const subRadios = container.querySelectorAll('input[name="sub_tingkatan"]');
+if (show) {
+container.classList.remove('hidden');
+subRadios.forEach(r => r.required = true);
+} else {
+container.classList.add('hidden');
+subRadios.forEach(r => {
+r.required = false;
+r.checked = false;
 });
-
-function showExitToast() {
-  const toast = document.getElementById('exit-toast');
-  toast.classList.remove('hidden');
-  setTimeout(() => {
-    toast.classList.add('hidden');
-  }, 2000);
 }
-
-window.handleLogin = async function(e) {
-  e.preventDefault();
-  const email = document.getElementById('login-email').value.trim().toLowerCase();
-  const password = document.getElementById('login-password').value;
-  const btn = document.getElementById('login-btn');
-  try {
-    btn.innerText = "SEDANG LOG MASUK...";
-    btn.disabled = true;
-    const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    const user = userCredential.user;
-    if (adminEmails.includes(email)) return;
-    const docRef = doc(db, "guru", user.uid);
-    const docSnap = await getDoc(docRef);
-    if (docSnap.exists()) {
-      const data = docSnap.data();
-      if (data.status !== 'aktif') {
-        await signOut(auth);
-        showCustomAlert('Akaun anda masih menunggu kelulusan pentadbir.');
-        toggleView('login');
-      }
-    } else {
-      await setDoc(docRef, { email: email, status: 'menunggu', tarikhDaftar: new Date().toISOString() });
-      await signOut(auth);
-      showCustomAlert('Akaun anda berjaya didaftarkan dan sedang menunggu kelulusan pentadbir.');
-      toggleView('login');
-    }
-  } catch (error) {
-    showCustomAlert('Gagal log masuk: ' + error.message);
-  } finally {
-    btn.innerText = "Log Masuk";
-    btn.disabled = false;
-  }
 };
-
-window.handleRegister = async function(e) {
-  e.preventDefault();
-  const name = document.getElementById('reg-name').value;
-  const email = document.getElementById('reg-email').value.trim().toLowerCase();
-  const password = document.getElementById('reg-password').value;
-  const btn = document.getElementById('reg-btn');
-  try {
-    btn.innerText = "MENDAFTAR...";
-    btn.disabled = true;
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    await setDoc(doc(db, "guru", userCredential.user.uid), {
-      nama: name,
-      email: email,
-      status: "menunggu",
-      tarikhDaftar: new Date().toISOString()
-    });
-    await signOut(auth);
-    showCustomAlert('Pendaftaran berjaya dihantar! Akaun anda sedang menunggu kelulusan pentadbir.');
-    toggleView('login');
-    document.getElementById('register-form').reset();
-  } catch (error) {
-    showCustomAlert('Gagal daftar akaun: ' + error.message);
-  } finally {
-    btn.innerText = "Daftar Akaun";
-    btn.disabled = false;
-  }
-};
-
-window.handleForgotPassword = async function(e) {
-  e.preventDefault();
-  const email = document.getElementById('login-email').value.trim().toLowerCase();
-  if (!email) {
-    showCustomAlert('Sila masukkan alamat e-mel anda pada ruangan e-mel di atas terlebih dahulu.');
-    return;
-  }
-  try {
-    await sendPasswordResetEmail(auth, email);
-    showCustomAlert('Pautan tetapan semula kata laluan telah dihantar ke e-mel: ' + email);
-  } catch (error) {
-    showCustomAlert('Ralat: ' + error.message);
-  }
-};
-
-window.handleLogout = async function() {
-  await signOut(auth);
-  toggleView('login');
-};
-
-window.saveStudentData = async function(e) {
-  e.preventDefault();
-  const aliranSelected = document.querySelector('input[name="aliran_kelas"]:checked');
-  let tingkatanValue = aliranSelected ? aliranSelected.value : '';
-  const subTingkatanSelected = document.querySelector('input[name="sub_tingkatan"]:checked');
-  if (subTingkatanSelected && !document.getElementById('tingkatan-options-container').classList.contains('hidden')) {
-    tingkatanValue += ` (${subTingkatanSelected.value})`;
-  }
-  const studentData = {
-    nama: document.getElementById('student-name').value,
-    noMyKad: document.getElementById('student-ic').value,
-    jantina: document.getElementById('student-gender').value,
-    namaWarisibuBapa: document.getElementById('guardian-name').value,
-    telefonWaris: document.getElementById('guardian-phone').value,
-    sekolahTerdahulu: document.getElementById('student-prev-school').value,
-    tingkatan: tingkatanValue,
-    tarikhDaftar: new Date().toISOString()
-  };
-  try {
-    await addDoc(collection(db, "pelajar"), studentData);
-    showCustomAlert('Pendaftaran pelajar berjaya dihantar!');
-    document.getElementById('student-form').reset();
-    document.getElementById('tingkatan-options-container').classList.add('hidden');
-    switchTab('home');
-    loadDashboardStats();
-  } catch (error) {
-    showCustomAlert('Ralat menghantar data: ' + error.message);
-  }
-};
-
-window.loadDashboardStats = async function() {
-  try {
-    const querySnapshot = await getDocs(collection(db, "pelajar"));
-    let total = querySnapshot.size;
-    let countYear = 0;
-    let maleCount = 0;
-    let femaleCount = 0;
-    let akademikCount = 0;
-    let tahfizCount = 0;
-    let recentCount = 0;
-    const now = new Date();
-
-    const currentYearStr = document.getElementById('display-year-stat').innerText;
-
-    querySnapshot.forEach(docSnap => {
-      const data = docSnap.data();
-      if(data.tarikhDaftar) {
-        if(data.tarikhDaftar.startsWith(currentYearStr)) {
-          countYear++;
-        }
-        const regDate = new Date(data.tarikhDaftar);
-        const diffTime = now - regDate;
-        const diffDays = diffTime / (1000 * 60 * 60 * 24);
-        if(diffDays <= 3) {
-          recentCount++;
-        }
-      }
-      if(data.jantina === 'Lelaki') maleCount++;
-      if(data.jantina === 'Perempuan') femaleCount++;
-      if(data.tingkatan && data.tingkatan.toLowerCase().includes('akademik')) {
-        akademikCount++;
-      } else if(data.tingkatan && data.tingkatan.toLowerCase().includes('tahfiz')) {
-        tahfizCount++;
-      }
-    });
-    document.getElementById('stat-total').innerText = total;
-    document.getElementById('stat-male').innerText = maleCount;
-    document.getElementById('stat-female').innerText = femaleCount;
-    document.getElementById('stat-akademik').innerText = akademikCount;
-    document.getElementById('stat-tahfiz').innerText = tahfizCount;
-    document.getElementById('stat-year').innerText = countYear;
-    const bellBadge = document.getElementById('bell-badge');
-    if(recentCount > 0) {
-      bellBadge.innerText = recentCount;
-      bellBadge.style.display = 'inline-block';
-    } else {
-      bellBadge.innerText = '0';
-      bellBadge.style.display = 'none';
-    }
-  } catch(e) { console.log(e); }
-};
-
-window.openNotificationModal = async function() {
-  const modal = document.getElementById('notification-modal');
-  const container = document.getElementById('notification-list-content');
-  modal.classList.remove('hidden');
-  container.innerHTML = '<p class="text-xs text-slate-500 text-center">Memuatkan data terkini...</p>';
-  try {
-    const querySnapshot = await getDocs(collection(db, "pelajar"));
-    container.innerHTML = '';
-    let records = [];
-    const now = new Date();
-    querySnapshot.forEach(docSnap => {
-      const d = docSnap.data();
-      if(d.tarikhDaftar) {
-        const regDate = new Date(d.tarikhDaftar);
-        const diffDays = (now - regDate) / (1000 * 60 * 60 * 24);
-        if(diffDays <= 3) {
-          records.push(d);
-        }
-      }
-    });
-    if(records.length === 0) {
-      container.innerHTML = '<p class="text-xs text-slate-400 text-center">Tiada pendaftaran baharu dalam masa 3 hari terkini.</p>';
-      return;
-    }
-    records.reverse();
-    records.forEach((d, index) => {
-      const item = document.createElement('div');
-      item.className = "p-3 bg-slate-50 border border-slate-200 rounded-2xl text-xs space-y-1";
-      item.innerHTML = `
-      <div class="font-bold text-[#3b0000]">${index + 1}. ${escapeHtml(d.nama)}</div>
-      <div class="text-slate-600">MyKad: ${escapeHtml(d.noMyKad)} | Jantina: ${escapeHtml(d.jantina)}</div>
-      <div class="text-slate-600">Aliran: ${escapeHtml(d.tingkatan)}</div>
-      <div class="text-[10px] text-slate-400">Waris: ${escapeHtml(d.namaWarisibuBapa)} (${escapeHtml(d.telefonWaris)})</div>
-      `;
-      container.appendChild(item);
-    });
-  } catch(e) {
-    container.innerHTML = '<p class="text-xs text-red-500 text-center">Ralat memuatkan data.</p>';
-  }
-};
-
-window.closeNotificationModal = function() {
-  document.getElementById('notification-modal').classList.add('hidden');
-};
-
-window.loadStudentList = async function() {
-  const container = document.getElementById('student-list-container');
-  container.innerHTML = '<tr><td colspan="7" class="p-4 text-center text-slate-400">Memuatkan senarai...</td></tr>';
-  try {
-    const querySnapshot = await getDocs(collection(db, "pelajar"));
-    container.innerHTML = '';
-    if(querySnapshot.empty) {
-      container.innerHTML = '<tr><td colspan="7" class="p-4 text-center text-slate-400">Tiada rekod pelajar.</td></tr>';
-      return;
-    }
-    let i = 1;
-    querySnapshot.forEach(docSnap => {
-      const d = docSnap.data();
-      const tr = document.createElement('tr');
-      tr.className = "hover:bg-slate-50 transition";
-      tr.innerHTML = `
-      <td class="p-3 font-semibold text-slate-500">${i++}</td>
-      <td class="p-3 font-bold text-slate-800">${escapeHtml(d.nama)}</td>
-      <td class="p-3 text-slate-600">${escapeHtml(d.jantina)}</td>
-      <td class="p-3 text-slate-600">${escapeHtml(d.noMyKad)}</td>
-      <td class="p-3 text-slate-600">${escapeHtml(d.namaWarisibuBapa)}<br><span class="text-[10px] text-slate-400">${escapeHtml(d.telefonWaris)}</span></td>
-      <td class="p-3 text-slate-600">${escapeHtml(d.sekolahTerdahulu)}</td>
-      <td class="p-3 text-slate-600">${escapeHtml(d.tingkatan)}</td>
-      `;
-      container.appendChild(tr);
-    });
-  } catch(e) {
-    container.innerHTML = '<tr><td colspan="7" class="p-4 text-center text-red-500">Ralat memuatkan senarai.</td></tr>';
-  }
-};
-
-function escapeHtml(str) {
-  return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+window.switchTab = function(tab, pushState = true) {
+currentActiveTab = tab;
+if(pushState) {
+  history.pushState({tab: tab}, '', '');
 }
-
-window.loadTeacherAccounts = async function() {
-  const container = document.getElementById('teacher-list-container');
-  container.innerHTML = '<p class="text-xs text-slate-500">Memuatkan senarai akaun...</p>';
-  try {
-    const querySnapshot = await getDocs(collection(db, "guru"));
-    container.innerHTML = '';
-    if(querySnapshot.empty) {
-      container.innerHTML = '<p class="text-xs text-slate-500">Tiada akaun guru.</p>';
-      return;
-    }
-    querySnapshot.forEach(docSnap => {
-      const data = docSnap.data();
-      const teacherId = docSnap.id;
-      const isAktif = data.status === 'aktif';
-      const card = document.createElement('div');
-      card.className = "bg-slate-50 p-3 rounded-2xl border border-slate-200 text-xs space-y-2";
-      card.innerHTML = `
-      <div class="font-bold text-slate-800">${escapeHtml(data.email)}</div>
-      <div class="text-slate-500">Status: <span class="${isAktif ? 'text-emerald-600' : 'text-amber-600'} font-semibold">${data.status || 'menunggu'}</span></div>
-      <div class="flex space-x-2 pt-1">
-      ${!isAktif ? `<button onclick="approveTeacher('${teacherId}')" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-[10px] font-semibold cursor-pointer">Luluskan</button>` : ''}
-      <button onclick="deleteTeacher('${teacherId}')" class="px-2.5 py-1 bg-red-600 hover:bg-red-700 text-white rounded-lg text-[10px] font-semibold cursor-pointer">Hapus Akaun</button>
-      </div>
-      `;
-      container.appendChild(card);
-    });
-  } catch(e) { container.innerHTML = '<p class="text-xs text-red-500">Ralat memuatkan akaun.</p>'; }
+['home', 'form', 'senarai', 'admin'].forEach(item => {
+const el = document.getElementById(`content-${item}`);
+const btn = document.getElementById(`tab-${item}-btn`);
+if(el) el.classList.add('hidden');
+if(btn && item !== 'admin') {
+btn.className = "p-3 rounded-2xl hover:bg-slate-100 text-slate-600 flex md:flex-row flex-col items-center justify-center md:justify-start md:space-x-3 transition cursor-pointer w-full";
+}
+});
+const activeEl = document.getElementById(`content-${tab}`);
+const activeBtn = document.getElementById(`tab-${tab}-btn`);
+if(activeEl) activeEl.classList.remove('hidden');
+if(activeBtn && tab !== 'admin') {
+activeBtn.className = "p-3 rounded-2xl bg-[#3b0000] text-white flex md:flex-row flex-col items-center justify-center md:justify-start md:space-x-3 transition shadow cursor-pointer w-full";
+}
+if(tab === 'home') loadDashboardStats();
+if(tab === 'senarai') loadStudentList();
+if(tab === 'admin') loadTeacherAccounts();
 };
-
-window.approveTeacher = async function(id) {
-  try {
-    await updateDoc(doc(db, "guru", id), { status: "aktif" });
-    showCustomAlert("Akaun guru berjaya diluluskan!");
-    loadTeacherAccounts();
-  } catch(e) { showCustomAlert("Ralat meluluskan akaun: " + e.message); }
-};
-
-window.deleteTeacher = async function(id) {
-  if(confirm("Hapus akaun ini?")) {
-    try {
-      await deleteDoc(doc(db, "guru", id));
-      showCustomAlert("Akaun dipadam.");
-      loadTeacherAccounts();
-    } catch(e) { showCustomAlert("Ralat."); }
-  }
-};
-
-onAuthStateChanged(auth, async (user) => {
-  if (user) {
-    const email = user.email.toLowerCase();
-    if (!adminEmails.includes(email)) {
-      const docSnap = await getDoc(doc(db, "guru", user.uid));
-      if (docSnap.exists() && docSnap.data().status !== 'aktif') {
-        await signOut(auth);
-        toggleView('login');
-        return;
-      }
-    }
-    await loadSettings();
-    toggleView('dashboard');
-    loadDashboardStats();
-    const adminBtn = document.getElementById('tab-admin-btn');
-    if (adminEmails.includes(email)) {
-      adminBtn.classList.remove('hidden');
-    } else {
-      adminBtn.classList.add('hidden');
-    }
+// Pengurusan Butang Back Telefon (Double Back to Exit / Menu Utama)
+window.addEventListener('popstate', (e) => {
+const dashboardSection = document.getElementById('dashboard-section');
+if (!dashboardSection.classList.contains('hidden')) {
+  if (currentActiveTab !== 'home') {
+    switchTab('home', false);
+    history.pushState({tab: 'home'}, '', '');
+    lastBackPress = 0;
   } else {
-    toggleView('login');
+    const now = new Date().getTime();
+    if (now - lastBackPress < 2000) {
+      window.history.go(-1);
+    } else {
+      lastBackPress = now;
+      showExitToast();
+      history.pushState({tab: 'home'}, '', '');
+    }
   }
+}
+});
+function showExitToast() {
+const toast = document.getElementById('exit-toast');
+toast.classList.remove('hidden');
+setTimeout(() => {
+  toast.classList.add('hidden');
+}, 2000);
+}
+window.handleLogin = async function(e) {
+e.preventDefault();
+const email = document.getElementById('login-email').value.trim().toLowerCase();
+const password = document.getElementById('login-password').value;
+const btn = document.getElementById('login-btn');
+try {
+btn.innerText = "SEDANG LOG MASUK...";
+btn.disabled = true;
+const userCredential = await signInWithEmailAndPassword(auth, email, password);
+const user = userCredential.user;
+if (adminEmails.includes(email)) return;
+const docRef = doc(db, "guru", user.uid);
+const docSnap = await getDoc(docRef);
+if (docSnap.exists()) {
+const data = docSnap.data();
+if (data.status !== 'aktif') {
+await signOut(auth);
+showCustomAlert('Akaun anda masih menunggu kelulusan pentadbir.');
+toggleView('login');
+}
+} else {
+await setDoc(docRef, { email: email, status: 'menunggu', tarikhDaftar: new Date().toISOString() });
+await signOut(auth);
+showCustomAlert('Akaun anda berjaya didaftarkan dan sedang menunggu kelulusan pentadbir.');
+toggleView('login');
+}
+} catch (error) {
+showCustomAlert('Gagal log masuk: ' + error.message);
+} finally {
+btn.innerText = "Log Masuk";
+btn.disabled = false;
+}
+};
+window.handleRegister = async function(e) {
+e.preventDefault();
+const name = document.getElementById('reg-name').value;
+const email = document.getElementById('reg-email').value.trim().toLowerCase();
+const password = document.getElementById('reg-password').value;
+const btn = document.getElementById('reg-btn');
+try {
+btn.innerText = "MENDAFTAR...";
+btn.disabled = true;
+const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+await setDoc(doc(db, "guru", userCredential.user.uid), {
+nama: name,
+email: email,
+status: "menunggu",
+tarikhDaftar: new Date().toISOString()
+});
+await signOut(auth);
+showCustomAlert('Pendaftaran berjaya dihantar! Akaun anda sedang menunggu kelulusan pentadbir.');
+toggleView('login');
+document.getElementById('register-form').reset();
+} catch (error) {
+showCustomAlert('Gagal daftar akaun: ' + error.message);
+} finally {
+btn.innerText = "Daftar Akaun";
+btn.disabled = false;
+}
+};
+window.handleForgotPassword = async function(e) {
+e.preventDefault();
+const email = document.getElementById('login-email').value.trim().toLowerCase();
+if (!email) {
+showCustomAlert('Sila masukkan alamat e-mel anda pada ruangan e-mel di atas terlebih dahulu.');
+return;
+}
+try {
+await sendPasswordResetEmail(auth, email);
+showCustomAlert('Pautan tetapan semula kata laluan telah dihantar ke e-mel: ' + email);
+} catch (error) {
+showCustomAlert('Ralat: ' + error.message);
+}
+};
+window.handleLogout = async function() {
+await signOut(auth);
+toggleView('login');
+};
+window.saveStudentData = async function(e) {
+e.preventDefault();
+const aliranSelected = document.querySelector('input[name="aliran_kelas"]:checked');
+let tingkatanValue = aliranSelected ? aliranSelected.value : '';
+const subTingkatanSelected = document.querySelector('input[name="sub_tingkatan"]:checked');
+if (subTingkatanSelected && !document.getElementById('tingkatan-options-container').classList.contains('hidden')) {
+tingkatanValue += ` (${subTingkatanSelected.value})`;
+}
+const studentData = {
+nama: document.getElementById('student-name').value,
+noMyKad: document.getElementById('student-ic').value,
+jantina: document.getElementById('student-gender').value,
+namaWarisibuBapa: document.getElementById('guardian-name').value,
+telefonWaris: document.getElementById('guardian-phone').value,
+sekolahTerdahulu: document.getElementById('student-prev-school').value,
+tingkatan: tingkatanValue,
+tarikhDaftar: new Date().toISOString()
+};
+try {
+await addDoc(collection(db, "pelajar"), studentData);
+showCustomAlert('Pendaftaran pelajar berjaya dihantar!');
+document.getElementById('student-form').reset();
+document.getElementById('tingkatan-options-container').classList.add('hidden');
+switchTab('home');
+loadDashboardStats();
+} catch (error) {
+showCustomAlert('Ralat menghantar data: ' + error.message);
+}
+};
+window.loadDashboardStats = async function() {
+try {
+const querySnapshot = await getDocs(collection(db, "pelajar"));
+let total = querySnapshot.size;
+let countYear = 0;
+let maleCount = 0;
+let femaleCount = 0;
+let akademikCount = 0;
+let tahfizCount = 0;
+let recentCount = 0;
+const now = new Date();
+
+const currentYearStr = document.getElementById('display-year-stat').innerText;
+
+querySnapshot.forEach(docSnap => {
+const data = docSnap.data();
+if(data.tarikhDaftar) {
+  if(data.tarikhDaftar.startsWith(currentYearStr)) {
+    countYear++;
+  }
+  const regDate = new Date(data.tarikhDaftar);
+  const diffTime = now - regDate;
+  const diffDays = diffTime / (1000 * 60 * 60 * 24);
+  if(diffDays <= 3) {
+    recentCount++;
+  }
+}
+if(data.jantina === 'Lelaki') maleCount++;
+if(data.jantina === 'Perempuan') femaleCount++;
+if(data.tingkatan && data.tingkatan.toLowerCase().includes('akademik')) {
+  akademikCount++;
+} else if(data.tingkatan && data.tingkatan.toLowerCase().includes('tahfiz')) {
+  tahfizCount++;
+}
+});
+document.getElementById('stat-total').innerText = total;
+document.getElementById('stat-male').innerText = maleCount;
+document.getElementById('stat-female').innerText = femaleCount;
+document.getElementById('stat-akademik').innerText = akademikCount;
+document.getElementById('stat-tahfiz').innerText = tahfizCount;
+document.getElementById('stat-year').innerText = countYear;
+const bellBadge = document.getElementById('bell-badge');
+if(recentCount > 0) {
+  bellBadge.innerText = recentCount;
+  bellBadge.style.display = 'inline-block';
+} else {
+  bellBadge.innerText = '0';
+  bellBadge.style.display = 'none';
+}
+} catch(e) { console.log(e); }
+};
+window.openNotificationModal = async function() {
+const modal = document.getElementById('notification-modal');
+const container = document.getElementById('notification-list-content');
+modal.classList.remove('hidden');
+container.innerHTML = '<p class="text-xs text-slate-500 text-center">Memuatkan data terkini...</p>';
+try {
+const querySnapshot = await getDocs(collection(db, "pelajar"));
+container.innerHTML = '';
+let records = [];
+const now = new Date();
+querySnapshot.forEach(docSnap => {
+const d = docSnap.data();
+if(d.tarikhDaftar) {
+  const regDate = new Date(d.tarikhDaftar);
+  const diffDays = (now - regDate) / (1000 * 60 * 60 * 24);
+  if(diffDays <= 3) {
+    records.push(d);
+  }
+}
+});
+if(records.length === 0) {
+container.innerHTML = '<p class="text-xs text-slate-400 text-center">Tiada pendaftaran baharu dalam masa 3 hari terkini.</p>';
+return;
+}
+records.reverse();
+records.forEach((d, index) => {
+const item = document.createElement('div');
+item.className = "p-3 bg-slate-50 border border-slate-200 rounded-2xl text-xs space-y-1";
+item.innerHTML = `
+<div class="font-bold text-[#3b0000]">${index + 1}. ${escapeHtml(d.nama)}</div>
+<div class="text-slate-600">MyKad: ${escapeHtml(d.noMyKad)} | Jantina: ${escapeHtml(d.jantina)}</div>
+<div class="text-slate-600">Aliran: ${escapeHtml(d.tingkatan)}</div>
+<div class="text-[10px] text-slate-400">Waris: ${escapeHtml(d.namaWarisibuBapa)} (${escapeHtml(d.telefonWaris)})</div>
+`;
+container.appendChild(item);
+});
+} catch(e) {
+container.innerHTML = '<p class="text-xs text-red-500 text-center">Ralat memuatkan data.</p>';
+}
+};
+window.closeNotificationModal = function() {
+document.getElementById('notification-modal').classList.add('hidden');
+};
+window.loadStudentList = async function() {
+const container = document.getElementById('student-list-container');
+container.innerHTML = '<tr><td colspan="7" class="p-4 text-center text-slate-400">Memuatkan senarai...</td></tr>';
+try {
+const querySnapshot = await getDocs(collection(db, "pelajar"));
+container.innerHTML = '';
+if(querySnapshot.empty) {
+container.innerHTML = '<tr><td colspan="7" class="p-4 text-center text-slate-400">Tiada rekod pelajar.</td></tr>';
+return;
+}
+let i = 1;
+querySnapshot.forEach(docSnap => {
+const d = docSnap.data();
+const tr = document.createElement('tr');
+tr.className = "hover:bg-slate-50 transition";
+tr.innerHTML = `
+<td class="p-3 font-semibold text-slate-500">${i++}</td>
+<td class="p-3 font-bold text-slate-800">${escapeHtml(d.nama)}</td>
+<td class="p-3 text-slate-600">${escapeHtml(d.jantina)}</td>
+<td class="p-3 text-slate-600">${escapeHtml(d.noMyKad)}</td>
+<td class="p-3 text-slate-600">${escapeHtml(d.namaWarisibuBapa)}<br><span class="text-[10px] text-slate-400">${escapeHtml(d.telefonWaris)}</span></td>
+<td class="p-3 text-slate-600">${escapeHtml(d.sekolahTerdahulu)}</td>
+<td class="p-3 text-slate-600">${escapeHtml(d.tingkatan)}</td>
+`;
+container.appendChild(tr);
+});
+} catch(e) {
+container.innerHTML = '<tr><td colspan="7" class="p-4 text-center text-red-500">Ralat memuatkan senarai.</td></tr>';
+}
+};
+function escapeHtml(str) {
+return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+window.loadTeacherAccounts = async function() {
+const container = document.getElementById('teacher-list-container');
+container.innerHTML = '<p class="text-xs text-slate-500">Memuatkan senarai akaun...</p>';
+try {
+const querySnapshot = await getDocs(collection(db, "guru"));
+container.innerHTML = '';
+if(querySnapshot.empty) {
+container.innerHTML = '<p class="text-xs text-slate-500">Tiada akaun guru.</p>';
+return;
+}
+querySnapshot.forEach(docSnap => {
+const data = docSnap.data();
+const teacherId = docSnap.id;
+const isAktif = data.status === 'aktif';
+const card = document.createElement('div');
+card.className = "bg-slate-50 p-3 rounded-2xl border border-slate-200 text-xs space-y-2";
+card.innerHTML = `
+<div class="font-bold text-slate-800">${escapeHtml(data.email)}</div>
+<div class="text-slate-500">Status: <span class="${isAktif ? 'text-emerald-600' : 'text-amber-600'} font-semibold">${data.status || 'menunggu'}</span></div>
+<div class="flex space-x-2 pt-1">
+${!isAktif ? `<button onclick="approveTeacher('${teacherId}')" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-[10px] font-semibold cursor-pointer">Luluskan</button>` : ''}
+<button onclick="deleteTeacher('${teacherId}')" class="px-2.5 py-1 bg-red-600 hover:bg-red-700 text-white rounded-lg text-[10px] font-semibold cursor-pointer">Hapus Akaun</button>
+</div>
+`;
+container.appendChild(card);
+});
+} catch(e) { container.innerHTML = '<p class="text-xs text-red-500">Ralat memuatkan akaun.</p>'; }
+};
+window.approveTeacher = async function(id) {
+try {
+await updateDoc(doc(db, "guru", id), { status: "aktif" });
+showCustomAlert("Akaun guru berjaya diluluskan!");
+loadTeacherAccounts();
+} catch(e) { showCustomAlert("Ralat meluluskan akaun: " + e.message); }
+};
+window.deleteTeacher = async function(id) {
+if(confirm("Hapus akaun ini?")) {
+try {
+await deleteDoc(doc(db, "guru", id));
+showCustomAlert("Akaun dipadam.");
+loadTeacherAccounts();
+} catch(e) { showCustomAlert("Ralat."); }
+}
+};
+onAuthStateChanged(auth, async (user) => {
+if (user) {
+const email = user.email.toLowerCase();
+if (!adminEmails.includes(email)) {
+const docSnap = await getDoc(doc(db, "guru", user.uid));
+if (docSnap.exists() && docSnap.data().status !== 'aktif') {
+await signOut(auth);
+toggleView('login');
+return;
+}
+}
+await loadSettings();
+toggleView('dashboard');
+loadDashboardStats();
+const adminBtn = document.getElementById('tab-admin-btn');
+if (adminEmails.includes(email)) {
+adminBtn.classList.remove('hidden');
+} else {
+adminBtn.classList.add('hidden');
+}
+} else {
+toggleView('login');
+}
 });
 </script>
 </body>
