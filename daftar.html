@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pendaftaran Pelajar Baharu - SMU(A) Khairiah Banggol Setol</title>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f1f5f9; }
+</style>
+</head>
+<body class="min-h-screen flex flex-col justify-between py-6 px-4">
+
+<!-- KAWASAN UTAMA BORANG PENDAFTARAN AWAM -->
+<main class="w-full max-w-2xl mx-auto flex-grow">
+  
+  <!-- Header Logo / Nama Sekolah -->
+  <div class="bg-[#3b0000] text-white p-6 rounded-3xl shadow-xl mb-6 text-center space-y-1">
+    <h1 class="text-base md:text-lg font-bold tracking-tight">SMU(A) KHAIRIAH MUKIM BANGGOL SETOL</h1>
+    <p class="text-xs text-rose-200">Portal Rasmi Pendaftaran Pelajar Baharu Tingkatan Satu Tahun 2027</p>
+  </div>
+
+  <!-- Kotak Borang -->
+  <div class="bg-white p-6 md:p-8 rounded-3xl shadow-md space-y-4 w-full border border-slate-100">
+    <div class="border-b pb-3">
+      <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wide">SILA ISI MAKLUMAT DI BAWAH DENGAN LENGKAP</h3>
+    </div>
+    
+    <form id="public-student-form" class="space-y-4" onsubmit="savePublicStudentData(event)">
+      <div>
+        <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">NAMA PELAJAR <span class="text-red-500">*</span></label>
+        <input type="text" id="student-name" required placeholder="Sila isi nama penuh pelajar" class="w-full px-3.5 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000]">
+      </div>
+      
+      <div>
+        <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">NO KAD PENGENALAN PELAJAR <span class="text-red-500">*</span></label>
+        <input type="tel" inputmode="numeric" id="student-ic" required placeholder="Sila isi tanpa sengkang" class="w-full px-3.5 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000]">
+      </div>
+      
+      <div>
+        <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">JANTINA <span class="text-red-500">*</span></label>
+        <select id="student-gender" required class="w-full px-3.5 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000]">
+          <option value="" disabled selected>Sila Pilih Jantina</option>
+          <option value="Lelaki">Lelaki</option>
+          <option value="Perempuan">Perempuan</option>
+        </select>
+      </div>
+      
+      <div>
+        <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">NAMA PENUH IBU BAPA / PENJAGA <span class="text-red-500">*</span></label>
+        <input type="text" id="guardian-name" required placeholder="Sila isi nama penuh Ibubapa / penjaga" class="w-full px-3.5 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000]">
+      </div>
+      
+      <div>
+        <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">NO. TELEFON UNTUK DIHUBUNGI <span class="text-red-500">*</span></label>
+        <input type="tel" inputmode="numeric" id="guardian-phone" required placeholder="Sila isi nombor telefon" class="w-full px-3.5 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000]">
+      </div>
+      
+      <div>
+        <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">NAMA SEKOLAH TERDAHULU <span class="text-red-500">*</span></label>
+        <textarea id="student-prev-school" required rows="2" placeholder="Sila isi nama penuh sekolah asal" class="w-full px-3.5 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-[#3b0000] resize-none"></textarea>
+      </div>
+
+      <!-- Aliran Kelas Yang Dipohon -->
+      <div class="space-y-2 pt-1">
+        <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">ALIRAN KELAS YANG DIPOHON <span class="text-red-500">*</span></label>
+        <div class="space-y-2">
+          <label class="flex items-start space-x-3 cursor-pointer p-2.5 rounded-xl hover:bg-slate-50 transition border border-slate-100">
+            <input type="radio" name="aliran_kelas" value="Aliran Akademik (Akademik & Arab/Agama)" required onclick="toggleTingkatanOptions(true)" class="mt-0.5 text-[#3b0000] focus:ring-[#3b0000]">
+            <span class="text-xs text-slate-700 font-medium">Aliran Akademik (Akademik & Arab/Agama)</span>
+          </label>
+          <label class="flex items-start space-x-3 cursor-pointer p-2.5 rounded-xl hover:bg-slate-50 transition border border-slate-100">
+            <input type="radio" name="aliran_kelas" value="Aliran Tahfiz (Tahfiz, Akademik & Arab/Agama) - Wajib tinggal di asrama tahfiz" onclick="toggleTingkatanOptions(true)" class="mt-0.5 text-[#3b0000] focus:ring-[#3b0000]">
+            <span class="text-xs text-slate-700 font-medium">Aliran Tahfiz (Tahfiz, Akademik & Arab/Agama) - Wajib tinggal di asrama tahfiz</span>
+          </label>
+        </div>
+
+        <!-- Pilihan Tingkatan T1 hingga T5 -->
+        <div id="tingkatan-options-container" class="hidden mt-3 pl-4 p-3 bg-rose-50 border border-rose-200 rounded-2xl space-y-2">
+          <label class="block text-[11px] font-bold text-[#3b0000] uppercase">Sila Pilih Pilihan Tingkatan:</label>
+          <div class="grid grid-cols-5 gap-1.5 text-center">
+            <label class="border border-rose-300 rounded-xl p-2 cursor-pointer hover:bg-rose-100 bg-white transition flex flex-col items-center">
+              <input type="radio" name="sub_tingkatan" value="T1" class="mb-1 text-[#3b0000]">
+              <span class="text-[11px] font-bold text-slate-800">T1</span>
+            </label>
+            <label class="border border-rose-300 rounded-xl p-2 cursor-pointer hover:bg-rose-100 bg-white transition flex flex-col items-center">
+              <input type="radio" name="sub_tingkatan" value="T2" class="mb-1 text-[#3b0000]">
+              <span class="text-[11px] font-bold text-slate-800">T2</span>
+            </label>
+            <label class="border border-rose-300 rounded-xl p-2 cursor-pointer hover:bg-rose-100 bg-white transition flex flex-col items-center">
+              <input type="radio" name="sub_tingkatan" value="T3" class="mb-1 text-[#3b0000]">
+              <span class="text-[11px] font-bold text-slate-800">T3</span>
+            </label>
+            <label class="border border-rose-300 rounded-xl p-2 cursor-pointer hover:bg-rose-100 bg-white transition flex flex-col items-center">
+              <input type="radio" name="sub_tingkatan" value="T4" class="mb-1 text-[#3b0000]">
+              <span class="text-[11px] font-bold text-slate-800">T4</span>
+            </label>
+            <label class="border border-rose-300 rounded-xl p-2 cursor-pointer hover:bg-rose-100 bg-white transition flex flex-col items-center">
+              <input type="radio" name="sub_tingkatan" value="T5" class="mb-1 text-[#3b0000]">
+              <span class="text-[11px] font-bold text-slate-800">T5</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-2xl text-[11px] text-slate-500 leading-relaxed space-y-1 mt-2">
+        <p>Pihak sekolah akan menghubungi anda dalam masa terdekat untuk urusan seterusnya selepas permohonan ini lengkap dihantar.</p>
+        <p>Terima kasih atas sokongan dan kepercayaan yang diberikan kepada sekolah kami.</p>
+      </div>
+
+      <div class="flex justify-center pt-3">
+        <button type="submit" id="submit-btn" class="px-10 py-3.5 bg-[#3b0000] hover:bg-[#4a0000] text-white font-semibold rounded-2xl transition duration-200 shadow-lg text-xs uppercase tracking-wider cursor-pointer">
+          Hantar Permohonan
+        </button>
+      </div>
+    </form>
+  </div>
+</main>
+
+<footer class="text-center py-4 text-xs text-slate-400 border-t bg-white mt-8 w-full rounded-2xl">
+© 2026 SMU(A) Khairiah Banggol Setol
+</footer>
+
+<!-- FIREBASE SDK & SKRIP PENGHANTARAN -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyBfWyq2ADAtOdbaeHh7nRhB3dM4LjKDFdw",
+authDomain: "sistem-pendaftaran-pelaj-6d6b4.firebaseapp.com",
+projectId: "sistem-pendaftaran-pelaj-6d6b4",
+storageBucket: "sistem-pendaftaran-pelaj-6d6b4.firebasestorage.app",
+messagingSenderId: "611930781573",
+appId: "1:611930781573:web:6b6f458c7291f9936876ec"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.toggleTingkatanOptions = function(show) {
+  const container = document.getElementById('tingkatan-options-container');
+  const subRadios = container.querySelectorAll('input[name="sub_tingkatan"]');
+  if (show) {
+    container.classList.remove('hidden');
+    subRadios.forEach(r => r.required = true);
+  } else {
+    container.classList.add('hidden');
+    subRadios.forEach(r => {
+      r.required = false;
+      r.checked = false;
+    });
+  }
+};
+
+window.savePublicStudentData = async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submit-btn');
+  
+  const aliranSelected = document.querySelector('input[name="aliran_kelas"]:checked');
+  let tingkatanValue = aliranSelected ? aliranSelected.value : '';
+
+  const subTingkatanSelected = document.querySelector('input[name="sub_tingkatan"]:checked');
+  if (subTingkatanSelected && !document.getElementById('tingkatan-options-container').classList.contains('hidden')) {
+    tingkatanValue += ` (${subTingkatanSelected.value})`;
+  }
+
+  const studentData = {
+    nama: document.getElementById('student-name').value.trim(),
+    noMyKad: document.getElementById('student-ic').value.trim(),
+    jantina: document.getElementById('student-gender').value,
+    namaWarisibuBapa: document.getElementById('guardian-name').value.trim(),
+    telefonWaris: document.getElementById('guardian-phone').value.trim(),
+    sekolahTerdahulu: document.getElementById('student-prev-school').value.trim(),
+    tingkatan: tingkatanValue,
+    tarikhDaftar: new Date().toISOString()
+  };
+
+  try {
+    btn.innerText = "SEDANG MENGHANTAR...";
+    btn.disabled = true;
+    
+    // Simpan terus ke koleksi "pelajar" yang sama dalam Firestore
+    await addDoc(collection(db, "pelajar"), studentData);
+    
+    alert('Alhamdulillah! Pendaftaran pelajar berjaya dihantar kepada pihak sekolah.');
+    document.getElementById('public-student-form').reset();
+    document.getElementById('tingkatan-options-container').classList.add('hidden');
+  } catch (error) {
+    alert('Ralat menghantar data: ' + error.message);
+  } finally {
+    btn.innerText = "Hantar Permohonan";
+    btn.disabled = false;
+  }
+};
+</script>
+</body>
+</html>
