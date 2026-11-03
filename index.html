@@ -526,6 +526,21 @@ const adminEmails = [
 ];
 let currentActiveTab = 'home';
 let lastBackPress = 0;
+
+// Fungsi Helper untuk Mendapatkan Kod Ringkas Tingkatan (T1, T2, T3, T4, T5) secara Pintar
+function extractTingkatanCode(str) {
+  if (!str) return '-';
+  const upper = str.toUpperCase();
+  if (upper.includes('(T1)') || upper.includes(' T1') || upper.startsWith('T1') || upper.includes('TINGKATAN 1')) return 'T1';
+  if (upper.includes('(T2)') || upper.includes(' T2') || upper.startsWith('T2') || upper.includes('TINGKATAN 2')) return 'T2';
+  if (upper.includes('(T3)') || upper.includes(' T3') || upper.startsWith('T3') || upper.includes('TINGKATAN 3')) return 'T3';
+  if (upper.includes('(T4)') || upper.includes(' T4') || upper.startsWith('T4') || upper.includes('TINGKATAN 4')) return 'T4';
+  if (upper.includes('(T5)') || upper.includes(' T5') || upper.startsWith('T5') || upper.includes('TINGKATAN 5')) return 'T5';
+  
+  // Jika rekod lama hanya ada nama aliran tanpa T1-T5, anggap sebagai T1 secara lalai atau semak perkataan
+  return 'T1'; 
+}
+
 // Fungsi Kotak Makluman Kustom (Alert & Confirm)
 window.showCustomAlert = function(msg) {
   document.getElementById('modal-icon-container').innerHTML = 'ℹ️';
@@ -722,7 +737,6 @@ btn.innerText = "Log Masuk";
 btn.disabled = false;
 }
 };
-// DIKEMASKINI: Menggunakan kaedah SisPAQ untuk menangani ralat email-already-in-use
 window.handleRegister = async function(e) {
 e.preventDefault();
 const name = document.getElementById('reg-name').value;
@@ -862,11 +876,8 @@ window.openEditStudentByBil = async function() {
           toggleTingkatanOptions(true);
         }
       });
-      if(d.tingkatan.includes('(T1)') || d.tingkatan.includes(' T1')) setSubTingkatan('T1');
-      else if(d.tingkatan.includes('(T2)') || d.tingkatan.includes(' T2')) setSubTingkatan('T2');
-      else if(d.tingkatan.includes('(T3)') || d.tingkatan.includes(' T3')) setSubTingkatan('T3');
-      else if(d.tingkatan.includes('(T4)') || d.tingkatan.includes(' T4')) setSubTingkatan('T4');
-      else if(d.tingkatan.includes('(T5)') || d.tingkatan.includes(' T5')) setSubTingkatan('T5');
+      const tCode = extractTingkatanCode(d.tingkatan);
+      if(tCode !== '-') setSubTingkatan(tCode);
     }
     document.getElementById('form-submit-btn').innerText = 'Simpan Kemaskini';
     document.getElementById('cancel-edit-btn').classList.remove('hidden');
@@ -950,7 +961,6 @@ querySnapshot.forEach(docSnap => {
 const data = docSnap.data();
 if(data.tarikhDaftar) {
   const regDate = new Date(data.tarikhDaftar);
-  // Semak sama ada tarikh pendaftaran adalah pada hari yang sama (dalam tempoh 1 hari / hari ini)
   const isSameDay = regDate.getDate() === now.getDate() && 
                     regDate.getMonth() === now.getMonth() && 
                     regDate.getFullYear() === now.getFullYear();
@@ -966,13 +976,12 @@ if(data.tingkatan && data.tingkatan.toLowerCase().includes('tahfiz')) {
 } else if(data.tingkatan && data.tingkatan.toLowerCase().includes('akademik')) {
   akademikCount++;
 }
-// Semak Tingkatan (T1 - T5) secara fleksibel
+// Semak Tingkatan (T1 - T5) secara bijak & fleksibel
 if(data.tingkatan) {
-  if(data.tingkatan.includes('(T1)') || data.tingkatan.includes(' T1')) tingkatanCounts["T1"]++;
-  else if(data.tingkatan.includes('(T2)') || data.tingkatan.includes(' T2')) tingkatanCounts["T2"]++;
-  else if(data.tingkatan.includes('(T3)') || data.tingkatan.includes(' T3')) tingkatanCounts["T3"]++;
-  else if(data.tingkatan.includes('(T4)') || data.tingkatan.includes(' T4')) tingkatanCounts["T4"]++;
-  else if(data.tingkatan.includes('(T5)') || data.tingkatan.includes(' T5')) tingkatanCounts["T5"]++;
+  const code = extractTingkatanCode(data.tingkatan);
+  if(tingkatanCounts[code] !== undefined) {
+    tingkatanCounts[code]++;
+  }
 }
 });
 document.getElementById('stat-total').innerText = total;
@@ -983,10 +992,8 @@ document.getElementById('stat-tahfiz').innerText = tahfizCount;
 // Paparkan Jadual Analisa Mengikut Tingkatan
 const tbodyTingkatan = document.getElementById('tingkatan-table-body');
 tbodyTingkatan.innerHTML = '';
-let totalTingkatanCheck = 0;
 ['T1', 'T2', 'T3', 'T4', 'T5'].forEach(t => {
   const count = tingkatanCounts[t];
-  totalTingkatanCheck += count;
   const tr = document.createElement('tr');
   tr.className = "hover:bg-slate-50 transition";
   tr.innerHTML = `
@@ -1075,15 +1082,7 @@ return;
 let i = 1;
 querySnapshot.forEach(docSnap => {
 const d = docSnap.data();
-let tingkatanDisplay = '-';
-if(d.tingkatan) {
-  if(d.tingkatan.includes('(T1)') || d.tingkatan.includes(' T1')) tingkatanDisplay = 'T1';
-  else if(d.tingkatan.includes('(T2)') || d.tingkatan.includes(' T2')) tingkatanDisplay = 'T2';
-  else if(d.tingkatan.includes('(T3)') || d.tingkatan.includes(' T3')) tingkatanDisplay = 'T3';
-  else if(d.tingkatan.includes('(T4)') || d.tingkatan.includes(' T4')) tingkatanDisplay = 'T4';
-  else if(d.tingkatan.includes('(T5)') || d.tingkatan.includes(' T5')) tingkatanDisplay = 'T5';
-  else tingkatanDisplay = d.tingkatan;
-}
+const tingkatanDisplay = extractTingkatanCode(d.tingkatan);
 const tr = document.createElement('tr');
 tr.className = "hover:bg-slate-50 transition";
 tr.innerHTML = `
