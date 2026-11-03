@@ -172,7 +172,7 @@ Daftar Akaun
         </div>
       </div>
 
-      <!-- JADUAL ANALISA MENGIKUT TINGKATAN (DILETAK SELEPAS KAD ANALISA UTAMA) -->
+      <!-- JADUAL ANALISA MENGIKUT TINGKATAN -->
       <div class="bg-white p-6 rounded-3xl shadow-md space-y-4 w-full">
         <div class="flex items-center space-x-2 border-b pb-3">
           <span class="text-lg">📋</span>
@@ -737,6 +737,7 @@ btn.disabled = false;
 }
 };
 
+// DIKEMASKINI: Menggunakan kaedah SisPAQ untuk menangani ralat email-already-in-use
 window.handleRegister = async function(e) {
 e.preventDefault();
 const name = document.getElementById('reg-name').value;
@@ -746,13 +747,31 @@ const btn = document.getElementById('reg-btn');
 try {
 btn.innerText = "MENDAFTAR...";
 btn.disabled = true;
-const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-await setDoc(doc(db, "guru", userCredential.user.uid), {
-nama: name,
-email: email,
-status: "menunggu",
-tarikhDaftar: new Date().toISOString()
-});
+let userId = '';
+try {
+  const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+  userId = userCredential.user.uid;
+} catch (regErr) {
+  if (regErr.code === 'auth/email-already-in-use') {
+    const loginCheck = await signInWithEmailAndPassword(auth, email, password).catch(() => null);
+    if (loginCheck && loginCheck.user) {
+      userId = loginCheck.user.uid;
+    } else {
+      showCustomAlert('E-mel ini telah berdaftar dalam sistem sebelumnya. Sila log masuk terus atau gunakan fungsi "Lupa Kata Laluan" jika anda ingin menetapkan semula kata laluan.');
+      return;
+    }
+  } else {
+    throw regErr;
+  }
+}
+if (userId) {
+  await setDoc(doc(db, "guru", userId), {
+    nama: name,
+    email: email,
+    status: "menunggu",
+    tarikhDaftar: new Date().toISOString()
+  });
+}
 await signOut(auth);
 showCustomAlert('Pendaftaran berjaya dihantar! Akaun anda sedang menunggu kelulusan pentadbir.');
 toggleView('login');
