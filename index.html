@@ -487,7 +487,7 @@ Daftar Akaun
   <div class="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden animate-fadeIn">
     <div class="bg-[#3b0000] text-white p-4 flex justify-between items-center">
       <h3 class="text-sm font-bold flex items-center space-x-2">
-        <span>🔔</span> <span>Ringkasan Pendaftaran Baharu (3 Hari Terkini)</span>
+        <span>🔔</span> <span id="notification-modal-title">Ringkasan Pendaftaran Baharu (Hari Ini)</span>
       </h3>
       <button onclick="closeNotificationModal()" class="text-white hover:text-rose-200 text-base font-bold px-2 cursor-pointer">✕</button>
     </div>
@@ -862,11 +862,11 @@ window.openEditStudentByBil = async function() {
           toggleTingkatanOptions(true);
         }
       });
-      if(d.tingkatan.includes('(T1')) setSubTingkatan('T1');
-      else if(d.tingkatan.includes('(T2')) setSubTingkatan('T2');
-      else if(d.tingkatan.includes('(T3')) setSubTingkatan('T3');
-      else if(d.tingkatan.includes('(T4')) setSubTingkatan('T4');
-      else if(d.tingkatan.includes('(T5')) setSubTingkatan('T5');
+      if(d.tingkatan.includes('(T1)') || d.tingkatan.includes(' T1')) setSubTingkatan('T1');
+      else if(d.tingkatan.includes('(T2)') || d.tingkatan.includes(' T2')) setSubTingkatan('T2');
+      else if(d.tingkatan.includes('(T3)') || d.tingkatan.includes(' T3')) setSubTingkatan('T3');
+      else if(d.tingkatan.includes('(T4)') || d.tingkatan.includes(' T4')) setSubTingkatan('T4');
+      else if(d.tingkatan.includes('(T5)') || d.tingkatan.includes(' T5')) setSubTingkatan('T5');
     }
     document.getElementById('form-submit-btn').innerText = 'Simpan Kemaskini';
     document.getElementById('cancel-edit-btn').classList.remove('hidden');
@@ -950,9 +950,11 @@ querySnapshot.forEach(docSnap => {
 const data = docSnap.data();
 if(data.tarikhDaftar) {
   const regDate = new Date(data.tarikhDaftar);
-  const diffTime = now - regDate;
-  const diffDays = diffTime / (1000 * 60 * 60 * 24);
-  if(diffDays <= 3) {
+  // Semak sama ada tarikh pendaftaran adalah pada hari yang sama (dalam tempoh 1 hari / hari ini)
+  const isSameDay = regDate.getDate() === now.getDate() && 
+                    regDate.getMonth() === now.getMonth() && 
+                    regDate.getFullYear() === now.getFullYear();
+  if(isSameDay) {
     recentCount++;
   }
 }
@@ -964,13 +966,13 @@ if(data.tingkatan && data.tingkatan.toLowerCase().includes('tahfiz')) {
 } else if(data.tingkatan && data.tingkatan.toLowerCase().includes('akademik')) {
   akademikCount++;
 }
-// Semak Tingkatan (T1 - T5) - Disemak dengan tepat
+// Semak Tingkatan (T1 - T5) secara fleksibel
 if(data.tingkatan) {
-  if(data.tingkatan.includes('(T1)')) tingkatanCounts["T1"]++;
-  else if(data.tingkatan.includes('(T2)')) tingkatanCounts["T2"]++;
-  else if(data.tingkatan.includes('(T3)')) tingkatanCounts["T3"]++;
-  else if(data.tingkatan.includes('(T4)')) tingkatanCounts["T4"]++;
-  else if(data.tingkatan.includes('(T5)')) tingkatanCounts["T5"]++;
+  if(data.tingkatan.includes('(T1)') || data.tingkatan.includes(' T1')) tingkatanCounts["T1"]++;
+  else if(data.tingkatan.includes('(T2)') || data.tingkatan.includes(' T2')) tingkatanCounts["T2"]++;
+  else if(data.tingkatan.includes('(T3)') || data.tingkatan.includes(' T3')) tingkatanCounts["T3"]++;
+  else if(data.tingkatan.includes('(T4)') || data.tingkatan.includes(' T4')) tingkatanCounts["T4"]++;
+  else if(data.tingkatan.includes('(T5)') || data.tingkatan.includes(' T5')) tingkatanCounts["T5"]++;
 }
 });
 document.getElementById('stat-total').innerText = total;
@@ -1029,14 +1031,16 @@ querySnapshot.forEach(docSnap => {
 const d = docSnap.data();
 if(d.tarikhDaftar) {
   const regDate = new Date(d.tarikhDaftar);
-  const diffDays = (now - regDate) / (1000 * 60 * 60 * 24);
-  if(diffDays <= 3) {
+  const isSameDay = regDate.getDate() === now.getDate() && 
+                    regDate.getMonth() === now.getMonth() && 
+                    regDate.getFullYear() === now.getFullYear();
+  if(isSameDay) {
     records.push(d);
   }
 }
 });
 if(records.length === 0) {
-container.innerHTML = '<p class="text-xs text-slate-400 text-center">Tiada pendaftaran baharu dalam masa 3 hari terkini.</p>';
+container.innerHTML = '<p class="text-xs text-slate-400 text-center">Tiada pendaftaran baharu pada hari ini.</p>';
 return;
 }
 records.reverse();
@@ -1071,14 +1075,13 @@ return;
 let i = 1;
 querySnapshot.forEach(docSnap => {
 const d = docSnap.data();
-// Ekstrak ringkas tingkatan (cth: T1, T2, dsb) daripada string tingkatan jika ada
 let tingkatanDisplay = '-';
 if(d.tingkatan) {
-  if(d.tingkatan.includes('(T1)')) tingkatanDisplay = 'T1';
-  else if(d.tingkatan.includes('(T2)')) tingkatanDisplay = 'T2';
-  else if(d.tingkatan.includes('(T3)')) tingkatanDisplay = 'T3';
-  else if(d.tingkatan.includes('(T4)')) tingkatanDisplay = 'T4';
-  else if(d.tingkatan.includes('(T5)')) tingkatanDisplay = 'T5';
+  if(d.tingkatan.includes('(T1)') || d.tingkatan.includes(' T1')) tingkatanDisplay = 'T1';
+  else if(d.tingkatan.includes('(T2)') || d.tingkatan.includes(' T2')) tingkatanDisplay = 'T2';
+  else if(d.tingkatan.includes('(T3)') || d.tingkatan.includes(' T3')) tingkatanDisplay = 'T3';
+  else if(d.tingkatan.includes('(T4)') || d.tingkatan.includes(' T4')) tingkatanDisplay = 'T4';
+  else if(d.tingkatan.includes('(T5)') || d.tingkatan.includes(' T5')) tingkatanDisplay = 'T5';
   else tingkatanDisplay = d.tingkatan;
 }
 const tr = document.createElement('tr');
