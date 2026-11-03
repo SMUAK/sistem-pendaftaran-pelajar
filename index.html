@@ -171,7 +171,6 @@ Daftar Akaun
           <h2 class="text-3xl font-extrabold text-amber-600" id="stat-tahfiz">0</h2>
         </div>
       </div>
-
       <!-- JADUAL ANALISA MENGIKUT TINGKATAN -->
       <div class="bg-white p-6 rounded-3xl shadow-md space-y-4 w-full">
         <div class="flex items-center space-x-2 border-b pb-3">
@@ -192,7 +191,6 @@ Daftar Akaun
           </table>
         </div>
       </div>
-
       <!-- CARTA BAR ANALISA PENDAFTARAN -->
       <div class="bg-white p-6 rounded-3xl shadow-md space-y-4 w-full">
         <div class="flex items-center space-x-2 border-b pb-3">
@@ -337,6 +335,7 @@ Daftar Akaun
             <tr class="bg-[#3b0000] text-white text-[10px] uppercase tracking-wider">
               <th class="p-3">Bil</th>
               <th class="p-3">Nama Pelajar</th>
+              <th class="p-3">Tingkatan</th>
               <th class="p-3">Jantina</th>
               <th class="p-3">No MyKad</th>
               <th class="p-3">Waris & Telefon</th>
@@ -346,7 +345,7 @@ Daftar Akaun
           </thead>
           <tbody id="student-list-container" class="divide-y divide-slate-100 text-xs text-slate-700">
             <tr>
-              <td colspan="7" class="p-4 text-center text-slate-400">Memuatkan senarai...</td>
+              <td colspan="8" class="p-4 text-center text-slate-400">Memuatkan senarai...</td>
             </tr>
           </tbody>
         </table>
@@ -527,7 +526,6 @@ const adminEmails = [
 ];
 let currentActiveTab = 'home';
 let lastBackPress = 0;
-
 // Fungsi Kotak Makluman Kustom (Alert & Confirm)
 window.showCustomAlert = function(msg) {
   document.getElementById('modal-icon-container').innerHTML = 'ℹ️';
@@ -539,7 +537,6 @@ window.showCustomAlert = function(msg) {
   `;
   document.getElementById('custom-alert-modal').classList.remove('hidden');
 };
-
 window.showCustomConfirm = function(msg, onConfirmCallback) {
   document.getElementById('modal-icon-container').innerHTML = '⚠️';
   document.getElementById('custom-alert-message').innerText = msg;
@@ -559,11 +556,9 @@ window.showCustomConfirm = function(msg, onConfirmCallback) {
   };
   document.getElementById('custom-alert-modal').classList.remove('hidden');
 };
-
 window.closeCustomAlert = function() {
   document.getElementById('custom-alert-modal').classList.add('hidden');
 };
-
 // Fungsi muat turun Tetapan Sekolah / Tahun dari Firestore
 window.loadSettings = async function() {
   try {
@@ -582,7 +577,6 @@ window.loadSettings = async function() {
     }
   } catch(e) { console.log(e); }
 };
-
 window.saveInstitutionSettings = async function() {
   const settingsData = {
     nama: document.getElementById('inst-name').value,
@@ -599,7 +593,6 @@ window.saveInstitutionSettings = async function() {
     showCustomAlert('Ralat menyimpan tetapan: ' + e.message);
   }
 };
-
 window.toggleView = function(view) {
 document.getElementById('login-section').classList.add('hidden');
 document.getElementById('register-section').classList.add('hidden');
@@ -611,7 +604,6 @@ if (view === 'dashboard') {
   history.pushState({tab: 'home'}, '', '');
 }
 };
-
 window.toggleEmailVisibility = function(inputId, btn) {
 const input = document.getElementById(inputId);
 if (!input) return;
@@ -623,7 +615,6 @@ input.classList.add('masked-text');
 btn.innerText = '👁️';
 }
 };
-
 window.togglePasswordVisibility = function(inputId, btn) {
 const input = document.getElementById(inputId);
 if (!input) return;
@@ -635,7 +626,6 @@ input.type = 'password';
 btn.innerText = '👁️';
 }
 };
-
 window.toggleTingkatanOptions = function(show) {
 const container = document.getElementById('tingkatan-options-container');
 const subRadios = container.querySelectorAll('input[name="sub_tingkatan"]');
@@ -650,7 +640,6 @@ r.checked = false;
 });
 }
 };
-
 window.switchTab = function(tab, pushState = true) {
 currentActiveTab = tab;
 if(pushState) {
@@ -674,7 +663,6 @@ if(tab === 'home') loadDashboardStats();
 if(tab === 'senarai') loadStudentList();
 if(tab === 'admin') loadTeacherAccounts();
 };
-
 window.addEventListener('popstate', (e) => {
 const dashboardSection = document.getElementById('dashboard-section');
 if (!dashboardSection.classList.contains('hidden')) {
@@ -694,7 +682,6 @@ if (!dashboardSection.classList.contains('hidden')) {
   }
 }
 });
-
 function showExitToast() {
 const toast = document.getElementById('exit-toast');
 toast.classList.remove('hidden');
@@ -702,7 +689,6 @@ setTimeout(() => {
   toast.classList.add('hidden');
 }, 2000);
 }
-
 window.handleLogin = async function(e) {
 e.preventDefault();
 const email = document.getElementById('login-email').value.trim().toLowerCase();
@@ -736,7 +722,6 @@ btn.innerText = "Log Masuk";
 btn.disabled = false;
 }
 };
-
 // DIKEMASKINI: Menggunakan kaedah SisPAQ untuk menangani ralat email-already-in-use
 window.handleRegister = async function(e) {
 e.preventDefault();
@@ -783,7 +768,6 @@ btn.innerText = "Daftar Akaun";
 btn.disabled = false;
 }
 };
-
 window.handleForgotPassword = async function(e) {
 e.preventDefault();
 const email = document.getElementById('login-email').value.trim().toLowerCase();
@@ -798,12 +782,10 @@ showCustomAlert('Pautan tetapan semula kata laluan telah dihantar ke e-mel: ' + 
 showCustomAlert('Ralat: ' + error.message);
 }
 };
-
 window.handleLogout = async function() {
 await signOut(auth);
 toggleView('login');
 };
-
 window.saveStudentData = async function(e) {
   e.preventDefault();
   const editId = document.getElementById('edit-student-id').value;
@@ -840,7 +822,6 @@ window.saveStudentData = async function(e) {
     showCustomAlert('Ralat menyimpan data: ' + error.message);
   }
 };
-
 window.cancelEditMode = function() {
   document.getElementById('edit-student-id').value = '';
   document.getElementById('form-submit-btn').innerText = 'Hantar';
@@ -848,7 +829,6 @@ window.cancelEditMode = function() {
   document.getElementById('student-form').reset();
   document.getElementById('tingkatan-options-container').classList.add('hidden');
 };
-
 window.openEditStudentByBil = async function() {
   const bilVal = parseInt(document.getElementById('update-bil-input').value.trim());
   if(isNaN(bilVal) || bilVal <= 0) {
@@ -867,7 +847,6 @@ window.openEditStudentByBil = async function() {
     }
     const targetRecord = docsArray[bilVal - 1];
     const d = targetRecord.data;
-
     document.getElementById('edit-student-id').value = targetRecord.id;
     document.getElementById('student-name').value = d.nama || '';
     document.getElementById('student-ic').value = d.noMyKad || '';
@@ -875,7 +854,6 @@ window.openEditStudentByBil = async function() {
     document.getElementById('guardian-name').value = d.namaWarisibuBapa || '';
     document.getElementById('guardian-phone').value = d.telefonWaris || '';
     document.getElementById('student-prev-school').value = d.sekolahTerdahulu || '';
-
     if(d.tingkatan) {
       const radioAliran = document.querySelectorAll('input[name="aliran_kelas"]');
       radioAliran.forEach(r => {
@@ -890,7 +868,6 @@ window.openEditStudentByBil = async function() {
       else if(d.tingkatan.includes('(T4')) setSubTingkatan('T4');
       else if(d.tingkatan.includes('(T5')) setSubTingkatan('T5');
     }
-
     document.getElementById('form-submit-btn').innerText = 'Simpan Kemaskini';
     document.getElementById('cancel-edit-btn').classList.remove('hidden');
     document.getElementById('update-bil-input').value = '';
@@ -899,14 +876,12 @@ window.openEditStudentByBil = async function() {
     showCustomAlert("Ralat mencari rekod: " + e.message);
   }
 };
-
 function setSubTingkatan(val) {
   const radios = document.querySelectorAll('input[name="sub_tingkatan"]');
   radios.forEach(r => {
     if(r.value === val) r.checked = true;
   });
 }
-
 window.toggleDeleteMethod = function(method) {
   const inputEl = document.getElementById('del-input-val');
   if(method === 'tahun') {
@@ -916,7 +891,6 @@ window.toggleDeleteMethod = function(method) {
   }
   inputEl.value = '';
 };
-
 window.promptExecuteDeleteRecord = async function() {
   const method = document.querySelector('input[name="del_method"]:checked').value;
   const val = document.getElementById('del-input-val').value.trim();
@@ -930,7 +904,6 @@ window.promptExecuteDeleteRecord = async function() {
     querySnapshot.forEach(docSnap => {
       docsArray.push({ id: docSnap.id, data: docSnap.data() });
     });
-
     if(method === 'tahun') {
       showCustomConfirm(`Adakah anda pasti ingin memadam semua rekod pelajar bagi tahun ${val}?`, async () => {
         let count = 0;
@@ -962,7 +935,6 @@ window.promptExecuteDeleteRecord = async function() {
     showCustomAlert("Ralat memadam rekod: " + e.message);
   }
 };
-
 window.loadDashboardStats = async function() {
 try {
 const querySnapshot = await getDocs(collection(db, "pelajar"));
@@ -972,9 +944,7 @@ let femaleCount = 0;
 let akademikCount = 0;
 let tahfizCount = 0;
 let recentCount = 0;
-
 let tingkatanCounts = { "T1": 0, "T2": 0, "T3": 0, "T4": 0, "T5": 0 };
-
 const now = new Date();
 querySnapshot.forEach(docSnap => {
 const data = docSnap.data();
@@ -988,30 +958,26 @@ if(data.tarikhDaftar) {
 }
 if(data.jantina === 'Lelaki') maleCount++;
 if(data.jantina === 'Perempuan') femaleCount++;
-
 // Semak Aliran
 if(data.tingkatan && data.tingkatan.toLowerCase().includes('tahfiz')) {
   tahfizCount++;
 } else if(data.tingkatan && data.tingkatan.toLowerCase().includes('akademik')) {
   akademikCount++;
 }
-
-// Semak Tingkatan (T1 - T5)
+// Semak Tingkatan (T1 - T5) - Disemak dengan tepat
 if(data.tingkatan) {
-  if(data.tingkatan.includes('(T1')) tingkatanCounts["T1"]++;
-  else if(data.tingkatan.includes('(T2')) tingkatanCounts["T2"]++;
-  else if(data.tingkatan.includes('(T3')) tingkatanCounts["T3"]++;
-  else if(data.tingkatan.includes('(T4')) tingkatanCounts["T4"]++;
-  else if(data.tingkatan.includes('(T5')) tingkatanCounts["T5"]++;
+  if(data.tingkatan.includes('(T1)')) tingkatanCounts["T1"]++;
+  else if(data.tingkatan.includes('(T2)')) tingkatanCounts["T2"]++;
+  else if(data.tingkatan.includes('(T3)')) tingkatanCounts["T3"]++;
+  else if(data.tingkatan.includes('(T4)')) tingkatanCounts["T4"]++;
+  else if(data.tingkatan.includes('(T5)')) tingkatanCounts["T5"]++;
 }
 });
-
 document.getElementById('stat-total').innerText = total;
 document.getElementById('stat-male').innerText = maleCount;
 document.getElementById('stat-female').innerText = femaleCount;
 document.getElementById('stat-akademik').innerText = akademikCount;
 document.getElementById('stat-tahfiz').innerText = tahfizCount;
-
 // Paparkan Jadual Analisa Mengikut Tingkatan
 const tbodyTingkatan = document.getElementById('tingkatan-table-body');
 tbodyTingkatan.innerHTML = '';
@@ -1027,25 +993,18 @@ let totalTingkatanCheck = 0;
   `;
   tbodyTingkatan.appendChild(tr);
 });
-
 const maxVal = Math.max(total, maleCount, femaleCount, akademikCount, tahfizCount, 5);
 const scaleFactor = 180 / (maxVal || 1);
-
 document.getElementById('bar-val-total').innerText = total;
 document.getElementById('bar-total').style.height = (total * scaleFactor) + 'px';
-
 document.getElementById('bar-val-male').innerText = maleCount;
 document.getElementById('bar-male').style.height = (maleCount * scaleFactor) + 'px';
-
 document.getElementById('bar-val-female').innerText = femaleCount;
 document.getElementById('bar-female').style.height = (femaleCount * scaleFactor) + 'px';
-
 document.getElementById('bar-val-akademik').innerText = akademikCount;
 document.getElementById('bar-akademik').style.height = (akademikCount * scaleFactor) + 'px';
-
 document.getElementById('bar-val-tahfiz').innerText = tahfizCount;
 document.getElementById('bar-tahfiz').style.height = (tahfizCount * scaleFactor) + 'px';
-
 const bellBadge = document.getElementById('bell-badge');
 if(recentCount > 0) {
   bellBadge.innerText = recentCount;
@@ -1056,7 +1015,6 @@ if(recentCount > 0) {
 }
 } catch(e) { console.log(e); }
 };
-
 window.openNotificationModal = async function() {
 const modal = document.getElementById('notification-modal');
 const container = document.getElementById('notification-list-content');
@@ -1097,29 +1055,38 @@ container.appendChild(item);
 container.innerHTML = '<p class="text-xs text-red-500 text-center">Ralat memuatkan data.</p>';
 }
 };
-
 window.closeNotificationModal = function() {
 document.getElementById('notification-modal').classList.add('hidden');
 };
-
 window.loadStudentList = async function() {
 const container = document.getElementById('student-list-container');
-container.innerHTML = '<tr><td colspan="7" class="p-4 text-center text-slate-400">Memuatkan senarai...</td></tr>';
+container.innerHTML = '<tr><td colspan="8" class="p-4 text-center text-slate-400">Memuatkan senarai...</td></tr>';
 try {
 const querySnapshot = await getDocs(collection(db, "pelajar"));
 container.innerHTML = '';
 if(querySnapshot.empty) {
-container.innerHTML = '<tr><td colspan="7" class="p-4 text-center text-slate-400">Tiada rekod pelajar.</td></tr>';
+container.innerHTML = '<tr><td colspan="8" class="p-4 text-center text-slate-400">Tiada rekod pelajar.</td></tr>';
 return;
 }
 let i = 1;
 querySnapshot.forEach(docSnap => {
 const d = docSnap.data();
+// Ekstrak ringkas tingkatan (cth: T1, T2, dsb) daripada string tingkatan jika ada
+let tingkatanDisplay = '-';
+if(d.tingkatan) {
+  if(d.tingkatan.includes('(T1)')) tingkatanDisplay = 'T1';
+  else if(d.tingkatan.includes('(T2)')) tingkatanDisplay = 'T2';
+  else if(d.tingkatan.includes('(T3)')) tingkatanDisplay = 'T3';
+  else if(d.tingkatan.includes('(T4)')) tingkatanDisplay = 'T4';
+  else if(d.tingkatan.includes('(T5)')) tingkatanDisplay = 'T5';
+  else tingkatanDisplay = d.tingkatan;
+}
 const tr = document.createElement('tr');
 tr.className = "hover:bg-slate-50 transition";
 tr.innerHTML = `
 <td class="p-3 font-semibold text-slate-500">${i++}</td>
 <td class="p-3 font-bold text-slate-800">${escapeHtml(d.nama)}</td>
+<td class="p-3 font-bold text-[#3b0000]">${escapeHtml(tingkatanDisplay)}</td>
 <td class="p-3 text-slate-600">${escapeHtml(d.jantina)}</td>
 <td class="p-3 text-slate-600">${escapeHtml(d.noMyKad)}</td>
 <td class="p-3 text-slate-600">${escapeHtml(d.namaWarisibuBapa)}<br><span class="text-[10px] text-slate-400">${escapeHtml(d.telefonWaris)}</span></td>
@@ -1129,14 +1096,12 @@ tr.innerHTML = `
 container.appendChild(tr);
 });
 } catch(e) {
-container.innerHTML = '<tr><td colspan="7" class="p-4 text-center text-red-500">Ralat memuatkan senarai.</td></tr>';
+container.innerHTML = '<tr><td colspan="8" class="p-4 text-center text-red-500">Ralat memuatkan senarai.</td></tr>';
 }
 };
-
 function escapeHtml(str) {
 return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
-
 window.loadTeacherAccounts = async function() {
 const container = document.getElementById('teacher-list-container');
 container.innerHTML = '<p class="text-xs text-slate-500">Memuatkan senarai akaun...</p>';
@@ -1165,7 +1130,6 @@ container.appendChild(card);
 });
 } catch(e) { container.innerHTML = '<p class="text-xs text-red-500">Ralat memuatkan akaun.</p>'; }
 };
-
 window.approveTeacher = async function(id) {
 try {
 await updateDoc(doc(db, "guru", id), { status: "aktif" });
@@ -1173,7 +1137,6 @@ showCustomAlert("Akaun guru berjaya diluluskan!");
 loadTeacherAccounts();
 } catch(e) { showCustomAlert("Ralat meluluskan akaun: " + e.message); }
 };
-
 window.deleteTeacher = async function(id) {
 showCustomConfirm("Adakah anda pasti ingin menghapus akaun ini?", async () => {
 try {
@@ -1183,7 +1146,6 @@ loadTeacherAccounts();
 } catch(e) { showCustomAlert("Ralat."); }
 });
 };
-
 window.exportJSONBackup = async function() {
   try {
     const querySnapshot = await getDocs(collection(db, "pelajar"));
@@ -1203,7 +1165,6 @@ window.exportJSONBackup = async function() {
     showCustomAlert("Ralat eksport JSON: " + e.message);
   }
 };
-
 window.importJSONBackup = async function(event) {
   const file = event.target.files[0];
   if(!file) return;
@@ -1230,7 +1191,6 @@ window.importJSONBackup = async function(event) {
   };
   reader.readAsText(file);
 };
-
 onAuthStateChanged(auth, async (user) => {
 if (user) {
 const email = user.email.toLowerCase();
